@@ -282,7 +282,7 @@ def main():
     st.write("**Modeling dialogue between human and digital agents for the personalized stimulation of mnemonic abilities and the support for the evaluation of the progress and assistance of neurocognitive problems**")
     st.write("Lo scopo di questo studio è quello di raccogliere memorie autobiografiche correlate a indici di salute mentale. Il fine è quello di aver un database uniforme di racconti a cui dare dei punteggi grazie a schemi di valutazione della narrazione autobiografica.")
     st.write(f"I dati raccolti, in formato solamente testuale e anonimo (la traccia vocale, se utilizzata, verrà cancellata una volta trascritta), saranno resi disponibili su una banca dati pubblica caricata su GitHub:")
-    st.markdown("https://github.com/SanEnzoLor/memo_rec")
+    st.markdown("https://github.com/SanEnzoLor/memorec")
     
     st.header("**Indici Demografici**")
 
@@ -388,13 +388,14 @@ def main():
         st.write("Racconta una memoria che recuperi prendendo spunto dalla parola:")
         st.header(f"**{st.session_state.selected_word}**")
         # Mostra il modulo di registrazione 
-        st.warning("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop**. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
+        st.warning("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
         st.session_state.wav_audio_data = st_audiorec()
 
     # Trascrizione automatica tramite modulo speech to text
     if st.session_state.wav_audio_data is not None:
         # Converti l'audio registrato in formato WAV
-        st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
+        if st.session_state.show == True:
+            st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
         audio_file = BytesIO(st.session_state.wav_audio_data)
         audio_segment = AudioSegment.from_file(audio_file)
         st.session_state.time_rec = len(audio_segment)/1000 # da [ms] a [s]
@@ -476,7 +477,7 @@ def main():
             st.session_state.session_data.clear()
 
     st.header("BIBLIOGRAFIA")
-    st.warning("leggere preferibilmente **dopo aver svolto il test**.")
+    st.warning("**Leggere dopo** aver svolto il **test**.")
     st.write("")
     st.write("- **Beck Depression Inventory - II:**")
     st.write("Versione italiana del Beck Depression Inventory - II:")
