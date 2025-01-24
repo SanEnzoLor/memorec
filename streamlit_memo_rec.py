@@ -268,7 +268,6 @@ def PCL5():
 
 # Interfaccia Streamlit
 def main():   
-    st.write("Raccolta statistiche:", st.config.get_option("browser.gatherUsageStats"))
     # Crea due colonne per le immagini
     col1, col2 = st.columns([0.81, 1])
     # Mostra le immagini nelle colonne
