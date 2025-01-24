@@ -384,7 +384,7 @@ def main():
     
     if st.session_state.show == True and ten_w == False:
         # Mostra la parola spunto
-        st.write("Racconta una memoria che recuperi prendendo spunto dalla parola:")
+        st.write("**Racconta una memoria** che recuperi prendendo spunto dalla parola:")
         st.header(f"**{st.session_state.selected_word}**")
         # Mostra il modulo di registrazione 
         st.warning("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
