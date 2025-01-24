@@ -1,0 +1,9 @@
+pandas
+requests
+numpy
+streamlit
+
+pydub
+streamlit-audiorec
+SpeechRecognition
+sounddevice
