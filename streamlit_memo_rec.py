@@ -35,7 +35,7 @@ def save_and_upload_to_github(data):
     file_name = "dati.csv"
 
     # Input per GitHub
-    repo_name = "SanEnzoLor/memo_rec"
+    repo_name = "SanEnzoLor/memo_data"
     branch_name = "main"
     token = st.secrets["token"]
         
