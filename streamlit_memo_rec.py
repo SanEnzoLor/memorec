@@ -417,7 +417,7 @@ def main():
         if st.session_state.transcription != "":
             st.write("**Trascrizione audio:**")
             st.write(st.session_state.transcription)
-            st.warning("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare le **frecce direzionali** virtuali (ad esempio sulla tastiera Samsung: selezionando la modalità 'Modifica Testo' nelle 'Impostazioni' [...] in alto a destra della tastiera virtuale).")
+            st.warning("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (ad esempio tenendo premuto e spostando la lineaa verticale lampeggiante, oppure tenendo premuto la barra spaziatrice per poi muovendosi nel campo testuale).")
         st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                 value = st.session_state.transcription,
                                                 key = len(st.session_state.remaining_words),
