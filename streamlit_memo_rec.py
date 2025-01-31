@@ -280,7 +280,7 @@ def main():
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
     st.write("**Modeling dialogue between human and digital agents for the personalized stimulation of mnemonic abilities and the support for the evaluation of the progress and assistance of neurocognitive problems**")
     st.write("Lo scopo di questo studio è quello di raccogliere memorie autobiografiche correlate a indici di salute mentale. Il fine è quello di aver un database uniforme di racconti a cui dare dei punteggi grazie a schemi di valutazione della narrazione autobiografica.")
-    st.markdown("I dati raccolti, in formato solamente testuale e anonimo (la traccia vocale, se utilizzata, verrà cancellata una volta trascritta), saranno caricati su una banca dati privata di GitHub https://github.com/SanEnzoLor/memo_data.  Tuttavia, Streamlit Cloud potrebbe raccogliere dati anonimi sull'utilizzo dell'app per scopi di analisi. Per ulteriori informazioni, consulta https://streamlit.io/privacy-policy.")
+    st.markdown("I dati raccolti in questo studio, in formato testuale e anonimo (la traccia vocale, se utilizzata, verrà cancellata una volta trascritta), saranno caricati su una banca dati privata di GitHub https://github.com/SanEnzoLor/memo_data. I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare l'utilizzo dell'app. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     
     st.header("**Indici Demografici**")
 
