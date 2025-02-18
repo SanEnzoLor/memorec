@@ -217,7 +217,7 @@ def PCL5():
         st.write("Qui sotto viene riportata una lista di problemi che talvolta le persone presentano in risposta a esperienze molto stressanti. Leggere ogni problema attentamente e selezionare il numero per indicare quanto ogni problema l'ha afflitta nell'ultima settimana:")
         
         # Crea cinque colonne per le informazioni
-        cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.2, 0.3, 0.15, 0.15])
+        cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.18, 0.29, 0.13, 0.20])
         # Mostra le scritte nelle colonne
         with cl1:
             st.write("Per niente = 0") 
