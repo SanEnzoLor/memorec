@@ -360,16 +360,17 @@ def main():
         st.session_state.time_rec = 0
     if "testo" not in st.session_state:
         st.session_state.testo = ""
+    if "ind" not in st.session_state:
+        st.session_state.ind = "Inizia"
 
     ten_w = False
     
     def on_button_i_click():
         st.session_state.start = True
         st.session_state.show = True
-        ind = "Prosegui"
+        st.session_state.ind = "Prosegui"
     
     # Bottone per avviare la registrazione
-    ind = "Inizia"
     if st.button(ind, disabled = st.session_state.start, on_click = on_button_i_click):
         if len(st.session_state.remaining_words) != 0:
             if dispositivo == "Computer":
