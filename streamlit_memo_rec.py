@@ -276,13 +276,13 @@ def main():
     with col2:
         st.image("image/logo_nextage.png", use_container_width=True)
 
-    st.title("**Indagine volta alla costruzione di un database di memorie in italiano**")
+    st.title("**Indagine volta alla costruzione di una banca dati di memorie in italiano**")
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
     st.write("**Modeling dialogue between human and digital agents for the personalized stimulation of mnemonic abilities and the support for the evaluation of the progress and assistance of neurocognitive problems**")
     st.write("Lo scopo di questo studio è quello di raccogliere memorie autobiografiche eventualmente correlabili a indici noti in letteratura come stimatori dello stato di salute individuale.")
     st.markdown("I dati raccolti in questo studio, in formato testuale e anonimo (se si registra un file audio, esso sarà cancellato una volta completata la trascrizione automatica), saranno caricati su una banca dati privata di GitHub https://github.com/SanEnzoLor/memo_data.")
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
-    st.markdown("Avendo perciò i dati anonimizzati la loro raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
+    st.markdown("Avendo perciò i dati anonimizzati, la loro raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
     
     st.header("**Indici Demografici**")
 
@@ -292,10 +292,10 @@ def main():
         st.session_state.change = True
     # Creazione di input per acquisire dati dall'utente
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare il task:", ["Computer","Smartphone"], index = 0)
-    if dispositivo == "Smartphone":
-        st.warning("Per salvare correttamente le risposte date per iscritto nei campi testuali premere sulla tastiera virtuale **INVIO**.")
     eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1)
     gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index=3, on_change = gend_sel)
+    if dispositivo == "Smartphone":
+        st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     nazione = st.text_input("Scrivi la tua nazionalità:")
     educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"])
     occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"])
@@ -311,8 +311,8 @@ def main():
     # Lista di parole spunto
     cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
     cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
-    st.write("Il task consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
-    st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), il task **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando nuovamente **Inizia** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
+    st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
+    st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando nuovamente **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
     st.write("Vi sarà la possibilità:")
     st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
     st.write("- Sia di **scrivere direttamente** nel campo testuale.") 
@@ -368,7 +368,10 @@ def main():
         st.session_state.show = True
     
     # Bottone per avviare la registrazione
-    if st.button("Inizia", disabled = st.session_state.start, on_click = on_button_i_click):
+    ind = "Inizia"
+    if len(st.session_state.remaining_words) != 0:
+        ind = "Prosegui"
+    if st.button(ind, disabled = st.session_state.start, on_click = on_button_i_click):
         if len(st.session_state.remaining_words) != 0:
             if dispositivo == "Computer":
                 st.warning("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
@@ -419,6 +422,7 @@ def main():
             st.write("**Trascrizione audio:**")
             st.write(st.session_state.transcription)
             st.warning("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
+        st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
         st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                 value = st.session_state.transcription,
                                                 key = len(st.session_state.remaining_words),
@@ -473,7 +477,7 @@ def main():
         st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
         if st.button(label = "Salva Dati e Termina"):
             save_and_upload_to_github(st.session_state.session_data)
-            st.success("Grazie per aver partecipato al task.")
+            st.success("Grazie per aver partecipato alla raccolta dati!")
             st.session_state.session_data.clear()
 
     st.header("BIBLIOGRAFIA")
