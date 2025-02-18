@@ -368,7 +368,6 @@ def main():
     def on_button_i_click():
         st.session_state.start = True
         st.session_state.show = True
-        st.session_state.ind = "Prosegui"
     
     # Bottone per avviare la registrazione
     if st.button(st.session_state.ind, disabled = st.session_state.start, on_click = on_button_i_click):
@@ -433,6 +432,7 @@ def main():
     def on_button_s_click():
         st.session_state.show = False
         st.session_state.start = False
+        st.session_state.ind = "Prosegui"
     
     if len(st.session_state.remaining_words) != 0:
         if st.button("Salva memoria", disabled = not st.session_state.show, on_click = on_button_s_click):
