@@ -371,7 +371,7 @@ def main():
         st.session_state.ind = "Prosegui"
     
     # Bottone per avviare la registrazione
-    if st.button(ind, disabled = st.session_state.start, on_click = on_button_i_click):
+    if st.button(st.session_state.ind, disabled = st.session_state.start, on_click = on_button_i_click):
         if len(st.session_state.remaining_words) != 0:
             if dispositivo == "Computer":
                 st.warning("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
