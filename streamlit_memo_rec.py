@@ -292,12 +292,11 @@ def main():
         st.session_state.change = True
     # Creazione di input per acquisire dati dall'utente
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
-    def smartphone(dispositivo):
-        if dispositivo == "Smartphone":
-            st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1)
     gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index=3, on_change = gend_sel)
-    nazione = st.text_input("Scrivi la tua nazionalità:", on_change = smartphone(dispositivo))
+    nazione = st.text_input("Scrivi la tua nazionalità:")
+    if dispositivo == "Smartphone":
+        st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"])
     occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"])
     
@@ -367,11 +366,10 @@ def main():
     def on_button_i_click():
         st.session_state.start = True
         st.session_state.show = True
+        ind = "Prosegui"
     
     # Bottone per avviare la registrazione
     ind = "Inizia"
-    if len(st.session_state.remaining_words) != 10:
-        ind = "Prosegui"
     if st.button(ind, disabled = st.session_state.start, on_click = on_button_i_click):
         if len(st.session_state.remaining_words) != 0:
             if dispositivo == "Computer":
@@ -427,8 +425,9 @@ def main():
                                                 value = st.session_state.transcription,
                                                 key = len(st.session_state.remaining_words),
                                                 disabled = able(st.session_state.show, ten_w),
-                                                label_visibility = visible(st.session_state.show),
-                                                on_change = smartphone(dispositivo))
+                                                label_visibility = visible(st.session_state.show))
+        if dispositivo == "Smartphone":
+            st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     
     def on_button_s_click():
         st.session_state.show = False
