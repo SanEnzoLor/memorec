@@ -165,7 +165,7 @@ def RRS():
     st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Per favore, legga ciascuno dei seguenti item e indichi se, quando si sente giù, triste o depresso, lo pensa o lo fa mai, a volte, spesso o sempre. Indichi cortesemente cosa fa di solito, non cosa pensa di dover fare, selezionando il numero per indicare quanto ogni problema la affligge:")
 
     # Crea quattro colonne per le informazioni
-    cl1, cl2, cl3, cl4 = st.columns([0.3, 0.32, 0.24, 0.18])
+    cl1, cl2, cl3, cl4 = st.columns([0.3, 0.3, 0.24, 0.2])
     # Mostra le scritte nelle colonne
     with cl1:
         st.write("Quasi mai = 1") 
