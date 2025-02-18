@@ -168,13 +168,13 @@ def RRS():
     cl1, cl2, cl3, cl4 = st.columns([0.3, 0.32, 0.24, 0.18])
     # Mostra le scritte nelle colonne
     with cl1:
-        st.write("Quasi mai=1") 
+        st.write("Quasi mai = 1") 
     with cl2:
-        st.write("A volte=2")
+        st.write("A volte = 2")
     with cl3:
-        st.write("Spesso=3")
+        st.write("Spesso = 3")
     with cl4:
-        st.write("Quasi sempre=4")
+        st.write("Quasi sempre = 4")
             
     items = st.slider("Pensare a quanto ti senti solo", min_value=1, max_value=4, step=1)        
     items = items + st.slider("2. Pensare “Non sarò in grado di fare il mio lavoro perché mi sento così male”", min_value=1, max_value=4, step=1)
@@ -220,15 +220,15 @@ def PCL5():
         cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.2, 0.3, 0.15, 0.15])
         # Mostra le scritte nelle colonne
         with cl1:
-            st.write("Per niente=0") 
+            st.write("Per niente = 0") 
         with cl2:
-            st.write("Poco=1")
+            st.write("Poco = 1")
         with cl3:
-            st.write("Moderatamente=2")
+            st.write("Moderatamente = 2")
         with cl4:
-            st.write("Molto=3")
+            st.write("Molto = 3")
         with cl5:
-            st.write("Moltissimo=4")
+            st.write("Moltissimo = 4")
         
         items_reexperiencing = st.slider("Ricordi ripetuti, disturbanti e indesiderati dell'esperienza stressante che ha subito?", min_value=0, max_value=4, step=1)
         items_reexperiencing = items_reexperiencing + st.slider("Sogni ricorrenti e disturbanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
