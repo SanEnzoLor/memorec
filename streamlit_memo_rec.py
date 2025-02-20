@@ -79,16 +79,17 @@ def save_and_upload_to_github(data):
             
     if response.status_code == 200:  # 200 = aggiornato
         st.success("File aggiornato con successo su GitHub!")
+        st.write(new_df)
     elif response.status_code == 201:  # 201 = creato
         st.success("File creato con successo su GitHub!")
+        st.write(new_df)
     else:
-        #st.error(f"Errore durante l'upload: {response.status_code}\n{response.json()}")
+        st.error(f"Errore durante l'upload; attendere qualche secondo...")
         # Attendi un tempo casuale tra 0 e 5 secondi prima di riprovare
         wait_time = random.uniform(0, 5)
         time.sleep(wait_time)
         save_and_upload_to_github(data)
         
-    st.write(new_df)
     
 
 # Funzione per somministrare il BDI2
