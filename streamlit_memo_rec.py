@@ -485,6 +485,7 @@ def main():
             save_and_upload_to_github(st.session_state.session_data)
             st.success("Grazie per aver partecipato alla raccolta dati!")
             st.session_state.session_data.clear()
+        st.write("Selezionando **Salva Dati e Termina** si accetta al trattamento dei dati forniti a fini di ricerca, come descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
     st.warning("**Leggere dopo** aver svolto il **test**.")
