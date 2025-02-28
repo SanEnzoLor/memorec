@@ -499,6 +499,8 @@ def main():
     st.write("")
     #st.markdown("https://academy.formazionecontinuainpsicologia.it/wp-content/uploads/2023/07/ruminative.pdf")
     st.write("- **Ruminative Response Scale:**")
+    st.write("Versione italiana del Ruminative Response Scale:")
+    st.markdown("http://siba-ese.unisalento.it/index.php/psychofenia/article/view/i17201632vXn17p15")
     st.write("Studio riguardante la correlazione tra depressione e ruminazione:")
     st.markdown("https://doi.org/10.1016/j.jbtep.2006.03.002")
     st.write("Descrizione, somministrazione e valutazione del Ruminative Response Scale:")
