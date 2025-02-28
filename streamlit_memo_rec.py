@@ -189,7 +189,7 @@ def RRS():
     items = items + st.slider("Pensare a quanto ti senti passivo e demotivato", min_value=1, max_value=4, step=1)
     items = items + st.slider("Analizzare eventi recenti per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
     items = items + st.slider("Pensare al fatto che ti sembra di non sentire più niente", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Perché non riesco a riprendermi?”", min_value=1, max_value=4, step=1)
+    items = items + st.slider("Pensare “Perché non riesco a mettermi in moto?”", min_value=1, max_value=4, step=1)
     items = items + st.slider("Pensare “Perché reagisco sempre in questo modo?”", min_value=1, max_value=4, step=1)
     items = items + st.slider("Andare via da solo e pensare al perché ti senti in questo modo", min_value=1, max_value=4, step=1)
     items = items + st.slider("Scrivere cosa stai pensando e analizzarlo", min_value=1, max_value=4, step=1)
