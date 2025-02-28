@@ -202,7 +202,7 @@ def RRS():
     items = items + st.slider("Pensare al fatto che non te la senti di far nulla", min_value=1, max_value=4, step=1)
     items = items + st.slider("Analizzare la tua personalità per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
     items = items + st.slider("Andare da solo in un qualche posto per pensare alle tue emozioni", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a quanto sei arrabbiato con te stesso", min_value=1, max_value=4, step=1)
+    items = items + st.slider("Pensare a quanto ti senti arrabbiato con te stesso", min_value=1, max_value=4, step=1)
 
     return items
 
