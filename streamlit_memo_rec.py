@@ -463,7 +463,8 @@ def main():
             })
             
             # Rimuovi la parola utilizzata dalla lista
-            st.session_state.remaining_words.remove(st.session_state.selected_word)
+            if st.session_state.selected_word in st.session_state.remaining_words:
+                st.session_state.remaining_words.remove(st.session_state.selected_word)
             st.success(f"Registrazione completata. Dati salvati temporaneamente.")
             # Reset testo precedente
             st.session_state.transcription = ""
