@@ -30,7 +30,7 @@ def transcribe_audio(audio_file):
 
 def save_and_upload_to_github(data):
     # Input per i dati da salvare
-    columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
+    columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
     new_df = pd.DataFrame(data, columns=columns)
     file_name = "dati.csv"
 
