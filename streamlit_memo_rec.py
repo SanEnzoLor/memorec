@@ -353,11 +353,13 @@ def main():
             st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
         else:
             cue_word_p = df_ses_p["Cue-Word"]
+            st.write(cue_words_p)
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
             else:
                 cue_words_ref = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
             cue_words_p_r = [p for p in cue_words_ref if p not in cue_word_p]
+            st.write(cue_words_p_r)
             if "remaining_words" not in st.session_state:
                 st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
