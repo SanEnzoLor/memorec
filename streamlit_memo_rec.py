@@ -336,13 +336,16 @@ def main():
     # Creazione di input per acquisire dati dall'utente
 
 
+
+
+    
     
     file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
     if file:
         df_ses_p = pd.read_csv(file)
         data_all = download_github()
+        st.write(df_ses_p[0:])
         if df_ses_p[0:].isin(data_all).all().all():
-            st.write(df_ses_p[0:])
             cue_word_p = df_ses_p["Cue-Word"]
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
@@ -355,6 +358,9 @@ def main():
             st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
     st.write(st.session_state.remaining_words)
+
+
+
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
