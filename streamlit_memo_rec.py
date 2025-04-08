@@ -309,7 +309,7 @@ def main():
     autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
     if autonomia != "NO":
         desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {autonomia.lower()}:")
-        autonomia = f"Limitazione {autonomia}. {desc}"
+        autonomia = f"Limitazione {autonomia}. {desc.capitalize()}"
     
     
     results_d = BDI2()
