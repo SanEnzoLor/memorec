@@ -92,7 +92,8 @@ def save_and_upload_to_github(data):
 
 
 
-"""#Scarica un CSV da una repo GitHub privata usando autenticazione via token.
+"""
+#Scarica un CSV da una repo GitHub privata usando autenticazione via token.
 def download_github():
     # Input per GitHub
     file_name = "dati.csv"
