@@ -352,7 +352,7 @@ def main():
         else:
             st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
-
+    st.write(st.session_state.remaining_words)
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
