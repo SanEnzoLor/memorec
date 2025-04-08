@@ -344,9 +344,10 @@ def main():
     if file:
         df_ses_p = pd.read_csv(file)
         data_all = download_github()
-        st.write(df_ses_p.iloc[0:,1:])
+        st.write(df_ses_p.iloc[0:,2:])
+        st.write(df_ses_p)
         st.write(data_all)
-        if df_ses_p.iloc[0:,1:].isin(data_all).all().all():
+        if df_ses_p.iloc[0:,:].isin(data_all).all().all():
             cue_word_p = df_ses_p["Cue-Word"]
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
