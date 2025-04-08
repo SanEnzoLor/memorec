@@ -92,7 +92,7 @@ def save_and_upload_to_github(data):
 
 
 
-#Scarica un CSV da una repo GitHub privata usando autenticazione via token.
+"""#Scarica un CSV da una repo GitHub privata usando autenticazione via token.
 def download_github():
     # Input per GitHub
     file_name = "dati.csv"
@@ -119,7 +119,7 @@ def download_github():
         print(f"Errore nel download del file. Status code: {response.status_code}")
         print(response.text)
         return None
-
+"""
 
 
 
@@ -340,7 +340,7 @@ def main():
 
     
     
-    file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
+    """file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
     if file:
         df_ses_p = pd.read_csv(file)
         #data_all = download_github()
@@ -362,7 +362,7 @@ def main():
         #else:
         #    st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
-    st.write(st.session_state.remaining_words)
+    st.write(st.session_state.remaining_words)"""
 
 
 
@@ -446,6 +446,39 @@ def main():
         st.session_state.testo = ""
     if "ind" not in st.session_state:
         st.session_state.ind = "Inizia"
+
+
+
+    
+
+    file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
+    if file:
+        df_ses_p = pd.read_csv(file)
+        #data_all = download_github()
+        #st.write(df_ses_p.iloc[0:,2:])
+        #st.write(df_ses_p)
+        #st.write(data_all)
+        #if df_ses_p.iloc[0:,:].reset_index(drop=True).isin(data_all.reset_index(drop=True)).all().all():
+        if 'Cue-Word' not in df_ses_p.columns:
+            st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
+        else:
+            cue_word_p = df_ses_p["Cue-Word"]
+            if df_ses_p["Gender"][0] == "Femminile":
+                cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
+            else:
+                cue_words_ref = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+            cue_words_p_r = [p for p in cue_words_ref if p not in cue_word_p]
+            st.session_state.remaining_words = cue_words_p_r.copy()
+            st.write(st.session_state.remaining_words)
+        #else:
+        #    st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
+
+    st.write(st.session_state.remaining_words)
+
+
+
+
+    
 
     ten_w = False
     
