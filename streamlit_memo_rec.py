@@ -344,13 +344,16 @@ def main():
         if df_ses_p[1:].isin(data_all).all().all():
             cue_word_p = df_ses_p["Cue-Word"]
             if df_ses_p["Gender"][0] == "Femminile":
-                cue_words_ref = cue_words_f
+                cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
             else:
-                cue_words_ref = cue_words_f
+                cue_words_ref = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
             cue_words_p_r = [p for p in cue_words_ref if p not in cue_word_p]
             st.session_state.remaining_words = cue_words_p_r.copy()
         else:
             st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
+
+
+    
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
     eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1)
