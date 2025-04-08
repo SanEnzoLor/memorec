@@ -347,7 +347,7 @@ def main():
         st.write(df_ses_p.iloc[0:,2:])
         st.write(df_ses_p)
         st.write(data_all)
-        if df_ses_p.iloc[0:,:].isin(data_all).all().all():
+        if df_ses_p.iloc[0:,:].reset_index(drop=True).isin(data_all.reset_index(drop=True)).all().all():
             cue_word_p = df_ses_p["Cue-Word"]
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
