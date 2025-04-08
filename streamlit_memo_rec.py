@@ -308,8 +308,8 @@ def main():
     caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index=1)
     autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
     if autonomia != "NO":
-        desc = st.text_input(f"Se si vuole aggiungere una breve descrizione della propria limitazione '{autonomia}':")
-        autonomia = f"Limitazione '{autonomia}'. '{desc}'"
+        desc = st.text_input(f"Se si vuole aggiungere una breve descrizione della propria limitazione {autonomia}:")
+        autonomia = f"Limitazione {autonomia}. {desc}"
     
     
     results_d = BDI2()
@@ -456,10 +456,8 @@ def main():
                 "Nazionalita": nazione,
                 "Educazione": educazione,
                 "Occupazione": occupazione,
-
                 "Caregiver": caregiver,
                 "Limitazione": autonomia,
-                
                 "BDI2": results_d,
                 "RRS" : results_r,
                 "PCL-5-reexperiencing": results_p[0], 
