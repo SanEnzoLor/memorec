@@ -344,11 +344,11 @@ def main():
     if file:
         df_ses_p = pd.read_csv(file)
         #data_all = download_github()
-        st.write(df_ses_p.iloc[0:,2:])
-        st.write(df_ses_p)
+        #st.write(df_ses_p.iloc[0:,2:])
+        #st.write(df_ses_p)
         #st.write(data_all)
         #if df_ses_p.iloc[0:,:].reset_index(drop=True).isin(data_all.reset_index(drop=True)).all().all():
-        if 'Cue-Word' not in df_caricato.columns:
+        if 'Cue-Word' not in df_ses_p.columns:
             st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
         else:
             cue_word_p = df_ses_p["Cue-Word"]
