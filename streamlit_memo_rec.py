@@ -341,15 +341,15 @@ def main():
     if file:
         df_ses_p = pd.read_csv(file)
         data_all = download_github()
-        if df_ses_p not in data_all:
-            st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
-        else:
+        if df_ses_p.isin(data_all).all().all():
             cue_word_p = df_ses_p["Cue-Word"]
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
             else:
                 cue_words_ref = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
             cue_words = [p for p in cue_words_ref if p not in cue_word_p]
+        else:
+            st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
     else:
         cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
         cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
