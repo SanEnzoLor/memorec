@@ -386,11 +386,11 @@ def main():
 
     caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
     st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index = caregiver_ind)
-    #autonomia_ind = 
-    st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
+    autonomia_ind = ["NO", "Fisica", "Mentale"].index(st.session_state.autonomia.split()[0][:-1])
+    st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=autonomia_ind)
     if st.session_state.autonomia != "NO":
-        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.autonomia)
-        st.session_state.autonomia = f"Limitazione {st.session_state.autonomia}. {desc}"
+        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = ' '.join(st.session_state.autonomia.split()[1:]))
+        st.session_state.autonomia = f"{st.session_state.autonomia}. {desc}"
     
     
     st.session_state.results_d = BDI2()
