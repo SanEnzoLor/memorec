@@ -326,11 +326,7 @@ def main():
             autonomia = df_ses_p["Limitazione"].iloc[-1]
             results_d = df_ses_p["BDI2"].iloc[-1]
             results_r = df_ses_p["RRS"].iloc[-1]
-            results_p[0] = df_ses_p["PCL-5-reexperiencing"].iloc[-1]
-            results_p[1] = df_ses_p["PCL-5-avoidance"].iloc[-1]
-            results_p[2] = df_ses_p["PCL-5-altereted_cognition"].iloc[-1]
-            results_p[3] = df_ses_p["PCL-5-hyperarousal"].iloc[-1]
-            results_p[4] = df_ses_p["PCL-5-tot"].iloc[-1]
+            results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
             cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
             if gender == "Femminile":
