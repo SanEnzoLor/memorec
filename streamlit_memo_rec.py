@@ -327,6 +327,10 @@ def main():
             st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
+        # Chiudi lo stream del file (buona pratica anche se Streamlit lo gestisce)
+        file.close()
+        # Elimina riferimento al file per liberare memoria
+        file = None
         #else:
         #    st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
