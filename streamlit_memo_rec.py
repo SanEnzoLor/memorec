@@ -310,7 +310,7 @@ def main():
     
     st.session_state.file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
     if st.session_state.file:
-        df_ses_p = pd.read_csv(file)
+        df_ses_p = pd.read_csv(st.session_state.file)
         #data_all = download_github()
         #st.write(df_ses_p.iloc[0:,2:])
         #st.write(df_ses_p)
