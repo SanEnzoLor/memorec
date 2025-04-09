@@ -290,11 +290,11 @@ def main():
     
     st.header("**Indici Demografici**")
 
+    # Gestione dello stato per i dati della sessione
     if "change" not in st.session_state:
         st.session_state.change = False
     def gend_sel():
         st.session_state.change = True
-    # Creazione di input per acquisire dati dall'utente
 
 
 
@@ -303,12 +303,14 @@ def main():
     # Lista di parole spunto
     cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
     cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+    # Gestione dello stato per i dati della sessione
     if "remaining_words" not in st.session_state:
         st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
     if "file_update" not in st.session_state:
         st.session_state.file_update = True
-    
-    file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
+
+    # Creazione di input per acquisire dati dall'utente
+    file = st.file_uploader("Se si è interrotta la **sessione precedente** senza completare il task carica il **file scaricato** (<anno>-<mese>-<giorno>T<ora>_export.csv) al termine della stessa:", type=["csv"])
     if file and st.session_state.file_update == True:
         df_ses_p = pd.read_csv(file)
         #data_all = download_github()
@@ -361,9 +363,7 @@ def main():
     results_p = PCL5()
     st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
         
-    # Lista di parole spunto
-    #cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
-    #cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+
     st.header("**Cue-Word Autobiographic Memory Retrievial**")
     st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
     st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
@@ -374,8 +374,6 @@ def main():
     # Gestione dello stato per i dati della sessione
     if "session_data" not in st.session_state:
         st.session_state.session_data = []  # Dati temporanei della sessione
-    #if "remaining_words" not in st.session_state:
-    #    st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
     if st.session_state.change == True and gender == "Femminile":
         corrispondenti = []
         for parola1 in cue_words_f:
