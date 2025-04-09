@@ -379,10 +379,14 @@ def main():
     st.session_state.nazione = st.text_input("Scrivi la tua nazionalità:", value = st.session_state.nazione)
     if dispositivo == "Smartphone":
         st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
-    st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"])
-    st.session_state.occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"])
-    
-    st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index=1)
+    educazione_ind = ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"].index(st.session_state.educazione)
+    st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"], index = educazione_ind)
+    occupazione_ind = ["SI","NO"].index(st.session_state.occupazione)
+    st.session_state.occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"], index = occupazione_ind)
+
+    caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
+    st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index = caregiver_ind)
+    #autonomia_ind = 
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
     if st.session_state.autonomia != "NO":
         desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.autonomia)
