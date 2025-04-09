@@ -313,28 +313,21 @@ def main():
     file = st.file_uploader("Se si è interrotta la **sessione precedente** senza completare il task carica il **file scaricato** (<anno>-<mese>-<giorno>T<ora>_export.csv) al termine della stessa:", type=["csv"])
     if file and st.session_state.file_update == True:
         df_ses_p = pd.read_csv(file)
-        #data_all = download_github()
-        #st.write(df_ses_p.iloc[0:,2:])
-        #st.write(df_ses_p)
-        #st.write(data_all)
-        #if df_ses_p.iloc[0:,:].reset_index(drop=True).isin(data_all.reset_index(drop=True)).all().all():
         if 'Cue-Word' not in df_ses_p.columns:
             st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
         else:
             cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
             if df_ses_p["Gender"][0] == "Femminile":
-                cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
+                cue_words_ref = cue_words_f
             else:
-                cue_words_ref = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+                cue_words_ref = cue_words
             cue_words_p_r = [p for p in cue_words_ref if p not in cue_words_p]
             st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
         # blocca l'aggiornamento dell'applicativo
         st.session_state.file_update = False
-        #else:
-        #    st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
 
 
