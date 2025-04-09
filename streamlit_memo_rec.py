@@ -310,7 +310,8 @@ def main():
         st.session_state.file_update = True
 
     # Creazione di input per acquisire dati dall'utente
-    file = st.file_uploader("Se si è interrotta la **sessione precedente** senza completare il task carica il **file scaricato** (avente il formato: <anno>-<mese>-<giorno>T<ora>_export.csv) al termine della stessa:", type=["csv"])
+    st.write("Se si è interrotta la **sessione precedente** senza completare il task carica il **file scaricato** (avente il formato:")
+    file = st.file_uploader("<anno>-<mese>-<giorno>T<ora>_export.csv) al termine della stessa:", type=["csv"])
     if file and st.session_state.file_update == True:
         df_ses_p = pd.read_csv(file)
         if 'Cue-Word' not in df_ses_p.columns:
