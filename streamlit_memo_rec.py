@@ -314,7 +314,7 @@ def main():
     if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         df_ses_p = pd.read_csv(file)
-        if colums not in df_ses_p.columns:
+        if columns not in df_ses_p.columns:
             st.error("Il file caricato non è corretto.")
         else:
             eta = df_ses_p["Eta"][-1]
