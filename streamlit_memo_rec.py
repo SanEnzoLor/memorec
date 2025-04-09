@@ -384,7 +384,7 @@ def main():
     st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index=1)
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
     if st.session_state.autonomia != "NO":
-        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:")
+        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.autonomia)
         st.session_state.autonomia = f"Limitazione {st.session_state.autonomia}. {desc}"
     
     
