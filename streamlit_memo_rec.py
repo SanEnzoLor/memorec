@@ -310,15 +310,30 @@ def main():
         st.session_state.file_update = True
 
     # Creazione di input per acquisire dati dall'utente
-    file = st.file_uploader("Se si è interrotta la **sessione precedente** senza completare il task carica il **file scaricato** (avente il formato: <ANNO>-<MESE>-<GIORNO>T<ORA>_export.csv) al termine della stessa:", type=["csv"])
+    file = st.file_uploader("Carica il **file scaricato** (avente il formato: <data>T<ora>_export.csv) se si è interrotta la **sessione precedente** senza completare il task:", type=["csv"])
     if file and st.session_state.file_update == True:
+        columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         df_ses_p = pd.read_csv(file)
-        if 'Cue-Word' not in df_ses_p.columns:
-            st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
+        if colums not in df_ses_p.columns:
+            st.error("Il file caricato non è corretto.")
         else:
+            eta = df_ses_p["Eta"][-1]
+            gender = df_ses_p["Gender"][-1]
+            nazione = df_ses_p["Nazionalita"][-1]
+            educazione = df_ses_p["Educazione"][-1]
+            occupazione = df_ses_p["Occupazione"][-1]
+            caregiver = df_ses_p["Caregiver"][-1]
+            autonomia = df_ses_p["Limitazione"][-1]
+            results_d = df_ses_p["BDI2"][-1]
+            results_r = df_ses_p["RRS"][-1]
+            results_p[0] = df_ses_p["PCL-5-reexperiencing"][-1]
+            results_p[1] = df_ses_p["PCL-5-avoidance"][-1]
+            results_p[2] = df_ses_p["PCL-5-altereted_cognition"][-1]
+            results_p[3] = df_ses_p["PCL-5-hyperarousal"][-1]
+            results_p[4] = df_ses_p["PCL-5-tot"][-1]
             cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
-            if df_ses_p["Gender"][0] == "Femminile":
+            if gender == "Femminile":
                 cue_words_ref = cue_words_f
             else:
                 cue_words_ref = cue_words
@@ -326,8 +341,8 @@ def main():
             st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
-        # blocca l'aggiornamento dell'applicativo
-        st.session_state.file_update = False
+            # blocca l'aggiornamento dell'applicativo
+            st.session_state.file_update = False
 
 
 
