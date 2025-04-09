@@ -88,47 +88,7 @@ def save_and_upload_to_github(data):
         # Attendi un tempo casuale tra 0 e 5 secondi prima di riprovare
         wait_time = random.uniform(0, 5)
         time.sleep(wait_time)
-        save_and_upload_to_github(data)
-
-
-
-"""
-#Scarica un CSV da una repo GitHub privata usando autenticazione via token.
-def download_github():
-    # Input per GitHub
-    file_name = "dati.csv"
-    repo_name = "SanEnzoLor/memo_data"
-    token = st.secrets["token"]
-    url = f"https://api.github.com/repos/{repo_name}/contents/{file_name}"
-    
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3.raw"
-    }
-
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
-        try:
-            csv_string = response.text
-            df = pd.read_csv(StringIO(csv_string))
-            return df
-        except Exception as e:
-            print(f"Errore nella lettura del CSV: {e}")
-            return None
-    else:
-        print(f"Errore nel download del file. Status code: {response.status_code}")
-        print(response.text)
-        return None
-"""
-
-
-
-
-
-
-
-        
+        save_and_upload_to_github(data)      
     
 
 # Funzione per somministrare il BDI2
