@@ -305,12 +305,12 @@ def main():
     cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
     if "remaining_words" not in st.session_state:
         st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
-    if "file" not in st.session_state:
-        st.session_state.file = None
+    if "file_update" not in st.session_state:
+        st.session_state.file_update = True
     
-    st.session_state.file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
-    if st.session_state.file:
-        df_ses_p = pd.read_csv(st.session_state.file)
+    file = st.file_uploader("Se si è interrotta la sessione precedente senza completare il task carica il file scaricato (<nome_file>.csv) al termine della stessa:", type=["csv"])
+    if file and st.session_state.file_update == True:
+        df_ses_p = pd.read_csv(file)
         #data_all = download_github()
         #st.write(df_ses_p.iloc[0:,2:])
         #st.write(df_ses_p)
@@ -329,10 +329,8 @@ def main():
             st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
-        # Chiudi lo stream del file (buona pratica anche se Streamlit lo gestisce)
-        st.session_state.file.close()
-        # Elimina riferimento al file per liberare memoria
-        st.session_state.file = None
+        # blocca l'aggiornamento dell'applicativo
+        st.session_state.file_update = False
         #else:
         #    st.error("Il file caricato non corrisponde a nessuno dei dati salvati nella banca dati di GitHub.")
 
