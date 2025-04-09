@@ -306,6 +306,32 @@ def main():
     # Gestione dello stato per i dati della sessione
     if "remaining_words" not in st.session_state:
         st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
+
+    
+    if "eta" not in st.session_state:
+        st.session_state.eta = 18
+    if "gender" not in st.session_state:
+        st.session_state.gender = "Nessuno"
+    if "nazione" not in st.session_state:
+        st.session_state.nazione = ""
+    if "educazione" not in st.session_state:
+        st.session_state.educazione = "Scuola primaria"
+    if "occupazione" not in st.session_state:
+        st.session_state.occupazione = "SI"
+    if "caregiver" not in st.session_state:
+        st.session_state.caregiver = "NO"
+    if "autonomia" not in st.session_state:
+        st.session_state.autonomia = "NO"
+    if "results_d" not in st.session_state:
+        st.session_state.results_d = 0
+    if "results_r" not in st.session_state:
+        st.session_state.results_r = 0
+    if "results_p" not in st.session_state:
+        st.session_state.results_p = [0, 0, 0, 0, 0]
+    
+    
+    
+    # blocca l'aggiornamento dell'applicativo dopo aver letto il file caricato
     if "file_update" not in st.session_state:
         st.session_state.file_update = True
 
@@ -317,19 +343,19 @@ def main():
         if not all(col in df_ses_p.columns for col in columns):
             st.error("Il file caricato non è corretto.")
         else:
-            eta = df_ses_p["Eta"].iloc[-1]
-            gender = df_ses_p["Gender"].iloc[-1]
-            nazione = df_ses_p["Nazionalita"].iloc[-1]
-            educazione = df_ses_p["Educazione"].iloc[-1]
-            occupazione = df_ses_p["Occupazione"].iloc[-1]
-            caregiver = df_ses_p["Caregiver"].iloc[-1]
-            autonomia = df_ses_p["Limitazione"].iloc[-1]
-            results_d = df_ses_p["BDI2"].iloc[-1]
-            results_r = df_ses_p["RRS"].iloc[-1]
-            results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
+            st.session_state.eta = df_ses_p["Eta"].iloc[-1]
+            st.session_state.gender = df_ses_p["Gender"].iloc[-1]
+            st.session_state.nazione = df_ses_p["Nazionalita"].iloc[-1]
+            st.session_state.educazione = df_ses_p["Educazione"].iloc[-1]
+            st.session_state.occupazione = df_ses_p["Occupazione"].iloc[-1]
+            st.session_state.caregiver = df_ses_p["Caregiver"].iloc[-1]
+            st.session_state.autonomia = df_ses_p["Limitazione"].iloc[-1]
+            st.session_state.results_d = df_ses_p["BDI2"].iloc[-1]
+            st.session_state.results_r = df_ses_p["RRS"].iloc[-1]
+            st.session_state.results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
             cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
-            if gender == "Femminile":
+            if st.session_state.gender == "Femminile":
                 cue_words_ref = cue_words_f
             else:
                 cue_words_ref = cue_words
@@ -339,35 +365,35 @@ def main():
             st.write(st.session_state.remaining_words)
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
-            st.write(eta, gender, nazione, educazione, occupazione, caregiver, autonomia, results_d, results_r, results_p)
-
-    #st.write(eta, gender, nazione, educazione, occupazione, caregiver, autonomia, results_d, results_r, results_p)
+    
+    
+    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.results_d, st.session_state.results_r, st.session_state.results_p)
 
 
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
-    eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1)
-    gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index=3, on_change = gend_sel)
-    nazione = st.text_input("Scrivi la tua nazionalità:")
+    st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1)
+    st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index=3, on_change = gend_sel)
+    st.session_state.nazione = st.text_input("Scrivi la tua nazionalità:")
     if dispositivo == "Smartphone":
         st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
-    educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"])
-    occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"])
+    st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"])
+    st.session_state.occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"])
     
-    caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index=1)
-    autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
-    if autonomia != "NO":
-        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {autonomia.lower()}:")
-        autonomia = f"Limitazione {autonomia}. {desc}"
+    st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index=1)
+    st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO", "Fisica", "Mentale"], index=0)
+    if st.session_state.autonomia != "NO":
+        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:")
+        st.session_state.autonomia = f"Limitazione {st.session_state.autonomia}. {desc}"
     
     
-    results_d = BDI2()
-    st.write(f"BDI2: {results_d}")
-    results_r = RRS()
-    st.write(f"RRS: {results_r}")
-    results_p = PCL5()
-    st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
+    st.session_state.results_d = BDI2()
+    st.write(f"BDI2: {st.session_state.results_d}")
+    st.session_state.results_r = RRS()
+    st.write(f"RRS: {st.session_state.results_r}")
+    st.session_state.results_p = PCL5()
+    st.write(f"PCL5: Re-experiencing = {st.session_state.results_p[0]}, Avoidance = {st.session_state.results_p[1]}, Negative alterations in cognition and mood = {st.session_state.results_p[2]}, Hyper-arousal = {st.session_state.results_p[3]}, Totale = {st.session_state.results_p[4]}")
         
 
     st.header("**Cue-Word Autobiographic Memory Retrievial**")
@@ -380,7 +406,7 @@ def main():
     # Gestione dello stato per i dati della sessione
     if "session_data" not in st.session_state:
         st.session_state.session_data = []  # Dati temporanei della sessione
-    if st.session_state.change == True and gender == "Femminile":
+    if st.session_state.change == True and st.session_state.gender == "Femminile":
         corrispondenti = []
         for parola1 in cue_words_f:
             # Rimuovi l'ultima lettera di parola1
@@ -391,7 +417,7 @@ def main():
                 corrispondenti.append(parola1)
         st.session_state.remaining_words = corrispondenti.copy()  # Parole rimanenti
         st.session_state.change = False
-    if st.session_state.change == True and gender != "Femminile":
+    if st.session_state.change == True and st.session_state.gender != "Femminile":
         corrispondenti = []
         for parola1 in cue_words:
             # Rimuovi l'ultima lettera di parola1
@@ -497,20 +523,20 @@ def main():
             duration = time.time() - st.session_state.start_time
             # Aggiungi i dati di questa registrazione alla sessione
             st.session_state.session_data.append({
-                "Eta": eta,
-                "Gender": gender,
-                "Nazionalita": nazione,
-                "Educazione": educazione,
-                "Occupazione": occupazione,
-                "Caregiver": caregiver,
-                "Limitazione": autonomia,
-                "BDI2": results_d,
-                "RRS" : results_r,
-                "PCL-5-reexperiencing": results_p[0], 
-                "PCL-5-avoidance": results_p[1],
-                "PCL-5-altereted_cognition": results_p[2],
-                "PCL-5-hyperarousal": results_p[3],
-                "PCL-5-tot": results_p[4],
+                "Eta": st.session_state.eta,
+                "Gender": st.session_state.gender,
+                "Nazionalita": st.session_state.nazione,
+                "Educazione": st.session_state.educazione,
+                "Occupazione": st.session_state.occupazione,
+                "Caregiver": st.session_state.caregiver,
+                "Limitazione": st.session_state.autonomia,
+                "BDI2": st.session_state.results_d,
+                "RRS" : st.session_state.results_r,
+                "PCL-5-reexperiencing": st.session_state.results_p[0], 
+                "PCL-5-avoidance": st.session_state.results_p[1],
+                "PCL-5-altereted_cognition": st.session_state.results_p[2],
+                "PCL-5-hyperarousal": st.session_state.results_p[3],
+                "PCL-5-tot": st.session_state.results_p[4],
                 "Cue-Word": st.session_state.selected_word,
                 "Text": st.session_state.testo,
                 "Time": duration,
