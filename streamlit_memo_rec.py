@@ -312,7 +312,7 @@ def main():
         if 'Cue-Word' not in df_ses_p.columns:
             st.error("Il file caricato non contiene la colonna 'Cue-Word'.")
         else:
-            cue_words_p = df_ses_p["Cue-Word"]
+            cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
             if df_ses_p["Gender"][0] == "Femminile":
                 cue_words_ref = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
