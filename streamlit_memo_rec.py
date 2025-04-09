@@ -341,7 +341,7 @@ def main():
             st.session_state.file_update = False
             st.write(eta, gender, nazione, educazione, occupazione, caregiver, autonomia, results_d, results_r, results_p)
 
-    st.write(eta, gender, nazione, educazione, occupazione, caregiver, autonomia, results_d, results_r, results_p)
+    #st.write(eta, gender, nazione, educazione, occupazione, caregiver, autonomia, results_d, results_r, results_p)
 
 
     
