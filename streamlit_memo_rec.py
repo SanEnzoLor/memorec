@@ -375,7 +375,7 @@ def main():
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
     
-    
+    results_d = 0
     st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, st.session_state.results_p)
 
 
