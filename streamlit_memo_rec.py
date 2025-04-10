@@ -386,6 +386,8 @@ def main():
             st.session_state.remaining_words = cue_words_p_r.copy()
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
+
+    st.write(df_ses_p)
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
