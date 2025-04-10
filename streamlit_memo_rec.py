@@ -379,13 +379,13 @@ def main():
             st.session_state.results_d = df_ses_p["BDI2"].iloc[-1]
             st.session_state.results_r = df_ses_p["RRS"].iloc[-1]
             st.session_state.results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
-            cue_words_p = [c_w for c_w in df_ses_p["Cue-Word"]]
+            cue_words_p = [c_w[:-1] for c_w in df_ses_p["Cue-Word"]]
             st.write(cue_words_p)
             if st.session_state.gender == "Femminile":
                 cue_words_ref = cue_words_f
             else:
                 cue_words_ref = cue_words
-            cue_words_p_r = [p for p in cue_words_ref if p not in cue_words_p]
+            cue_words_p_r = [p for p in cue_words_ref if p[:-1] not in cue_words_p]
             st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
