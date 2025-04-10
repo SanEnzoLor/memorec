@@ -100,13 +100,13 @@ def BDI2():
     st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, faccia una crocetta sul numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
 
     options = ["0. Non mi sento triste.", "1. Mi sento triste per la maggior parte del tempo.", "2. Mi sento sempre triste.", "3. Mi sento così triste o infelice da non poterlo sopportare."]
-    items= options.index(st.selectbox("Tristezza", options, on_change = BDI2_on_change()))
+    items= options.index(st.selectbox("Tristezza", options))#, on_change = BDI2_on_change()
     
     options = ["0. Non sono scoraggiato riguardo al mio futuro.", "1. Mi sento più scoraggiato riguardo al mio futuro rispetto al solito.", "2. Non mi aspetto nulla di buono per me.", "3. Sento che il mio futuro è senza speranza e che continuerà a peggiorare."]
-    items = items + options.index(st.selectbox("Pessimismo", options, on_change = BDI2_on_change()))
+    items = items + options.index(st.selectbox("Pessimismo", options))
         
     options = ["0. Non mi sento un fallito.", "1. Ho fallito più di quanto avrei dovuto.", "2. Se ripenso alla mia vita riesco a vedere solo una serie di fallimenti.", "3. Ho la sensazione di essere un fallimento totale come persona."]
-    items = items + options.index(st.selectbox("Fallimento", options, on_change = BDI2_on_change()))
+    items = items + options.index(st.selectbox("Fallimento", options))
     
     options = ["0. Traggo lo stesso piacere di sempre dalle cose che faccio.", "1. Non traggo più piacere dalle cose come un tempo.", "2. Traggo molto poco piacere dalle cose che di solito mi divertivano.", "3. Non riesco a trarre alcun piacere dalle cose che una volta mi piacevano."]
     items = items + options.index(st.selectbox("Perdita di piacere", options))
