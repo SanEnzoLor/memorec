@@ -421,7 +421,6 @@ def main():
     if results_p is not None:
         st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
 
-    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, results_r, st.session_state.results_p, results_p)
 
     st.header("**Cue-Word Autobiographic Memory Retrievial**")
     st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
