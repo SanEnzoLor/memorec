@@ -327,6 +327,8 @@ def main():
         st.session_state.caregiver = "NO"
     if "autonomia" not in st.session_state:
         st.session_state.autonomia = "NO."
+    if "desc" not in st.session_state:
+        st.session_state.desc = ""
     if "results_d" not in st.session_state:
         st.session_state.results_d = 0
     if "results_r" not in st.session_state:
@@ -394,11 +396,11 @@ def main():
     
     
     autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia.split()[0])
-    desc = st.session_state.autonomia.split('.', 1)[1]
+    st.session_state.desc = st.session_state.autonomia.split('.', 1)[1]
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
-        desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = desc)
-        st.session_state.autonomia = f"{st.session_state.autonomia} {desc}"
+        st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.desc)
+        st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
     
     
     st.session_state.results_d = BDI2(st.session_state.results_d)
