@@ -89,6 +89,8 @@ def save_and_upload_to_github(data):
         wait_time = random.uniform(0, 5)
         time.sleep(wait_time)
         save_and_upload_to_github(data)      
+
+    st.download_button(label="Se si volessero scaricare i dati di questa sessione, per completare l'attività successivamente o per fare richiesta al gestore dei dati di eliminarli, clicca qui:", data = new_df, file_name="dati_export.csv")
     
 
 # Funzione per somministrare il BDI2
@@ -592,7 +594,6 @@ def main():
         if st.button(label = "Salva Dati e Termina"):
             save_and_upload_to_github(st.session_state.session_data)
             st.success("Grazie per aver partecipato alla raccolta dati!")
-            st.download_button(label="Se si volessero scaricare i dati di questa sessione, per completare l'attività successivamente o per fare richiesta al gestore dei dati di eliminarli, clicca qui:", data = StringIO(st.session_state.session_data.to_csv(index=False)), file_name="dati_export.csv")
             st.session_state.session_data.clear()
         st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
