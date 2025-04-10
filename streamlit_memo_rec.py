@@ -389,7 +389,7 @@ def main():
 
 
     
-    st.write(st.session_state.autonomia.split()[0])
+    st.write(st.session_state.autonomia)
     
     
     autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia.split()[0])
