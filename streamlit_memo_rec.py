@@ -384,7 +384,6 @@ def main():
                 cue_words_ref = cue_words
             cue_words_p_r = [p for p in cue_words_ref if p[:-1] not in cue_words_p]
             st.session_state.remaining_words = cue_words_p_r.copy()
-            st.write(st.session_state.remaining_words)
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
     
