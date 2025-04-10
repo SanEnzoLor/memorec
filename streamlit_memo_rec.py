@@ -224,66 +224,73 @@ def RRS():
 
 # Funzione per il PTSD checklist 5
 def PCL5():
-    st.header("**Posttraumatic Stress Disorder Checklist - 5**")
+    if st.session_state.results_p[4] == 0:
+        st.write("Ha mai vissuto uno dei seguenti eventi: rischio di morte, minaccia concreta di lesioni gravi o atti di violenza? In una o più delle seguenti modalità?")
+        st.write("1. Sperimentando in prima persona l'evento o gli eventi.")
+        st.write("2. Assistendo a un evento o gli eventi verificati ad altri.")
+        st.write("3. Apprendendo che l'evento è accaduto a un parente o a un amico stretto.")
+        st.write("4. Sperimentando un'esposizione ripetuta a dettagli estremi di eventi non noti verificati ad altri (e.g., i primi soccorritori che raccolgono parti di corpi; gli agenti di polizia ripetutamente esposti a dettagli di abusi su minori).")
+        trauma_event = st.selectbox("risposta", ["SI","NO"], index=1, label_visibility = "collapsed") # NO predefinito
     
-    st.write("Ha mai vissuto uno dei seguenti eventi: rischio di morte, minaccia concreta di lesioni gravi o atti di violenza? In una o più delle seguenti modalità?")
-    st.write("1. Sperimentando in prima persona l'evento o gli eventi.")
-    st.write("2. Assistendo a un evento o gli eventi verificati ad altri.")
-    st.write("3. Apprendendo che l'evento è accaduto a un parente o a un amico stretto.")
-    st.write("4. Sperimentando un'esposizione ripetuta a dettagli estremi di eventi non noti verificati ad altri (e.g., i primi soccorritori che raccolgono parti di corpi; gli agenti di polizia ripetutamente esposti a dettagli di abusi su minori).")
-    trauma_event = st.selectbox("risposta", ["SI","NO"], index=1, label_visibility = "collapsed") # NO predefinito
-
-    if trauma_event == "SI":
-        st.write("Qui sotto viene riportata una lista di problemi che talvolta le persone presentano in risposta a esperienze molto stressanti. Leggere ogni problema attentamente e selezionare il numero per indicare quanto ogni problema l'ha afflitta nell'ultima settimana:")
-        
-        # Crea cinque colonne per le informazioni
-        cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.16, 0.32, 0.16, 0.16])
-        # Mostra le scritte nelle colonne
-        with cl1:
-            st.write("Per niente = 0") 
-        with cl2:
-            st.write("Poco = 1")
-        with cl3:
-            st.write("Moderatamente = 2")
-        with cl4:
-            st.write("Molto = 3")
-        with cl5:
-            st.write("Moltissimo = 4")
-        
-        items_reexperiencing = st.slider("Ricordi ripetuti, disturbanti e indesiderati dell'esperienza stressante che ha subito?", min_value=0, max_value=4, step=1)
-        items_reexperiencing = items_reexperiencing + st.slider("Sogni ricorrenti e disturbanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
-        items_reexperiencing = items_reexperiencing + st.slider("Avere la sensazione o comportarsi improvvisamente come se l'esperienza stressante  si stesse verificando nuovamente (come se si rivivesse la stessa esperienza)?", min_value=0, max_value=4, step=1)
-        items_reexperiencing = items_reexperiencing + st.slider("Sentirsi molto turbato/a quando qualcosa le ricorda l'esperienza stressante?", min_value=0, max_value=4, step=1)
-        items_reexperiencing = items_reexperiencing + st.slider("Avere forti reazioni fisiche quando qualcosa Le ricorda l'esperienza stressante (per esempio battito del cuore accelerato, respiro affannoso, sudorazione)?", min_value=0, max_value=4, step=1)
-
-        items_avoidance = st.slider("Evitare ricordi, pensieri o sensazioni legati all'esperienza stressante?", min_value=0, max_value=4, step=1)
-        items_avoidance = items_avoidance + st.slider("Evitare qualunque cosa Le ricordi l'esperienza stressante (per esempio, persone, luoghi, conversazioni, attività, oggetti o situazioni)?", min_value=0, max_value=4, step=1)
-
-        items_altereted_cognition = st.slider("Problemi a ricordare elementi importanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Avere opinioni fortemente negative di sé, di altre persone o del mondo (per esempio, avere pensieri del tipo: Io sono una cattiva persona, c'è realmente qualcosa che non va in me, non ci si può fidare di nessuno, il mondo intero è pericoloso)?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Incolpare se stesso/a o altre persone dell'esperienza stressante o di ciò che è accaduto in seguito?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Avere sentimenti fortemente negativi come paura, terrore, rabbia, senso di colpa o vergogna?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Perdita di interesse alle attività che solitamente Le piacevano?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Sentirsi distante o isolato/a dal prossimo?", min_value=0, max_value=4, step=1)
-        items_altereted_cognition = items_altereted_cognition + st.slider("Avere difficoltà a provare sentimenti positivi (per esempio, sentirsi incapace di provare felicità o sentimenti di affetto nei confronti di persone a Lei care)?", min_value=0, max_value=4, step=1)
-        
-        items_hyperarousal = st.slider("Avere un comportamento irritabile, accessi di rabbia, o reazioni aggressive?", min_value=0, max_value=4, step=1)
-        items_hyperarousal = items_hyperarousal + st.slider("Correre troppi rischi o fare cose che potrebbero causarLe danno?", min_value=0, max_value=4, step=1)
-        items_hyperarousal = items_hyperarousal + st.slider("Essere ipervigile, guardingo/a o sempre all'erta?", min_value=0, max_value=4, step=1)
-        items_hyperarousal = items_hyperarousal + st.slider("Sentirsi in tensione o spaventarsi facilmente?", min_value=0, max_value=4, step=1)
-        items_hyperarousal = items_hyperarousal + st.slider("Avere difficoltà di concentrazione?", min_value=0, max_value=4, step=1)
-        items_hyperarousal = items_hyperarousal + st.slider("Avere difficoltà ad addormentarsi o a dormire?", min_value=0, max_value=4, step=1)
-
-        tot = items_reexperiencing + items_avoidance + items_altereted_cognition + items_hyperarousal
+        if trauma_event == "SI":
+            st.write("Qui sotto viene riportata una lista di problemi che talvolta le persone presentano in risposta a esperienze molto stressanti. Leggere ogni problema attentamente e selezionare il numero per indicare quanto ogni problema l'ha afflitta nell'ultima settimana:")
+            
+            # Crea cinque colonne per le informazioni
+            cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.16, 0.32, 0.16, 0.16])
+            # Mostra le scritte nelle colonne
+            with cl1:
+                st.write("Per niente = 0") 
+            with cl2:
+                st.write("Poco = 1")
+            with cl3:
+                st.write("Moderatamente = 2")
+            with cl4:
+                st.write("Molto = 3")
+            with cl5:
+                st.write("Moltissimo = 4")
+            
+            items_reexperiencing = st.slider("Ricordi ripetuti, disturbanti e indesiderati dell'esperienza stressante che ha subito?", min_value=0, max_value=4, step=1)
+            items_reexperiencing = items_reexperiencing + st.slider("Sogni ricorrenti e disturbanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
+            items_reexperiencing = items_reexperiencing + st.slider("Avere la sensazione o comportarsi improvvisamente come se l'esperienza stressante  si stesse verificando nuovamente (come se si rivivesse la stessa esperienza)?", min_value=0, max_value=4, step=1)
+            items_reexperiencing = items_reexperiencing + st.slider("Sentirsi molto turbato/a quando qualcosa le ricorda l'esperienza stressante?", min_value=0, max_value=4, step=1)
+            items_reexperiencing = items_reexperiencing + st.slider("Avere forti reazioni fisiche quando qualcosa Le ricorda l'esperienza stressante (per esempio battito del cuore accelerato, respiro affannoso, sudorazione)?", min_value=0, max_value=4, step=1)
     
+            items_avoidance = st.slider("Evitare ricordi, pensieri o sensazioni legati all'esperienza stressante?", min_value=0, max_value=4, step=1)
+            items_avoidance = items_avoidance + st.slider("Evitare qualunque cosa Le ricordi l'esperienza stressante (per esempio, persone, luoghi, conversazioni, attività, oggetti o situazioni)?", min_value=0, max_value=4, step=1)
+    
+            items_altereted_cognition = st.slider("Problemi a ricordare elementi importanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Avere opinioni fortemente negative di sé, di altre persone o del mondo (per esempio, avere pensieri del tipo: Io sono una cattiva persona, c'è realmente qualcosa che non va in me, non ci si può fidare di nessuno, il mondo intero è pericoloso)?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Incolpare se stesso/a o altre persone dell'esperienza stressante o di ciò che è accaduto in seguito?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Avere sentimenti fortemente negativi come paura, terrore, rabbia, senso di colpa o vergogna?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Perdita di interesse alle attività che solitamente Le piacevano?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Sentirsi distante o isolato/a dal prossimo?", min_value=0, max_value=4, step=1)
+            items_altereted_cognition = items_altereted_cognition + st.slider("Avere difficoltà a provare sentimenti positivi (per esempio, sentirsi incapace di provare felicità o sentimenti di affetto nei confronti di persone a Lei care)?", min_value=0, max_value=4, step=1)
+            
+            items_hyperarousal = st.slider("Avere un comportamento irritabile, accessi di rabbia, o reazioni aggressive?", min_value=0, max_value=4, step=1)
+            items_hyperarousal = items_hyperarousal + st.slider("Correre troppi rischi o fare cose che potrebbero causarLe danno?", min_value=0, max_value=4, step=1)
+            items_hyperarousal = items_hyperarousal + st.slider("Essere ipervigile, guardingo/a o sempre all'erta?", min_value=0, max_value=4, step=1)
+            items_hyperarousal = items_hyperarousal + st.slider("Sentirsi in tensione o spaventarsi facilmente?", min_value=0, max_value=4, step=1)
+            items_hyperarousal = items_hyperarousal + st.slider("Avere difficoltà di concentrazione?", min_value=0, max_value=4, step=1)
+            items_hyperarousal = items_hyperarousal + st.slider("Avere difficoltà ad addormentarsi o a dormire?", min_value=0, max_value=4, step=1)
+    
+            tot = items_reexperiencing + items_avoidance + items_altereted_cognition + items_hyperarousal
+        
+        else:
+            items_reexperiencing = 0
+            items_avoidance = 0
+            items_altereted_cognition = 0
+            items_hyperarousal = 0
+            tot = 0
+    
+        return items_reexperiencing, items_avoidance, items_altereted_cognition, items_hyperarousal, tot
+
     else:
-        items_reexperiencing = 0
-        items_avoidance = 0
-        items_altereted_cognition = 0
-        items_hyperarousal = 0
-        tot = 0
-
-    return items_reexperiencing, items_avoidance, items_altereted_cognition, items_hyperarousal, tot
+        choice_p = st.selectbox("Si vuole rieseguire la Checklist per il Disturbo da Stress Posttraumatico - 5 (PCL-5) ?", ["SI", "NO"], index = 1)
+        if choice_p == "SI":
+            st.session_state.results_p = [0, 0, 0, 0, 0]
+            PCL5()
+        else:
+            return st.session_state.results_p
 
 
 # Interfaccia Streamlit
@@ -417,13 +424,12 @@ def main():
     st.header("**Ruminative Response Scale**")
     results_r = RRS()
     st.write(f"RRS: {results_r}")
+    
+    st.header("**Posttraumatic Stress Disorder Checklist - 5**")
+    results_p = PCL5()
+    st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
 
-    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, results_r, st.session_state.results_p)
-    
-    
-    st.session_state.results_p = PCL5()
-    st.write(f"PCL5: Re-experiencing = {st.session_state.results_p[0]}, Avoidance = {st.session_state.results_p[1]}, Negative alterations in cognition and mood = {st.session_state.results_p[2]}, Hyper-arousal = {st.session_state.results_p[3]}, Totale = {st.session_state.results_p[4]}")
-        
+    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, results_r, st.session_state.results_p, results_p)
 
     st.header("**Cue-Word Autobiographic Memory Retrievial**")
     st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
@@ -561,11 +567,11 @@ def main():
                 "Limitazione": st.session_state.autonomia + st.session_state.desc,
                 "BDI2": results_d,
                 "RRS" : results_r,
-                "PCL-5-reexperiencing": st.session_state.results_p[0], 
-                "PCL-5-avoidance": st.session_state.results_p[1],
-                "PCL-5-altereted_cognition": st.session_state.results_p[2],
-                "PCL-5-hyperarousal": st.session_state.results_p[3],
-                "PCL-5-tot": st.session_state.results_p[4],
+                "PCL-5-reexperiencing": results_p[0], 
+                "PCL-5-avoidance": results_p[1],
+                "PCL-5-altereted_cognition": results_p[2],
+                "PCL-5-hyperarousal": results_p[3],
+                "PCL-5-tot": results_p[4],
                 "Cue-Word": st.session_state.selected_word,
                 "Text": st.session_state.testo,
                 "Time": duration,
