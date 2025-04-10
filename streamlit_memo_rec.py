@@ -427,7 +427,8 @@ def main():
     
     st.header("**Posttraumatic Stress Disorder Checklist - 5**")
     results_p = PCL5()
-    st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
+    if results_p is not None:
+        st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
 
     st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, results_r, st.session_state.results_p, results_p)
 
