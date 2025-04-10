@@ -387,6 +387,11 @@ def main():
     caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
     st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index = caregiver_ind)
 
+
+    
+    st.write(st.session_state.autonomia.split()[0])
+    
+    
     autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia.split()[0])
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
