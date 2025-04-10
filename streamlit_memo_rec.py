@@ -335,7 +335,7 @@ def main():
     if "gender" not in st.session_state:
         st.session_state.gender = "Nessuno"
     if "nazione" not in st.session_state:
-        st.session_state.nazione = ""
+        st.session_state.nazione = " "
     if "educazione" not in st.session_state:
         st.session_state.educazione = "Scuola primaria"
     if "occupazione" not in st.session_state:
