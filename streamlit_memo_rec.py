@@ -90,7 +90,7 @@ def save_and_upload_to_github(data):
         time.sleep(wait_time)
         save_and_upload_to_github(data)      
 
-    st.download_button(label="**CLICCA QUI**: Se si volessero **scaricare i dati** di questa sessione, per **completare l'attività successivamente** O per fare **richiesta al gestore dei dati di eliminarli**.", data = new_df.to_csv(index=False))
+    st.download_button(label="**CLICCA QUI**: Se si volessero **scaricare i dati** di questa sessione, per **completare l'attività successivamente** O per fare **richiesta al gestore dei dati di eliminarli**.", data = new_df.to_csv(index=False), icon = "📥", type = "primary")
     
 
 # Funzione per somministrare il BDI2
