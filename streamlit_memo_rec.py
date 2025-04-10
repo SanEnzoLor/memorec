@@ -174,7 +174,7 @@ def BDI2():
 
 # Funzione per somministrare il RRS
 def RRS():
-    if st.session_state.results_r == 0:
+    if st.session_state.results_r == 22:
         st.write("La Scala delle Risposte Ruminative (RRS) è una misura autovalutata progettata per valutare la frequenza con cui gli individui si impegnano in diversi tipi di pensieri e comportamenti ruminativi.")
         st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Per favore, legga ciascuno dei seguenti item e indichi se, quando si sente giù, triste o depresso, lo pensa o lo fa 'mai', 'a volte', 'spesso' o 'sempre'. Indichi cortesemente cosa fa di solito, non cosa pensa di dover fare, selezionando il numero per indicare quanto ogni problema la affligge:")
     
@@ -218,7 +218,7 @@ def RRS():
     else:
         choice_r = st.selectbox("Si vuole **rieseguire** la **Scala delle Risposte Ruminative (RRS)** ?", ["SI", "NO"], index = 1)
         if choice_r == "SI":
-            st.session_state.results_r = 0
+            st.session_state.results_r = 22
             RRS()
         else:
             return st.session_state.results_r
@@ -349,7 +349,7 @@ def main():
     if "results_d" not in st.session_state:
         st.session_state.results_d = 0
     if "results_r" not in st.session_state:
-        st.session_state.results_r = 0
+        st.session_state.results_r = 22
     if "results_p" not in st.session_state:
         st.session_state.results_p = [0, 0, 0, 0, 0]
     
