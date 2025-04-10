@@ -94,7 +94,7 @@ def BDI2_on_change(value):
     value = None
 
 # Funzione per somministrare il BDI2
-def BDI2(value: int = None):
+def BDI2(value):
     st.header("**Beck Depression Inventory - II**")
     st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
     st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, faccia una crocetta sul numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
@@ -356,7 +356,8 @@ def main():
             st.session_state.educazione = df_ses_p["Educazione"].iloc[-1]
             st.session_state.occupazione = df_ses_p["Occupazione"].iloc[-1]
             st.session_state.caregiver = df_ses_p["Caregiver"].iloc[-1]
-            st.session_state.autonomia = df_ses_p["Limitazione"].iloc[-1]
+            st.session_state.autonomia = df_ses_p["Limitazione"].iloc[-1].split()[0]
+            st.session_state.desc = df_ses_p["Limitazione"].iloc[-1].split('.', 1)[1]
             st.session_state.results_d = df_ses_p["BDI2"].iloc[-1]
             st.session_state.results_r = df_ses_p["RRS"].iloc[-1]
             st.session_state.results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
@@ -395,8 +396,7 @@ def main():
     st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index = caregiver_ind)
     
     
-    autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia.split()[0])
-    st.session_state.desc = st.session_state.autonomia.split('.', 1)[1]
+    autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia)
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.desc)
