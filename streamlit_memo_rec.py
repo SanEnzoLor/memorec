@@ -92,7 +92,7 @@ def save_and_upload_to_github(data):
     
 
 # Funzione per somministrare il BDI2
-def BDI2():
+def BDI2(value: int = None):
     st.header("**Beck Depression Inventory - II**")
     st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
     st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, faccia una crocetta sul numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
@@ -160,7 +160,10 @@ def BDI2():
     options = ["0. Non ho notato alcun cambiamento recente nel mio interesse verso il sesso.", "1. Sono meno interessato al sesso rispetto a prima.","2. Ora sono molto meno interessato al sesso. ","3. Ho completamente perso l’interesse verso il sesso."]
     items = items + options.index(st.selectbox("Sesso", options))
 
-    return items
+    if value is None:
+        return items
+    else:
+        return value
 
 # Funzione per somministrare il RRS
 def RRS():
@@ -396,7 +399,7 @@ def main():
         st.session_state.autonomia = f"{st.session_state.autonomia} {desc}"
     
     
-    st.session_state.results_d = BDI2()
+    st.session_state.results_d = BDI2(st.session_state.results_d)
     st.write(f"BDI2: {st.session_state.results_d}")
     st.session_state.results_r = RRS()
     st.write(f"RRS: {st.session_state.results_r}")
