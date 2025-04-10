@@ -400,7 +400,7 @@ def main():
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower()}:", value = st.session_state.desc)
-        st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
+        #st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
     
     
     st.session_state.results_d = BDI2(st.session_state.results_d)
@@ -544,7 +544,7 @@ def main():
                 "Educazione": st.session_state.educazione,
                 "Occupazione": st.session_state.occupazione,
                 "Caregiver": st.session_state.caregiver,
-                "Limitazione": st.session_state.autonomia,
+                "Limitazione": st.session_state.autonomia + st.session_state.desc,
                 "BDI2": st.session_state.results_d,
                 "RRS" : st.session_state.results_r,
                 "PCL-5-reexperiencing": st.session_state.results_p[0], 
