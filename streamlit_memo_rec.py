@@ -321,7 +321,7 @@ def main():
     if "caregiver" not in st.session_state:
         st.session_state.caregiver = "NO"
     if "autonomia" not in st.session_state:
-        st.session_state.autonomia = "NO"
+        st.session_state.autonomia = "NO."
     if "results_d" not in st.session_state:
         st.session_state.results_d = 0
     if "results_r" not in st.session_state:
