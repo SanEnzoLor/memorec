@@ -90,6 +90,8 @@ def save_and_upload_to_github(data):
         time.sleep(wait_time)
         save_and_upload_to_github(data)      
 
+    if st.session_state.df_ses_p is not None:
+        new_df = pd.concat([st.session_state.df_ses_p, new_df], ignore_index=True)
     st.download_button(label="**CLICCA QUI** per **scaricare i dati** della sessione attuale. Potrai usarli per **riprendere l’attività in un secondo momento** oppore per **inviare una richiesta di eliminazione dei dati al gestore**.", data = new_df.to_csv(index=False), icon = "💾", type = "primary", file_name="dati_sessione.csv", mime="text/csv")
     
 
@@ -352,6 +354,10 @@ def main():
         st.session_state.results_r = 22
     if "results_p" not in st.session_state:
         st.session_state.results_p = [0, 0, 0, 0, 0]
+
+    
+    if "df_ses_p" not in st.session_state:
+        st.session_state.df_ses_p = None
     
     
     # blocca l'aggiornamento dell'applicativo dopo aver letto il file caricato
@@ -362,22 +368,22 @@ def main():
     file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
     if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
-        df_ses_p = pd.read_csv(file)
-        if not all(col in df_ses_p.columns for col in columns):
+        st.session_state.df_ses_p = pd.read_csv(file)
+        if not all(col in st.session_state.df_ses_p.columns for col in columns):
             st.error("Il file caricato non è corretto.")
         else:
-            st.session_state.eta = df_ses_p["Eta"].iloc[-1]
-            st.session_state.gender = df_ses_p["Gender"].iloc[-1]
-            st.session_state.nazione = df_ses_p["Nazionalita"].iloc[-1]
-            st.session_state.educazione = df_ses_p["Educazione"].iloc[-1]
-            st.session_state.occupazione = df_ses_p["Occupazione"].iloc[-1]
-            st.session_state.caregiver = df_ses_p["Caregiver"].iloc[-1]
-            st.session_state.autonomia = df_ses_p["Limitazione"].iloc[-1].split()[0]
-            st.session_state.desc = df_ses_p["Limitazione"].iloc[-1].split('.', 1)[1]
-            st.session_state.results_d = df_ses_p["BDI2"].iloc[-1]
-            st.session_state.results_r = df_ses_p["RRS"].iloc[-1]
-            st.session_state.results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
-            cue_words_p = [c_w[:-1] for c_w in df_ses_p["Cue-Word"]]
+            st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
+            st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
+            st.session_state.nazione = st.session_state.df_ses_p["Nazionalita"].iloc[-1]
+            st.session_state.educazione = st.session_state.df_ses_p["Educazione"].iloc[-1]
+            st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
+            st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
+            st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split()[0]
+            st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[1]
+            st.session_state.results_d = st.session_state.df_ses_p["BDI2"].iloc[-1]
+            st.session_state.results_r = st.session_state.df_ses_p["RRS"].iloc[-1]
+            st.session_state.results_p = [st.session_state.df_ses_p["PCL-5-reexperiencing"].iloc[-1], st.session_state.df_ses_p["PCL-5-avoidance"].iloc[-1], st.session_state.df_ses_p["PCL-5-altereted_cognition"].iloc[-1], st.session_state.df_ses_p["PCL-5-hyperarousal"].iloc[-1], st.session_state.df_ses_p["PCL-5-tot"].iloc[-1]]
+            cue_words_p = [c_w[:-1] for c_w in st.session_state.df_ses_p["Cue-Word"]]
             if st.session_state.gender == "Femminile":
                 cue_words_ref = cue_words_f
             else:
@@ -386,8 +392,6 @@ def main():
             st.session_state.remaining_words = cue_words_p_r.copy()
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
-
-    st.write(df_ses_p)
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
