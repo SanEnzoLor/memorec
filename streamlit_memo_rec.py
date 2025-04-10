@@ -93,8 +93,6 @@ def save_and_upload_to_github(data):
 
 # Funzione per somministrare il BDI2
 def BDI2():
-    st.header("**Beck Depression Inventory - II**")
-    
     if st.session_state.results_d == 0:
         st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
         st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, faccia una crocetta sul numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
@@ -168,6 +166,7 @@ def BDI2():
         choice_d = st.selectbox("Si vuole rieseguire l' Inventario per la Depressione di Beck (BDI -II) ?", ["SI", "NO"], index = 1)
         if choice_d == "SI":
             st.session_state.results_d = 0
+            BDI2()
         else:
             return st.session_state.results_d
 
@@ -402,10 +401,13 @@ def main():
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower().split('.', 1)[0]}:", value = st.session_state.desc)
         #st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
     
-    
+
+    st.header("**Beck Depression Inventory - II**")
     results_d = BDI2()
     st.write(f"BDI2: {results_d}")
+    
     st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, st.session_state.results_p)
+    
     st.session_state.results_r = RRS()
     st.write(f"RRS: {st.session_state.results_r}")
     st.session_state.results_p = PCL5()
