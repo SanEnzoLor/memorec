@@ -163,7 +163,7 @@ def BDI2():
         return items
 
     else:
-        choice_d = st.selectbox("Si vuole rieseguire l' Inventario per la Depressione di Beck (BDI -II) ?", ["SI", "NO"], index = 1)
+        choice_d = st.selectbox("Si vuole **rieseguire** l' **Inventario per la Depressione di Beck (BDI -II)** ?", ["SI", "NO"], index = 1)
         if choice_d == "SI":
             st.session_state.results_d = 0
             BDI2()
@@ -214,7 +214,7 @@ def RRS():
         return items
 
     else:
-        choice_r = st.selectbox("Si vuole rieseguire la Scala delle Risposte Ruminative (RRS) ?", ["SI", "NO"], index = 1)
+        choice_r = st.selectbox("Si vuole **rieseguire** la **Scala delle Risposte Ruminative (RRS)** ?", ["SI", "NO"], index = 1)
         if choice_r == "SI":
             st.session_state.results_r = 0
             RRS()
@@ -285,7 +285,7 @@ def PCL5():
         return items_reexperiencing, items_avoidance, items_altereted_cognition, items_hyperarousal, tot
 
     else:
-        choice_p = st.selectbox("Si vuole rieseguire la Checklist per il Disturbo da Stress Posttraumatico - 5 (PCL-5) ?", ["SI", "NO"], index = 1)
+        choice_p = st.selectbox("Si vuole **rieseguire** la **Checklist per il Disturbo da Stress Posttraumatico - 5 (PCL-5)** ?", ["SI", "NO"], index = 1)
         if choice_p == "SI":
             st.session_state.results_p = [0, 0, 0, 0, 0]
             PCL5()
@@ -318,9 +318,6 @@ def main():
         st.session_state.change = False
     def gend_sel():
         st.session_state.change = True
-
-
-
 
     
     # Lista di parole spunto
@@ -355,7 +352,6 @@ def main():
         st.session_state.results_p = [0, 0, 0, 0, 0]
     
     
-    
     # blocca l'aggiornamento dell'applicativo dopo aver letto il file caricato
     if "file_update" not in st.session_state:
         st.session_state.file_update = True
@@ -380,20 +376,17 @@ def main():
             st.session_state.results_r = df_ses_p["RRS"].iloc[-1]
             st.session_state.results_p = [df_ses_p["PCL-5-reexperiencing"].iloc[-1], df_ses_p["PCL-5-avoidance"].iloc[-1], df_ses_p["PCL-5-altereted_cognition"].iloc[-1], df_ses_p["PCL-5-hyperarousal"].iloc[-1], df_ses_p["PCL-5-tot"].iloc[-1]]
             cue_words_p = [c_w[:-1] for c_w in df_ses_p["Cue-Word"]]
-            st.write(cue_words_p)
             if st.session_state.gender == "Femminile":
                 cue_words_ref = cue_words_f
             else:
                 cue_words_ref = cue_words
             cue_words_p_r = [p for p in cue_words_ref if p[:-1] not in cue_words_p]
-            st.write(cue_words_p_r)
             st.session_state.remaining_words = cue_words_p_r.copy()
             st.write(st.session_state.remaining_words)
             # blocca l'aggiornamento dell'applicativo
             st.session_state.file_update = False
     
     
-
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
     st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
     gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
@@ -409,12 +402,10 @@ def main():
     caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
     st.session_state.caregiver = st.selectbox("In questo momento si sta fornendo assistenza a un familiare non autosufficiente (caregiver informale):", ["SI","NO"], index = caregiver_ind)
     
-    
     autonomia_ind = ["NO.", "Fisica.", "Mentale."].index(st.session_state.autonomia)
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower().split('.', 1)[0]}:", value = st.session_state.desc)
-        #st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
     
 
     st.header("**Beck Depression Inventory - II**")
@@ -602,6 +593,7 @@ def main():
         if st.button(label = "Salva Dati e Termina"):
             save_and_upload_to_github(st.session_state.session_data)
             st.success("Grazie per aver partecipato alla raccolta dati!")
+            st.download_button(label="Se si volessero scaricare i dati di questa sessione, per completare l'attività successivamente o per fare richiesta al gestore dei dati di eliminarli, clicca qui:", data = StringIO(st.session_state.session_data.to_csv(index=False)), file_name="dati_export.csv")
             st.session_state.session_data.clear()
         st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
