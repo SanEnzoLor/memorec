@@ -404,7 +404,7 @@ def main():
         #st.session_state.autonomia = f"{st.session_state.autonomia} {st.session_state.desc}"
     
     
-    results_d = BDI2(st.session_state.results_d)
+    results_d = BDI2()
     st.write(f"BDI2: {results_d}")
     st.session_state.results_r = RRS()
     st.write(f"RRS: {st.session_state.results_r}")
