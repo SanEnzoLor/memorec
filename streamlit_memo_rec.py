@@ -215,7 +215,7 @@ def RRS():
 
     else:
         choice_r = st.selectbox("Si vuole rieseguire la Scala delle Risposte Ruminative (RRS) ?", ["SI", "NO"], index = 1)
-        if choice_d == "SI":
+        if choice_r == "SI":
             st.session_state.results_r = 0
             RRS()
         else:
