@@ -565,7 +565,7 @@ def main():
                 "Educazione": st.session_state.educazione,
                 "Occupazione": st.session_state.occupazione,
                 "Caregiver": st.session_state.caregiver,
-                "Limitazione": st.session_state.autonomia + st.session_state.desc,
+                "Limitazione": st.session_state.autonomia + " " + st.session_state.desc,
                 "BDI2": results_d,
                 "RRS" : results_r,
                 "PCL-5-reexperiencing": results_p[0], 
