@@ -172,46 +172,54 @@ def BDI2():
 
 # Funzione per somministrare il RRS
 def RRS():
-    st.header("**Ruminative Response Scale**")
-    st.write("La Scala delle Risposte Ruminative (RRS) è una misura autovalutata progettata per valutare la frequenza con cui gli individui si impegnano in diversi tipi di pensieri e comportamenti ruminativi.")
-    st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Per favore, legga ciascuno dei seguenti item e indichi se, quando si sente giù, triste o depresso, lo pensa o lo fa 'mai', 'a volte', 'spesso' o 'sempre'. Indichi cortesemente cosa fa di solito, non cosa pensa di dover fare, selezionando il numero per indicare quanto ogni problema la affligge:")
+    if st.session_state.results_r == 0:
+        st.write("La Scala delle Risposte Ruminative (RRS) è una misura autovalutata progettata per valutare la frequenza con cui gli individui si impegnano in diversi tipi di pensieri e comportamenti ruminativi.")
+        st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Per favore, legga ciascuno dei seguenti item e indichi se, quando si sente giù, triste o depresso, lo pensa o lo fa 'mai', 'a volte', 'spesso' o 'sempre'. Indichi cortesemente cosa fa di solito, non cosa pensa di dover fare, selezionando il numero per indicare quanto ogni problema la affligge:")
+    
+        # Crea quattro colonne per le informazioni
+        cl1, cl2, cl3, cl4 = st.columns([0.26, 0.32, 0.29, 0.13])
+        # Mostra le scritte nelle colonne
+        with cl1:
+            st.write("Mai = 1") 
+        with cl2:
+            st.write("A volte = 2")
+        with cl3:
+            st.write("Spesso = 3")
+        with cl4:
+            st.write("Sempre = 4")
+                
+        items = st.slider("Pensare a quanto ti senti solo", min_value=1, max_value=4, step=1)        
+        items = items + st.slider("Pensare “Non sarò in grado di svolgere il mio lavoro se non mi libero di questo”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare alle tue sensazioni di stanchezza e malessere", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a quanto sia difficile concentrarti", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Cosa ho fatto per meritarmi questo?”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a quanto ti senti passivo e demotivato", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Analizzare eventi recenti per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare al fatto che ti sembra di non sentire più niente", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Perché non riesco a mettermi in moto?”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Perché reagisco sempre in questo modo?”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Andare via da solo e pensare al perché ti senti in questo modo", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Scrivere cosa stai pensando e analizzarlo", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a una situazione recente, desiderando che fosse andata meglio", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Non riuscirò a concentrarmi se continuo a sentirmi in questo modo”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Perché ho problemi che gli altri non hanno?”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare “Perché non tratto meglio le cose?”", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a quanto ti senti triste", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a tutte le tue mancanze, difetti, colpe, errori", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare al fatto che non te la senti di far nulla", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Analizzare la tua personalità per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Andare da solo in un qualche posto per pensare alle tue emozioni", min_value=1, max_value=4, step=1)
+        items = items + st.slider("Pensare a quanto ti senti arrabbiato con te stesso", min_value=1, max_value=4, step=1)
+    
+        return items
 
-    # Crea quattro colonne per le informazioni
-    cl1, cl2, cl3, cl4 = st.columns([0.26, 0.32, 0.29, 0.13])
-    # Mostra le scritte nelle colonne
-    with cl1:
-        st.write("Mai = 1") 
-    with cl2:
-        st.write("A volte = 2")
-    with cl3:
-        st.write("Spesso = 3")
-    with cl4:
-        st.write("Sempre = 4")
-            
-    items = st.slider("Pensare a quanto ti senti solo", min_value=1, max_value=4, step=1)        
-    items = items + st.slider("Pensare “Non sarò in grado di svolgere il mio lavoro se non mi libero di questo”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare alle tue sensazioni di stanchezza e malessere", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a quanto sia difficile concentrarti", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Cosa ho fatto per meritarmi questo?”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a quanto ti senti passivo e demotivato", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Analizzare eventi recenti per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare al fatto che ti sembra di non sentire più niente", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Perché non riesco a mettermi in moto?”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Perché reagisco sempre in questo modo?”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Andare via da solo e pensare al perché ti senti in questo modo", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Scrivere cosa stai pensando e analizzarlo", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a una situazione recente, desiderando che fosse andata meglio", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Non riuscirò a concentrarmi se continuo a sentirmi in questo modo”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Perché ho problemi che gli altri non hanno?”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare “Perché non tratto meglio le cose?”", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a quanto ti senti triste", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a tutte le tue mancanze, difetti, colpe, errori", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare al fatto che non te la senti di far nulla", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Analizzare la tua personalità per cercare di capire perché sei depresso", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Andare da solo in un qualche posto per pensare alle tue emozioni", min_value=1, max_value=4, step=1)
-    items = items + st.slider("Pensare a quanto ti senti arrabbiato con te stesso", min_value=1, max_value=4, step=1)
-
-    return items
+    else:
+        choice_r = st.selectbox("Si vuole rieseguire la Scala delle Risposte Ruminative (RRS) ?", ["SI", "NO"], index = 1)
+        if choice_d == "SI":
+            st.session_state.results_r = 0
+            RRS()
+        else:
+            return st.session_state.results_r
 
 
 # Funzione per il PTSD checklist 5
@@ -405,11 +413,14 @@ def main():
     st.header("**Beck Depression Inventory - II**")
     results_d = BDI2()
     st.write(f"BDI2: {results_d}")
+
+    st.header("**Ruminative Response Scale**")
+    results_r = RRS()
+    st.write(f"RRS: {results_r}")
+
+    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, results_r, st.session_state.results_p)
     
-    st.write(st.session_state.eta, st.session_state.gender, st.session_state.nazione, st.session_state.educazione, st.session_state.occupazione, st.session_state.caregiver, st.session_state.autonomia, st.session_state.desc, st.session_state.results_d, results_d, st.session_state.results_r, st.session_state.results_p)
     
-    st.session_state.results_r = RRS()
-    st.write(f"RRS: {st.session_state.results_r}")
     st.session_state.results_p = PCL5()
     st.write(f"PCL5: Re-experiencing = {st.session_state.results_p[0]}, Avoidance = {st.session_state.results_p[1]}, Negative alterations in cognition and mood = {st.session_state.results_p[2]}, Hyper-arousal = {st.session_state.results_p[3]}, Totale = {st.session_state.results_p[4]}")
         
@@ -548,8 +559,8 @@ def main():
                 "Occupazione": st.session_state.occupazione,
                 "Caregiver": st.session_state.caregiver,
                 "Limitazione": st.session_state.autonomia + st.session_state.desc,
-                "BDI2": st.session_state.results_d,
-                "RRS" : st.session_state.results_r,
+                "BDI2": results_d,
+                "RRS" : results_r,
                 "PCL-5-reexperiencing": st.session_state.results_p[0], 
                 "PCL-5-avoidance": st.session_state.results_p[1],
                 "PCL-5-altereted_cognition": st.session_state.results_p[2],
