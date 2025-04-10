@@ -90,7 +90,7 @@ def save_and_upload_to_github(data):
         time.sleep(wait_time)
         save_and_upload_to_github(data)      
 
-    st.download_button(label="**CLICCA QUI** per **scaricare i dati** della sessione attuale. Potrai usarli per **riprendere l’attività in un secondo momento** oppore per **inviare una richiesta di eliminazione dei dati al gestore**.", data = new_df.to_csv(index=False), icon = "💾", type = "primary", mime="text/csv")
+    st.download_button(label="**CLICCA QUI** per **scaricare i dati** della sessione attuale. Potrai usarli per **riprendere l’attività in un secondo momento** oppore per **inviare una richiesta di eliminazione dei dati al gestore**.", data = new_df.to_csv(index=False), icon = "💾", type = "primary", file_name="dati_sessione.csv", mime="text/csv")
     
 
 # Funzione per somministrare il BDI2
@@ -359,7 +359,7 @@ def main():
         st.session_state.file_update = True
 
     # Creazione di input per acquisire dati dall'utente
-    file = st.file_uploader("Carica il **file scaricato** (avente il formato: <data>T<ora>_export.csv) se si è interrotta la **sessione precedente** senza completare il task:", type=["csv"])
+    file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare il task:", type=["csv"])
     if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         df_ses_p = pd.read_csv(file)
