@@ -413,6 +413,8 @@ def main():
     st.session_state.autonomia = st.selectbox("Indicare se durante le attività giornaliere si possiede una limitazione all'autonomia:", ["NO.", "Fisica.", "Mentale."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower().split('.', 1)[0]}:", value = st.session_state.desc)
+    else:
+        st.session_state.desc = ""
     
 
     st.header("**Beck Depression Inventory - II**")
