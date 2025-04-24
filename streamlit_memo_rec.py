@@ -379,7 +379,7 @@ def main():
             st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
             st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
             st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[0] + "."
-            st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[1]
+            st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('. ', 1)[1]
             st.session_state.results_d = st.session_state.df_ses_p["BDI2"].iloc[-1]
             st.session_state.results_r = st.session_state.df_ses_p["RRS"].iloc[-1]
             st.session_state.results_p = [st.session_state.df_ses_p["PCL-5-reexperiencing"].iloc[-1], st.session_state.df_ses_p["PCL-5-avoidance"].iloc[-1], st.session_state.df_ses_p["PCL-5-altereted_cognition"].iloc[-1], st.session_state.df_ses_p["PCL-5-hyperarousal"].iloc[-1], st.session_state.df_ses_p["PCL-5-tot"].iloc[-1]]
