@@ -48,6 +48,8 @@ def load_from_github(id_value):
         content = response.json()["content"]
         decoded_content = base64.b64decode(content).decode("utf-8")
         df = pd.read_csv(StringIO(decoded_content))
+
+        st.write(df)
         
         # Filtro per l'id specificato
         if "id" not in df.columns:
