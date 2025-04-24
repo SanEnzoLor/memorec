@@ -412,7 +412,7 @@ def main():
     autonomia_ind = ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva"].index(st.session_state.autonomia)
     st.session_state.autonomia = st.selectbox("Indica se durante le attività quotidiane hai una delle seguenti limitazioni all'autonomia:", ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
-        st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.lower().split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
+        st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
     else:
         st.session_state.desc = ""
     
