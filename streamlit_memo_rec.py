@@ -406,8 +406,8 @@ def main():
 
     if st.button("Carica i dati relativi a questo ID"):
         file = load_from_github(user_id)
-        if not df_user.empty:
-            st.write(df_user)
+        if not file.empty:
+            st.write(file)
         else:
             st.info("Nessun dato trovato per l'ID inserito.")
     
