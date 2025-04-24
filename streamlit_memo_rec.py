@@ -49,10 +49,7 @@ def load_from_github(id_value):
         decoded_content = base64.b64decode(content).decode("utf-8")
         df = pd.read_csv(StringIO(decoded_content))
         
-        filtered_df = df[df["Eta"] == id_value]
-
-        st.write(id_value)
-        st.write(filtered_df)
+        filtered_df = df[df["Eta"] == int(id_value)]
         
         return filtered_df
 
