@@ -412,7 +412,7 @@ def main():
     
     #if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
-        st.session_state.df_ses_p = pd.read_csv(file)
+        st.session_state.df_ses_p = file#pd.read_csv(file)
         if not all(col in st.session_state.df_ses_p.columns for col in columns):
             st.error("Il file caricato non è corretto.")
         else:
