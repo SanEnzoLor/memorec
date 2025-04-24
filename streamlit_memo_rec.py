@@ -402,7 +402,17 @@ def main():
         st.session_state.file_update = True
 
     # Creazione di input per acquisire dati dall'utente
-    file = load_from_github(23)#st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
+    user_id = st.text_input("Inserisci il tuo ID")
+
+    if st.button("Carica i dati relativi a questo ID"):
+        file = load_csv_from_github(user_id)
+        if not df_user.empty:
+            st.write(df_user)
+        else:
+            st.info("Nessun dato trovato per l'ID inserito.")
+    
+    
+    #st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
     if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         st.session_state.df_ses_p = pd.read_csv(file)
