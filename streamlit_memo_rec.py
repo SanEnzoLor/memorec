@@ -412,8 +412,9 @@ def main():
             st.info("Nessun dato trovato per l'ID inserito.")
     
     
-    #st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
-    if file and st.session_state.file_update == True:
+    #file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
+    
+    #if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         st.session_state.df_ses_p = pd.read_csv(file)
         if not all(col in st.session_state.df_ses_p.columns for col in columns):
