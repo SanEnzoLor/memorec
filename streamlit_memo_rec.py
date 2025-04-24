@@ -28,6 +28,43 @@ def transcribe_audio(audio_file):
             return f"Errore nel servizio di riconoscimento vocale: {e}"
 
 
+# Funzione per caricare i dati dalla sessione precedente
+def load_from_github(id_value):
+    # Parametri di accesso al repository
+    repo_name = "SanEnzoLor/memo_data"
+    file_name = "dati.csv"
+    branch_name = "main"
+    token = st.secrets["token"]
+
+    # URL per ottenere il contenuto del file
+    url = f"https://api.github.com/repos/{repo_name}/contents/{file_name}?ref={branch_name}"
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3+json",
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        content = response.json()["content"]
+        decoded_content = base64.b64decode(content).decode("utf-8")
+        df = pd.read_csv(StringIO(decoded_content))
+        
+        # Filtro per l'id specificato
+        if "id" not in df.columns:
+            st.error("La colonna 'id' non è presente nel file CSV.")
+            return pd.DataFrame()
+        
+        filtered_df = df[df["Eta"] == id_value]
+        return filtered_df
+
+    elif response.status_code == 404:
+        st.warning("Il file non è stato trovato nel repository.")
+        return pd.DataFrame()
+    else:
+        st.error(f"Errore durante il caricamento del file da GitHub: {response.status_code}")
+        return pd.DataFrame()
+
+
 def save_and_upload_to_github(data):
     # Input per i dati da salvare
     columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
@@ -365,7 +402,7 @@ def main():
         st.session_state.file_update = True
 
     # Creazione di input per acquisire dati dall'utente
-    file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
+    file = load_from_github(23)#st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
     if file and st.session_state.file_update == True:
         columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
         st.session_state.df_ses_p = pd.read_csv(file)
