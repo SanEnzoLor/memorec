@@ -405,7 +405,7 @@ def main():
     user_id = st.text_input("Inserisci il tuo ID")
 
     if st.button("Carica i dati relativi a questo ID"):
-        file = load_csv_from_github(user_id)
+        file = load_from_github(user_id)
         if not df_user.empty:
             st.write(df_user)
         else:
