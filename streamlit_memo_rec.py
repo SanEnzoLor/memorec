@@ -50,7 +50,7 @@ def load_from_github(id_value):
         df = pd.read_csv(StringIO(decoded_content))
         
         filtered_df = df[df["Eta"] == id_value]
-        
+        st.write(filtered_df)
         return filtered_df
 
     elif response.status_code == 404:
