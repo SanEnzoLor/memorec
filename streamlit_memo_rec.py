@@ -49,12 +49,7 @@ def load_from_github(id_value):
         decoded_content = base64.b64decode(content).decode("utf-8")
         df = pd.read_csv(StringIO(decoded_content))
         
-        # Filtro per l'id specificato
-        if "id" not in df.columns:
-            st.error("La colonna 'id' non è presente nel file CSV.")
-            return pd.DataFrame()
-        
-        filtered_df = df[df["Eta"] == 23]
+        filtered_df = df[df["Eta"] == id_value]
         return filtered_df
 
     elif response.status_code == 404:
