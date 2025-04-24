@@ -378,7 +378,7 @@ def main():
             st.session_state.educazione = st.session_state.df_ses_p["Educazione"].iloc[-1]
             st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
             st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
-            st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[0]
+            st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[0] + "."
             st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[1]
             st.session_state.results_d = st.session_state.df_ses_p["BDI2"].iloc[-1]
             st.session_state.results_r = st.session_state.df_ses_p["RRS"].iloc[-1]
