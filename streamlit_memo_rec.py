@@ -130,6 +130,8 @@ def save_and_upload_to_github(data):
             
     if response.status_code == 200:  # 200 = aggiornato
         st.success("File aggiornato con successo su GitHub!")
+        if st.session_state.df_ses_p is not None:
+            new_df = pd.concat([st.session_state.df_ses_p, new_df], ignore_index=True)
         st.write(new_df)
     elif response.status_code == 201:  # 201 = creato
         st.success("File creato con successo su GitHub!")
@@ -140,10 +142,8 @@ def save_and_upload_to_github(data):
         wait_time = random.uniform(0, 5)
         time.sleep(wait_time)
         save_and_upload_to_github(data)      
-
-    if st.session_state.df_ses_p is not None:
-        new_df = pd.concat([st.session_state.df_ses_p, new_df], ignore_index=True)
-    st.download_button(label="**CLICCA QUI** per **scaricare i dati** della sessione attuale. Potrai usarli per **riprendere l’attività in un secondo momento** oppore per **inviare una richiesta di eliminazione dei dati al gestore**.", data = new_df.to_csv(index=False), icon = "💾", type = "primary", file_name="dati_sessione.csv", mime="text/csv")
+        
+    #st.download_button(label="**CLICCA QUI** per **scaricare i dati** della sessione.", data = new_df.to_csv(index=False), icon = "💾", type = "primary", file_name="dati_sessione.csv", mime="text/csv")
     
 
 # Funzione per somministrare il BDI2
@@ -426,7 +426,7 @@ def main():
 
     
     # Creazione di input per acquisire dati dall'utente
-    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci **ID** che ti è stato fornito al termine della sessione:")
+    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
 
     if user_id != "" and st.session_state.file_update == True:
         file = load_from_github(user_id)
@@ -675,6 +675,9 @@ def main():
         if st.button(label = "Salva Dati e Termina"):
             save_and_upload_to_github(st.session_state.session_data)
             st.success("Grazie per aver partecipato alla raccolta dati!")
+            st.success("Il tuo codice di accesso:", icon = "🔑")
+            st.code(st.session_state.new_token, language='text')
+            st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
             st.session_state.session_data.clear()
         st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
