@@ -23,8 +23,6 @@ import string
 def generate_unique_token(length=32):
     alphabet = string.ascii_letters + string.digits
     token = ''.join(secrets.choice(alphabet) for _ in range(length))
-
-    st.write(token)
     
     if load_from_github(token).empty:
         return token
@@ -83,7 +81,7 @@ def load_from_github(id_value):
 
 def save_and_upload_to_github(data):
     # Input per i dati da salvare
-    columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
+    columns = ["ID", "Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
     new_df = pd.DataFrame(data, columns=columns)
     file_name = "dati.csv"
 
@@ -420,52 +418,53 @@ def main():
 
 
 
-    
-    new_token = generate_unique_token()
+    # genera il nuovo token di accesso
+    if "new_token" not in st.session_state:
+        st.session_state.new_token = generate_unique_token()
 
 
 
     
     # Creazione di input per acquisire dati dall'utente
-    user_id = st.text_input("Inserisci il tuo ID")
+    user_id = st.text_input("**Se non è la prima volta che partecipi**: Inserisci **ID** che ti è stato fornito al termine della sessione:")
 
-    if st.button("Carica i dati relativi a questo ID"):
+    if user_id is not None and st.session_state.file_update == True:
         file = load_from_github(user_id)
         if not file.empty:
             st.write(file)
         else:
             st.info("Nessun dato trovato per l'ID inserito.")
     
-    
     #file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
     
     #if file and st.session_state.file_update == True:
-        columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
-        st.session_state.df_ses_p = file#pd.read_csv(file)
-        if not all(col in st.session_state.df_ses_p.columns for col in columns):
-            st.error("Il file caricato non è corretto.")
+        #columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
+        st.session_state.df_ses_p = file #pd.read_csv(file)
+        #if not all(col in st.session_state.df_ses_p.columns for col in columns):
+        #    st.error("Il file caricato non è corretto.")
+        #else:
+        st.session_state.new_token = st.session_state.df_ses_p["ID"].iloc[-1]
+        st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
+        st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
+        st.session_state.nazione = st.session_state.df_ses_p["Nazionalita"].iloc[-1]
+        st.session_state.educazione = st.session_state.df_ses_p["Educazione"].iloc[-1]
+        st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
+        st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
+        st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[0] + "."
+        if st.session_state.autonomia != "NO.":
+            st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('. ', 1)[1]
+        st.session_state.results_d = st.session_state.df_ses_p["BDI2"].iloc[-1]
+        st.session_state.results_r = st.session_state.df_ses_p["RRS"].iloc[-1]
+        st.session_state.results_p = [st.session_state.df_ses_p["PCL-5-reexperiencing"].iloc[-1], st.session_state.df_ses_p["PCL-5-avoidance"].iloc[-1], st.session_state.df_ses_p["PCL-5-altereted_cognition"].iloc[-1], st.session_state.df_ses_p["PCL-5-hyperarousal"].iloc[-1], st.session_state.df_ses_p["PCL-5-tot"].iloc[-1]]
+        cue_words_p = [c_w[:-1] for c_w in st.session_state.df_ses_p["Cue-Word"]]
+        if st.session_state.gender == "Femminile":
+            cue_words_ref = cue_words_f
         else:
-            st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
-            st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
-            st.session_state.nazione = st.session_state.df_ses_p["Nazionalita"].iloc[-1]
-            st.session_state.educazione = st.session_state.df_ses_p["Educazione"].iloc[-1]
-            st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
-            st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
-            st.session_state.autonomia = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('.', 1)[0] + "."
-            if st.session_state.autonomia != "NO.":
-                st.session_state.desc = st.session_state.df_ses_p["Limitazione"].iloc[-1].split('. ', 1)[1]
-            st.session_state.results_d = st.session_state.df_ses_p["BDI2"].iloc[-1]
-            st.session_state.results_r = st.session_state.df_ses_p["RRS"].iloc[-1]
-            st.session_state.results_p = [st.session_state.df_ses_p["PCL-5-reexperiencing"].iloc[-1], st.session_state.df_ses_p["PCL-5-avoidance"].iloc[-1], st.session_state.df_ses_p["PCL-5-altereted_cognition"].iloc[-1], st.session_state.df_ses_p["PCL-5-hyperarousal"].iloc[-1], st.session_state.df_ses_p["PCL-5-tot"].iloc[-1]]
-            cue_words_p = [c_w[:-1] for c_w in st.session_state.df_ses_p["Cue-Word"]]
-            if st.session_state.gender == "Femminile":
-                cue_words_ref = cue_words_f
-            else:
-                cue_words_ref = cue_words
-            cue_words_p_r = [p for p in cue_words_ref if p[:-1] not in cue_words_p]
-            st.session_state.remaining_words = cue_words_p_r.copy()
-            # blocca l'aggiornamento dell'applicativo
-            st.session_state.file_update = False
+            cue_words_ref = cue_words
+        cue_words_p_r = [p for p in cue_words_ref if p[:-1] not in cue_words_p]
+        st.session_state.remaining_words = cue_words_p_r.copy()
+        # blocca l'aggiornamento dell'applicativo
+        st.session_state.file_update = False
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
@@ -632,6 +631,7 @@ def main():
             duration = time.time() - st.session_state.start_time
             # Aggiungi i dati di questa registrazione alla sessione
             st.session_state.session_data.append({
+                "ID": st.session_state.new_token,
                 "Eta": st.session_state.eta,
                 "Gender": st.session_state.gender,
                 "Nazionalita": st.session_state.nazione,
