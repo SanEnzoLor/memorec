@@ -428,7 +428,7 @@ def main():
     # Creazione di input per acquisire dati dall'utente
     user_id = st.text_input("**Se non è la prima volta che partecipi**: Inserisci **ID** che ti è stato fornito al termine della sessione:")
 
-    if user_id is not None and st.session_state.file_update == True:
+    if user_id != "" and st.session_state.file_update == True:
         file = load_from_github(user_id)
         if not file.empty:
             st.write(file)
