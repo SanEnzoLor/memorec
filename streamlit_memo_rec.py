@@ -482,7 +482,7 @@ def main():
     caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
     st.session_state.caregiver = st.selectbox("In questo momento stai fornendo assistenza a un familiare non autosufficiente:", ["SI","NO"], index = caregiver_ind)
     
-    autonomia_ind = ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva"].index(st.session_state.autonomia)
+    autonomia_ind = ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."].index(st.session_state.autonomia)
     st.session_state.autonomia = st.selectbox("Indica se durante le attività quotidiane hai una delle seguenti limitazioni all'autonomia:", ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
