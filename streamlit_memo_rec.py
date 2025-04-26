@@ -24,7 +24,7 @@ def generate_unique_token(length=32):
     alphabet = string.ascii_letters + string.digits
     token = ''.join(secrets.choice(alphabet) for _ in range(length))
 
-    print(token)
+    st.write(token)
     
     if load_from_github(token).empty:
         return token
