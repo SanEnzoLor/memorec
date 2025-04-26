@@ -26,7 +26,7 @@ def generate_unique_token(length=32):
 
     st.write(token)
     
-    if load_from_github(token).empty:
+    if load_from_github("OxhZoP4Ub7r7RJYYI7cuMIRES9FaU7mc").empty:
         return token
     else:
         return generate_unique_token()
