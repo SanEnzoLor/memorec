@@ -14,6 +14,24 @@ from io import StringIO
 from io import BytesIO
 
 
+
+
+import secrets
+import string
+
+# Funzione per generare il token di accesso
+def generate_unique_token(length=32):
+    alphabet = string.ascii_letters + string.digits
+    token = ''.join(secrets.choice(alphabet) for _ in range(length))
+    
+    if load_from_github(token).empty:
+        return token
+    else:
+        return generate_unique_token()
+
+
+
+
 # Funzione per trascrivere l'audio
 def transcribe_audio(audio_file):
     recognizer = sr.Recognizer()
@@ -397,6 +415,15 @@ def main():
     if "file_update" not in st.session_state:
         st.session_state.file_update = True
 
+
+
+
+    
+    new_token = generate_unique_token()
+
+
+
+    
     # Creazione di input per acquisire dati dall'utente
     user_id = st.text_input("Inserisci il tuo ID")
 
