@@ -420,7 +420,7 @@ def main():
 
     
     # Creazione di input per acquisire dati dall'utente
-    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
+    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il **codice di accesso** che ti è stato fornito al termine della sessione precedente:", icon = "🔑")
 
     if user_id != "" and st.session_state.file_update == True:
         file = load_from_github(user_id)
@@ -459,7 +459,7 @@ def main():
             st.session_state.file_update = False
         
         else:
-            st.warning("Nessun dato trovato per l'ID inserito. **RICARICARE** la pagina se si vuole tentare nuovamente l'acceso.")
+            st.warning("Nessun dato trovato per l'ID inserito. **RICARICARE** la pagina se si vuole tentare nuovamente l'acceso ai propri dati.")
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
