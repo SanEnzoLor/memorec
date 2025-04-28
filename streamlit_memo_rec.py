@@ -7,17 +7,13 @@ import requests
 import json
 import base64
 import speech_recognition as sr
+import secrets
+import string
 
 from st_audiorec import st_audiorec
 from pydub import AudioSegment
 from io import StringIO
 from io import BytesIO
-
-
-
-
-import secrets
-import string
 
 # Funzione per generare il token di accesso
 def generate_unique_token(length=32):
@@ -28,8 +24,6 @@ def generate_unique_token(length=32):
         return token
     else:
         return generate_unique_token()
-
-
 
 
 # Funzione per trascrivere l'audio
@@ -465,7 +459,7 @@ def main():
             st.session_state.file_update = False
         
         else:
-            st.info("Nessun dato trovato per l'ID inserito.")
+            st.warning("Nessun dato trovato per l'ID inserito. **RICARICARE** la pagina se si vuole tentare nuovamente l'acceso.")
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
@@ -474,7 +468,7 @@ def main():
     st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
     st.session_state.nazione = st.text_input("Scrivi la tua nazionalità:", value = st.session_state.nazione)
     if dispositivo == "Smartphone":
-        st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+        st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     educazione_ind = ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"].index(st.session_state.educazione)
     st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"], index = educazione_ind)
     occupazione_ind = ["SI","NO"].index(st.session_state.occupazione)
@@ -566,9 +560,9 @@ def main():
     if st.button(st.session_state.ind, disabled = st.session_state.start, on_click = on_button_i_click):
         if len(st.session_state.remaining_words) != 0:
             if dispositivo == "Computer":
-                st.warning("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
+                st.info("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
             else:
-                st.warning("Per il salvataggio della memoria fornita premere prima sulla tastiera virtuale **INVIO** poi selezionare **Salva memoria**.")
+                st.info("Per il salvataggio della memoria fornita premere prima sulla tastiera virtuale **INVIO** poi selezionare **Salva memoria**.")
             # Timer e il campo di input
             st.session_state.start_time = time.time()
             # Seleziona una parola casuale dalla lista di parole rimanenti
@@ -583,7 +577,7 @@ def main():
         st.write("**Racconta una memoria** che recuperi prendendo spunto dalla parola:")
         st.header(f"**{st.session_state.selected_word}**")
         # Mostra il modulo di registrazione 
-        st.warning("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
+        st.info("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
         st.session_state.wav_audio_data = st_audiorec()
 
     # Trascrizione automatica tramite modulo speech to text
@@ -613,14 +607,14 @@ def main():
         if st.session_state.transcription != "":
             st.write("**Trascrizione audio:**")
             st.write(st.session_state.transcription)
-            st.warning("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
+            st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
         st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                 value = st.session_state.transcription,
                                                 key = len(st.session_state.remaining_words),
                                                 disabled = able(st.session_state.show, ten_w),
                                                 label_visibility = visible(st.session_state.show))
         if dispositivo == "Smartphone":
-            st.warning("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+            st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     
     def on_button_s_click():
         st.session_state.show = False
@@ -683,7 +677,8 @@ def main():
         st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
-    st.warning("**Leggere dopo** aver svolto il **test**.")
+    if len(st.session_state.remaining_words) != 0
+        st.warning("**Leggere dopo** aver svolto il **test**.")
     st.write("")
     st.write("- **Beck Depression Inventory - II:**")
     st.write("Versione italiana del Beck Depression Inventory - II:")
