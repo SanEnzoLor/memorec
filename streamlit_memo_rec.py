@@ -410,13 +410,9 @@ def main():
         st.session_state.file_update = True
 
 
-
-
     # genera il nuovo token di accesso
     if "new_token" not in st.session_state:
         st.session_state.new_token = generate_unique_token()
-
-
 
     
     # Creazione di input per acquisire dati dall'utente
@@ -481,6 +477,8 @@ def main():
     st.session_state.autonomia = st.selectbox("Indica se durante le attività quotidiane hai una delle seguenti limitazioni all'autonomia:", ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."], index=autonomia_ind)
     if st.session_state.autonomia != "NO.":
         st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
+        if dispositivo == "Smartphone":
+            st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     else:
         st.session_state.desc = ""
     
