@@ -677,7 +677,7 @@ def main():
         st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
-    if len(st.session_state.remaining_words) != 0
+    if len(st.session_state.remaining_words) != 0:
         st.warning("**Leggere dopo** aver svolto il **test**.")
     st.write("")
     st.write("- **Beck Depression Inventory - II:**")
