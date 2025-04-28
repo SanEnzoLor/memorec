@@ -420,7 +420,7 @@ def main():
 
     
     # Creazione di input per acquisire dati dall'utente
-    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il **codice di accesso** che ti è stato fornito al termine della sessione precedente:", icon = "🔑")
+    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il 🔑 **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
 
     if user_id != "" and st.session_state.file_update == True:
         file = load_from_github(user_id)
