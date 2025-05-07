@@ -144,7 +144,7 @@ def save_and_upload_to_github(data):
 def BDI2():
     if st.session_state.results_d == 0:
         st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
-        st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, faccia una crocetta sul numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
+        st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, selezioni il numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
     
         options = ["0. Non mi sento triste.", "1. Mi sento triste per la maggior parte del tempo.", "2. Mi sento sempre triste.", "3. Mi sento così triste o infelice da non poterlo sopportare."]
         items= options.index(st.selectbox("Tristezza", options))#, on_change = BDI2_on_change()
