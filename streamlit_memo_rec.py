@@ -462,6 +462,8 @@ def main():
     st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
     gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
     st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
+    if st.session_state.gender != "Maschile":
+        st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
     st.session_state.nazione = st.text_input("Scrivi la tua nazionalità:", value = st.session_state.nazione)
     if dispositivo == "Smartphone":
         st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
