@@ -75,7 +75,7 @@ def load_from_github(id_value):
 
 def save_and_upload_to_github(data):
     # Input per i dati da salvare
-    columns = ["ID", "Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
+    columns = ["ID", "Eta", "Gender", "Lingua", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
     new_df = pd.DataFrame(data, columns=columns)
     file_name = "dati.csv"
 
@@ -381,8 +381,8 @@ def main():
         st.session_state.eta = 18
     if "gender" not in st.session_state:
         st.session_state.gender = "Nessuno"
-    if "nazione" not in st.session_state:
-        st.session_state.nazione = " "
+    if "lingua" not in st.session_state:
+        st.session_state.lingua = " "
     if "educazione" not in st.session_state:
         st.session_state.educazione = "Scuola primaria"
     if "occupazione" not in st.session_state:
@@ -426,7 +426,7 @@ def main():
     #file = st.file_uploader("Carica il **file scaricato** (avente il formato: **dati_sessione.csv**) se si è interrotta la **sessione precedente** senza completare l'attività:", type=["csv"])
     
     #if file and st.session_state.file_update == True:
-        #columns = ["Eta", "Gender", "Nazionalita", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
+        #columns = ["Eta", "Gender", "Lingua", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word"]
             st.session_state.df_ses_p = file #pd.read_csv(file)
         #if not all(col in st.session_state.df_ses_p.columns for col in columns):
         #    st.error("Il file caricato non è corretto.")
@@ -434,7 +434,7 @@ def main():
             st.session_state.new_token = st.session_state.df_ses_p["ID"].iloc[-1]
             st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
             st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
-            st.session_state.nazione = st.session_state.df_ses_p["Nazionalita"].iloc[-1]
+            st.session_state.lingua = st.session_state.df_ses_p["Lingua"].iloc[-1]
             st.session_state.educazione = st.session_state.df_ses_p["Educazione"].iloc[-1]
             st.session_state.occupazione = st.session_state.df_ses_p["Occupazione"].iloc[-1]
             st.session_state.caregiver = st.session_state.df_ses_p["Caregiver"].iloc[-1]
@@ -462,7 +462,7 @@ def main():
     st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
     gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
     st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
-    st.session_state.nazione = st.text_input("Scrivi la tua nazionalità:", value = st.session_state.nazione)
+    st.session_state.lingua = st.text_input("Scrivi la tua prima lingua:", value = st.session_state.lingua)
     if dispositivo == "Smartphone":
         st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
     educazione_ind = ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"].index(st.session_state.educazione)
@@ -628,7 +628,7 @@ def main():
                 "ID": st.session_state.new_token,
                 "Eta": st.session_state.eta,
                 "Gender": st.session_state.gender,
-                "Nazionalita": st.session_state.nazione,
+                "Lingua": st.session_state.lingua,
                 "Educazione": st.session_state.educazione,
                 "Occupazione": st.session_state.occupazione,
                 "Caregiver": st.session_state.caregiver,
