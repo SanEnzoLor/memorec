@@ -126,6 +126,7 @@ def save_and_upload_to_github(data):
         st.success("File aggiornato con successo su GitHub!")
         if st.session_state.df_ses_p is not None:
             new_df = pd.concat([st.session_state.df_ses_p, new_df], ignore_index=True)
+        new_df['Time'] = new_df['Time'].astype(float)
         st.write(new_df)
     elif response.status_code == 201:  # 201 = creato
         st.success("File creato con successo su GitHub!")
