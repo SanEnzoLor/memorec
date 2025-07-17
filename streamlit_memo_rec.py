@@ -501,7 +501,7 @@ def main():
 
 
     st.header("**Cue-Word Autobiographic Memory Retrievial**")
-    st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperarta. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
+    st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
     st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
     st.write("Vi sarà la possibilità:")
     st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
