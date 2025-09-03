@@ -350,9 +350,9 @@ def main():
     col1, col2 = st.columns([0.81, 1])
     # Mostra le immagini nelle colonne
     with col1:
-        st.image("image/logo_unige.png", use_container_width=True)
+        st.image("image/logo_unige.png", width=True)
     with col2:
-        st.image("image/logo_nextage.png", use_container_width=True)
+        st.image("image/logo_nextage.png", width=True)
 
     st.title("**Indagine volta alla costruzione di una banca dati di memorie in italiano**")
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
@@ -681,7 +681,7 @@ def main():
             st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
-    if len(st.session_state.remaining_words) != 0:
+    if len(st.session_state.remaining_words) != 0 and psico == "NO":
         st.warning("**Leggere dopo** aver svolto il **test**.")
     st.write("")
     st.write("- **Beck Depression Inventory - II:**")
@@ -718,5 +718,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
