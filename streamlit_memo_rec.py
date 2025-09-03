@@ -378,7 +378,7 @@ def main():
     if "remaining_words" not in st.session_state:
         st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
 
-    
+
     if "eta" not in st.session_state:
         st.session_state.eta = 18
     if "gender" not in st.session_state:
@@ -461,221 +461,225 @@ def main():
     
     
     dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
-    st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
-    gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
-    st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
-    st.session_state.lingua = st.text_input("Scrivi la tua prima lingua:", value = st.session_state.lingua)
-    if dispositivo == "Smartphone":
-        st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
-    educazione_ind = ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"].index(st.session_state.educazione)
-    st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"], index = educazione_ind)
-    occupazione_ind = ["SI","NO"].index(st.session_state.occupazione)
-    st.session_state.occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"], index = occupazione_ind)
-
-    caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
-    st.session_state.caregiver = st.selectbox("In questo momento stai fornendo assistenza a un familiare non autosufficiente:", ["SI","NO"], index = caregiver_ind)
-    
-    autonomia_ind = ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."].index(st.session_state.autonomia)
-    st.session_state.autonomia = st.selectbox("Indica se durante le attività quotidiane hai una delle seguenti limitazioni all'autonomia:", ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."], index=autonomia_ind)
-    if st.session_state.autonomia != "NO.":
-        st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
+    psico = st.selectbox("**NECESSARIA:** Hai una diagnosi medica di natura psichiatrica?", ["SI","NO"], index = 1)
+    if psico == "SI":
+        st.warning("Purtroppo la diagnosi di natura psichiatrica potrebbe interferire con la procedura di recupero delle memorie autobiografiche. Per questo motivo è **sconsigliato proseguire** con l'attività.")
+    else:
+        st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
+        gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
+        st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
+        st.session_state.lingua = st.text_input("Scrivi la tua prima lingua:", value = st.session_state.lingua)
         if dispositivo == "Smartphone":
             st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
-    else:
-        st.session_state.desc = ""
+        educazione_ind = ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"].index(st.session_state.educazione)
+        st.session_state.educazione = st.selectbox("Seleziona il grado di istruzione più elevato conseguito:", ["Scuola primaria", "Scuola secondaria di primo grado", "Scuola secondaria di secondo grado", "Istituto tecnico superiore", "Università triennale", "Università magistrale", "Dottorato"], index = educazione_ind)
+        occupazione_ind = ["SI","NO"].index(st.session_state.occupazione)
+        st.session_state.occupazione = st.selectbox("In questo momento hai un impiego:", ["SI","NO"], index = occupazione_ind)
     
-
-    st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
-    st.header("**Beck Depression Inventory - II**")
-    results_d = BDI2()
-    st.write(f"BDI2: {results_d}")
-
-    st.header("**Ruminative Response Scale**")
-    results_r = RRS()
-    st.write(f"RRS: {results_r}")
-    
-    st.header("**Posttraumatic Stress Disorder Checklist - 5**")
-    results_p = PCL5()
-    if results_p is not None:
-        st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
-
-
-    st.header("**Cue-Word Autobiographic Memory Retrievial**")
-    st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
-    st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
-    st.write("Vi sarà la possibilità:")
-    st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
-    st.write("- Sia di **scrivere direttamente** nel campo testuale.") 
-
-    # Gestione dello stato per i dati della sessione
-    if "session_data" not in st.session_state:
-        st.session_state.session_data = []  # Dati temporanei della sessione
-    if st.session_state.change == True and st.session_state.gender == "Femminile":
-        corrispondenti = []
-        for parola1 in cue_words_f:
-            # Rimuovi l'ultima lettera di parola1
-            base_parola1 = parola1[:-1]
-            # Controlla se esiste una parola che combacia con base_parola1
-            match_trovato = any(base_parola1 == parola2[:-1] for parola2 in st.session_state.remaining_words)
-            if match_trovato:
-                corrispondenti.append(parola1)
-        st.session_state.remaining_words = corrispondenti.copy()  # Parole rimanenti
-        st.session_state.change = False
-    if st.session_state.change == True and st.session_state.gender != "Femminile":
-        corrispondenti = []
-        for parola1 in cue_words:
-            # Rimuovi l'ultima lettera di parola1
-            base_parola1 = parola1[:-1]
-            # Controlla se esiste una parola in list2 che combacia con base_parola1
-            match_trovato = any(base_parola1 == parola2[:-1] for parola2 in st.session_state.remaining_words)
-            if match_trovato:
-                corrispondenti.append(parola1)
-        st.session_state.remaining_words = corrispondenti.copy()  # Parole rimanenti
-        st.session_state.change = False
-    if "selected_word" not in st.session_state:
-        st.session_state.selected_word = ""
-    if "start_time" not in st.session_state:
-        st.session_state.start_time = 0
-    if "start" not in st.session_state:
-        st.session_state.start = False
-    if "show" not in st.session_state:
-        st.session_state.show = False
-    if "wav_audio_data" not in st.session_state:
-        st.session_state.wav_audio_data = None
-    if "transcription" not in st.session_state:
-        st.session_state.transcription = ""
-    if "time_rec" not in st.session_state:
-        st.session_state.time_rec = 0
-    if "testo" not in st.session_state:
-        st.session_state.testo = ""
-    if "ind" not in st.session_state:
-        st.session_state.ind = "Inizia"
-
-    ten_w = False
-    
-    def on_button_i_click():
-        st.session_state.start = True
-        st.session_state.show = True
-    
-    # Bottone per avviare la registrazione
-    if st.button(st.session_state.ind, disabled = st.session_state.start, on_click = on_button_i_click):
-        if len(st.session_state.remaining_words) != 0:
-            if dispositivo == "Computer":
-                st.info("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
-            else:
-                st.info("Per il salvataggio della memoria fornita premere prima sulla tastiera virtuale **INVIO** poi selezionare **Salva memoria**.")
-            # Timer e il campo di input
-            st.session_state.start_time = time.time()
-            # Seleziona una parola casuale dalla lista di parole rimanenti
-            st.session_state.selected_word = random.choice(st.session_state.remaining_words)
-        else:
-            # Se non ci sono parole da suggerire, disabilita il pulsante di registrazione
-            st.warning("Hai già usato tutte le 10 parole, non è più possibile fare altre registrazioni. Selezionare **Salva Dati e Termina**")
-            ten_w = True
-    
-    if st.session_state.show == True and ten_w == False:
-        # Mostra la parola spunto
-        st.write("**Racconta una memoria** che recuperi prendendo spunto dalla parola:")
-        st.header(f"**{st.session_state.selected_word}**")
-        # Mostra il modulo di registrazione 
-        st.info("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
-        st.session_state.wav_audio_data = st_audiorec()
-
-    # Trascrizione automatica tramite modulo speech to text
-    if st.session_state.wav_audio_data is not None:
-        # Converti l'audio registrato in formato WAV
-        if st.session_state.show == True:
-            st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
-        audio_file = BytesIO(st.session_state.wav_audio_data)
-        audio_segment = AudioSegment.from_file(audio_file)
-        st.session_state.time_rec = len(audio_segment)/1000 # da [ms] a [s]
+        caregiver_ind = ["SI","NO"].index(st.session_state.caregiver)
+        st.session_state.caregiver = st.selectbox("In questo momento stai fornendo assistenza a un familiare non autosufficiente:", ["SI","NO"], index = caregiver_ind)
         
-        # Salva temporaneamente il file WAV per la trascrizione
-        temp_file = "temp_audio.wav"
-        audio_segment.export(temp_file, format="wav")
-        st.session_state.transcription = transcribe_audio(temp_file)
-
-    visible = lambda x: "visible" if x else "collapsed"
-    able = lambda x, y: False if x and not y else True
-    if dispositivo == "Computer":
-        st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                              value = st.session_state.transcription,
-                                              height = 300,
-                                              key = len(st.session_state.remaining_words),
-                                              disabled = able(st.session_state.show, ten_w),
-                                              label_visibility = visible(st.session_state.show))
-    else:
-        if st.session_state.transcription != "":
-            st.write("**Trascrizione audio:**")
-            st.write(st.session_state.transcription)
-            st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
-        st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                                value = st.session_state.transcription,
-                                                key = len(st.session_state.remaining_words),
-                                                disabled = able(st.session_state.show, ten_w),
-                                                label_visibility = visible(st.session_state.show))
-        if dispositivo == "Smartphone":
-            st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+        autonomia_ind = ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."].index(st.session_state.autonomia)
+        st.session_state.autonomia = st.selectbox("Indica se durante le attività quotidiane hai una delle seguenti limitazioni all'autonomia:", ["NO.", "SI, motoria.", "SI, sensoriale.", "SI, cognitiva."], index=autonomia_ind)
+        if st.session_state.autonomia != "NO.":
+            st.session_state.desc = st.text_input(f"Se si vuole aggiungere una descrizione della propria limitazione {st.session_state.autonomia.split('.', 1)[0].split(', ', 1)[1]}:", value = st.session_state.desc)
+            if dispositivo == "Smartphone":
+                st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+        else:
+            st.session_state.desc = ""
+        
     
-    def on_button_s_click():
-        st.session_state.show = False
-        st.session_state.start = False
-        st.session_state.ind = "Prosegui"
+        st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
+        st.header("**Beck Depression Inventory - II**")
+        results_d = BDI2()
+        st.write(f"BDI2: {results_d}")
     
-    if len(st.session_state.remaining_words) != 0:
-        if st.button("Salva memoria", disabled = not st.session_state.show, on_click = on_button_s_click):
-            duration = time.time() - st.session_state.start_time
-            # Aggiungi i dati di questa registrazione alla sessione
-            st.session_state.session_data.append({
-                "ID": st.session_state.new_token,
-                "Eta": st.session_state.eta,
-                "Gender": st.session_state.gender,
-                "Lingua": st.session_state.lingua,
-                "Educazione": st.session_state.educazione,
-                "Occupazione": st.session_state.occupazione,
-                "Caregiver": st.session_state.caregiver,
-                "Limitazione": st.session_state.autonomia + " " + st.session_state.desc,
-                "BDI2": results_d,
-                "RRS" : results_r,
-                "PCL-5-reexperiencing": results_p[0], 
-                "PCL-5-avoidance": results_p[1],
-                "PCL-5-altereted_cognition": results_p[2],
-                "PCL-5-hyperarousal": results_p[3],
-                "PCL-5-tot": results_p[4],
-                "Cue-Word": st.session_state.selected_word,
-                "Text": st.session_state.testo,
-                "Time": duration,
-                "Time_recording": st.session_state.time_rec
-            })
-            
-            # Rimuovi la parola utilizzata dalla lista
-            if st.session_state.selected_word in st.session_state.remaining_words:
-                st.session_state.remaining_words.remove(st.session_state.selected_word)
-            st.success(f"Registrazione completata. Dati salvati temporaneamente.")
-            # Reset testo precedente
-            st.session_state.transcription = ""
-            st.session_state.testo = ""
-            # Reset file audio
+        st.header("**Ruminative Response Scale**")
+        results_r = RRS()
+        st.write(f"RRS: {results_r}")
+        
+        st.header("**Posttraumatic Stress Disorder Checklist - 5**")
+        results_p = PCL5()
+        if results_p is not None:
+            st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
+    
+    
+        st.header("**Cue-Word Autobiographic Memory Retrievial**")
+        st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
+        st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
+        st.write("Vi sarà la possibilità:")
+        st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
+        st.write("- Sia di **scrivere direttamente** nel campo testuale.") 
+    
+        # Gestione dello stato per i dati della sessione
+        if "session_data" not in st.session_state:
+            st.session_state.session_data = []  # Dati temporanei della sessione
+        if st.session_state.change == True and st.session_state.gender == "Femminile":
+            corrispondenti = []
+            for parola1 in cue_words_f:
+                # Rimuovi l'ultima lettera di parola1
+                base_parola1 = parola1[:-1]
+                # Controlla se esiste una parola che combacia con base_parola1
+                match_trovato = any(base_parola1 == parola2[:-1] for parola2 in st.session_state.remaining_words)
+                if match_trovato:
+                    corrispondenti.append(parola1)
+            st.session_state.remaining_words = corrispondenti.copy()  # Parole rimanenti
+            st.session_state.change = False
+        if st.session_state.change == True and st.session_state.gender != "Femminile":
+            corrispondenti = []
+            for parola1 in cue_words:
+                # Rimuovi l'ultima lettera di parola1
+                base_parola1 = parola1[:-1]
+                # Controlla se esiste una parola in list2 che combacia con base_parola1
+                match_trovato = any(base_parola1 == parola2[:-1] for parola2 in st.session_state.remaining_words)
+                if match_trovato:
+                    corrispondenti.append(parola1)
+            st.session_state.remaining_words = corrispondenti.copy()  # Parole rimanenti
+            st.session_state.change = False
+        if "selected_word" not in st.session_state:
+            st.session_state.selected_word = ""
+        if "start_time" not in st.session_state:
+            st.session_state.start_time = 0
+        if "start" not in st.session_state:
+            st.session_state.start = False
+        if "show" not in st.session_state:
+            st.session_state.show = False
+        if "wav_audio_data" not in st.session_state:
             st.session_state.wav_audio_data = None
+        if "transcription" not in st.session_state:
+            st.session_state.transcription = ""
+        if "time_rec" not in st.session_state:
             st.session_state.time_rec = 0
-            st.write("")
-            st.write("")
-            st.write(f"Sono state fornite **{10 - len(st.session_state.remaining_words)}** memorie.")
+        if "testo" not in st.session_state:
+            st.session_state.testo = ""
+        if "ind" not in st.session_state:
+            st.session_state.ind = "Inizia"
+    
+        ten_w = False
+        
+        def on_button_i_click():
+            st.session_state.start = True
+            st.session_state.show = True
+        
+        # Bottone per avviare la registrazione
+        if st.button(st.session_state.ind, disabled = st.session_state.start, on_click = on_button_i_click):
+            if len(st.session_state.remaining_words) != 0:
+                if dispositivo == "Computer":
+                    st.info("Per il salvataggio della memoria fornita selezionare **Salva memoria**.")
+                else:
+                    st.info("Per il salvataggio della memoria fornita premere prima sulla tastiera virtuale **INVIO** poi selezionare **Salva memoria**.")
+                # Timer e il campo di input
+                st.session_state.start_time = time.time()
+                # Seleziona una parola casuale dalla lista di parole rimanenti
+                st.session_state.selected_word = random.choice(st.session_state.remaining_words)
+            else:
+                # Se non ci sono parole da suggerire, disabilita il pulsante di registrazione
+                st.warning("Hai già usato tutte le 10 parole, non è più possibile fare altre registrazioni. Selezionare **Salva Dati e Termina**")
+                ten_w = True
+        
+        if st.session_state.show == True and ten_w == False:
+            # Mostra la parola spunto
+            st.write("**Racconta una memoria** che recuperi prendendo spunto dalla parola:")
+            st.header(f"**{st.session_state.selected_word}**")
+            # Mostra il modulo di registrazione 
+            st.info("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
+            st.session_state.wav_audio_data = st_audiorec()
+    
+        # Trascrizione automatica tramite modulo speech to text
+        if st.session_state.wav_audio_data is not None:
+            # Converti l'audio registrato in formato WAV
+            if st.session_state.show == True:
+                st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
+            audio_file = BytesIO(st.session_state.wav_audio_data)
+            audio_segment = AudioSegment.from_file(audio_file)
+            st.session_state.time_rec = len(audio_segment)/1000 # da [ms] a [s]
             
-
-    # Bottone per salvare i dati
-    if st.session_state.session_data:
-        st.write("")
-        st.write("")
-        st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
-        if st.button(label = "Salva Dati e Termina"):
-            save_and_upload_to_github(st.session_state.session_data)
-            st.success("Grazie per aver partecipato alla raccolta dati!")
-            st.success("Il tuo codice di accesso:", icon = "🔑")
-            st.code(st.session_state.new_token, language='text')
-            st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
-            st.session_state.session_data.clear()
-        st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
+            # Salva temporaneamente il file WAV per la trascrizione
+            temp_file = "temp_audio.wav"
+            audio_segment.export(temp_file, format="wav")
+            st.session_state.transcription = transcribe_audio(temp_file)
+    
+        visible = lambda x: "visible" if x else "collapsed"
+        able = lambda x, y: False if x and not y else True
+        if dispositivo == "Computer":
+            st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                                                  value = st.session_state.transcription,
+                                                  height = 300,
+                                                  key = len(st.session_state.remaining_words),
+                                                  disabled = able(st.session_state.show, ten_w),
+                                                  label_visibility = visible(st.session_state.show))
+        else:
+            if st.session_state.transcription != "":
+                st.write("**Trascrizione audio:**")
+                st.write(st.session_state.transcription)
+                st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
+            st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                                                    value = st.session_state.transcription,
+                                                    key = len(st.session_state.remaining_words),
+                                                    disabled = able(st.session_state.show, ten_w),
+                                                    label_visibility = visible(st.session_state.show))
+            if dispositivo == "Smartphone":
+                st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+        
+        def on_button_s_click():
+            st.session_state.show = False
+            st.session_state.start = False
+            st.session_state.ind = "Prosegui"
+        
+        if len(st.session_state.remaining_words) != 0:
+            if st.button("Salva memoria", disabled = not st.session_state.show, on_click = on_button_s_click):
+                duration = time.time() - st.session_state.start_time
+                # Aggiungi i dati di questa registrazione alla sessione
+                st.session_state.session_data.append({
+                    "ID": st.session_state.new_token,
+                    "Eta": st.session_state.eta,
+                    "Gender": st.session_state.gender,
+                    "Lingua": st.session_state.lingua,
+                    "Educazione": st.session_state.educazione,
+                    "Occupazione": st.session_state.occupazione,
+                    "Caregiver": st.session_state.caregiver,
+                    "Limitazione": st.session_state.autonomia + " " + st.session_state.desc,
+                    "BDI2": results_d,
+                    "RRS" : results_r,
+                    "PCL-5-reexperiencing": results_p[0], 
+                    "PCL-5-avoidance": results_p[1],
+                    "PCL-5-altereted_cognition": results_p[2],
+                    "PCL-5-hyperarousal": results_p[3],
+                    "PCL-5-tot": results_p[4],
+                    "Cue-Word": st.session_state.selected_word,
+                    "Text": st.session_state.testo,
+                    "Time": duration,
+                    "Time_recording": st.session_state.time_rec
+                })
+                
+                # Rimuovi la parola utilizzata dalla lista
+                if st.session_state.selected_word in st.session_state.remaining_words:
+                    st.session_state.remaining_words.remove(st.session_state.selected_word)
+                st.success(f"Registrazione completata. Dati salvati temporaneamente.")
+                # Reset testo precedente
+                st.session_state.transcription = ""
+                st.session_state.testo = ""
+                # Reset file audio
+                st.session_state.wav_audio_data = None
+                st.session_state.time_rec = 0
+                st.write("")
+                st.write("")
+                st.write(f"Sono state fornite **{10 - len(st.session_state.remaining_words)}** memorie.")
+                
+    
+        # Bottone per salvare i dati
+        if st.session_state.session_data:
+            st.write("")
+            st.write("")
+            st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
+            if st.button(label = "Salva Dati e Termina"):
+                save_and_upload_to_github(st.session_state.session_data)
+                st.success("Grazie per aver partecipato alla raccolta dati!")
+                st.success("Il tuo codice di accesso:", icon = "🔑")
+                st.code(st.session_state.new_token, language='text')
+                st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
+                st.session_state.session_data.clear()
+            st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
     if len(st.session_state.remaining_words) != 0:
@@ -715,3 +719,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
