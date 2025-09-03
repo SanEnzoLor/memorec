@@ -350,9 +350,9 @@ def main():
     col1, col2 = st.columns([0.81, 1])
     # Mostra le immagini nelle colonne
     with col1:
-        st.image("image/logo_unige.png", width=stretch)
+        st.image("image/logo_unige.png", width="stretch")
     with col2:
-        st.image("image/logo_nextage.png", width=stretch)
+        st.image("image/logo_nextage.png", width="stretch")
 
     st.title("**Indagine volta alla costruzione di una banca dati di memorie in italiano**")
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
