@@ -459,12 +459,11 @@ def main():
         else:
             st.warning("Nessun dato trovato per l'ID inserito. **RICARICARE** la pagina se si vuole tentare nuovamente l'acceso ai propri dati.")
     
-    
-    dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
     psico = st.selectbox("**NECESSARIA:** Hai una diagnosi medica di natura psichiatrica?", ["SI","NO"], index = 1)
     if psico == "SI":
         st.warning("Purtroppo la diagnosi di natura psichiatrica potrebbe interferire con la procedura di recupero delle memorie autobiografiche. Per questo motivo è **sconsigliato proseguire** con l'attività.")
     else:
+        dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
         st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
         gender_ind = ["Maschile", "Femminile", "Non-binario", "Nessuno"].index(st.session_state.gender)
         st.session_state.gender = st.selectbox("Seleziona il genere in cui ti identifichi:", ["Maschile", "Femminile", "Non-binario", "Nessuno"], index = gender_ind, on_change = gend_sel)
@@ -719,4 +718,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
