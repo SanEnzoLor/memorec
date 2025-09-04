@@ -461,7 +461,7 @@ def main():
     
     psico = st.selectbox("**NECESSARIA:** Hai una diagnosi medica di natura psichiatrica?", ["SI","NO"], index = 1)
     if psico == "SI":
-        st.warning("Purtroppo la diagnosi di natura psichiatrica potrebbe interferire con la procedura di recupero delle memorie autobiografiche. Per questo motivo **NON è possibile proseguire** l'attività.")
+        st.warning("Purtroppo la diagnosi di natura psichiatrica potrebbe interferire con la procedura di recupero delle memorie autobiografiche. Per questo motivo **NON è possibile proseguire** con la raccolta dati.")
     else:
         dispositivo = st.selectbox("**NECESSARIA:** In questo momento quale strumento stai utilizzando per completare l'attività:", ["Computer","Smartphone"], index = 0)
         st.session_state.eta = st.number_input("Inserisci l'età:", min_value=18, max_value=80, step=1, value = st.session_state.eta)
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
