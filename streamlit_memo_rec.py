@@ -143,7 +143,7 @@ def save_and_upload_to_github(data):
     
 
 # Funzione per somministrare il BDI2
-def BDI2():
+def BDI2(dispositivo):
     if st.session_state.results_d == 0:
         st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
         st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, selezioni il numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
@@ -493,7 +493,7 @@ def main():
     
         st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
         st.header("**Beck Depression Inventory - II**")
-        results_d = BDI2()
+        results_d = BDI2(dispositivo)
         st.write(f"BDI2: {results_d}")
     
         st.header("**Ruminative Response Scale**")
@@ -721,6 +721,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
