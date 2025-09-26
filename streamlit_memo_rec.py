@@ -146,7 +146,7 @@ def save_and_upload_to_github(data):
 def BDI2(dispositivo):
     if st.session_state.results_d == 0:
         st.write("L'Inventario per la Depressione di Beck (BDI -II) è un questionario autovalutativo utilizzato per quantificare i sintomi del disturbo depressivo maggiore in adolescenti e adulti.")
-        st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo scelga quella che meglio descrive come si è sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come si sente, selezioni il numero più elevato per quel gruppo. Non si soffermi troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
+        st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo seleziona quella che meglio descrive come ti sei sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come ti senti, seleziona il numero più elevato per quel gruppo. Non soffermarti troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
 
         if dispositivo == "Smartphone":
             st.info("Utilizzando lo **smartphone** alcune risposte potrebbero non risultare interamente leggibili. In tal caso, si consiglia di **RUOTARE il dispositivo** per una lettura completa.")
@@ -228,7 +228,7 @@ def BDI2(dispositivo):
 def RRS():
     if st.session_state.results_r == 22:
         st.write("La Scala delle Risposte Ruminative (RRS) è una misura autovalutata progettata per valutare la frequenza con cui gli individui si impegnano in diversi tipi di pensieri e comportamenti ruminativi.")
-        st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Per favore, legga ciascuno dei seguenti item e indichi se, quando si sente giù, triste o depresso, lo pensa o lo fa 'mai', 'a volte', 'spesso' o 'sempre'. Indichi cortesemente cosa fa di solito, non cosa pensa di dover fare, selezionando il numero per indicare quanto ogni problema la affligge:")
+        st.write("Gli individui pensano e agiscono in molti modi diversi quando si sentono depressi. Leggi ciascuno dei seguenti item e indica se, quando ti senti giù, triste o depresso, lo pensi o lo fai 'mai', 'a volte', 'spesso' o 'sempre'. Indica cortesemente cosa fai di solito, non cosa pensi di dover fare, selezionando il numero per indicare quanto ogni problema ti affligge:")
     
         # Crea quattro colonne per le informazioni
         cl1, cl2, cl3, cl4 = st.columns([0.26, 0.32, 0.29, 0.13])
@@ -279,7 +279,7 @@ def RRS():
 # Funzione per il PTSD checklist 5
 def PCL5():
     if st.session_state.results_p[4] == 0:
-        st.write("Ha mai vissuto uno dei seguenti eventi: rischio di morte, minaccia concreta di lesioni gravi o atti di violenza? In una o più delle seguenti modalità?")
+        st.write("Hai mai vissuto uno dei seguenti eventi: rischio di morte, minaccia concreta di lesioni gravi o atti di violenza? In una o più delle seguenti modalità?")
         st.write("1. Sperimentando in prima persona l'evento o gli eventi.")
         st.write("2. Assistendo a un evento o gli eventi verificati ad altri.")
         st.write("3. Apprendendo che l'evento è accaduto a un parente o a un amico stretto.")
@@ -287,7 +287,7 @@ def PCL5():
         trauma_event = st.selectbox("risposta", ["SI","NO"], index=1, label_visibility = "collapsed") # NO predefinito
     
         if trauma_event == "SI":
-            st.write("Qui sotto viene riportata una lista di problemi che talvolta le persone presentano in risposta a esperienze molto stressanti. Leggere ogni problema attentamente e selezionare il numero per indicare quanto ogni problema l'ha afflitta nell'ultima settimana:")
+            st.write("Qui sotto viene riportata una lista di problemi che talvolta le persone presentano in risposta a esperienze molto stressanti. Leggi ogni problema attentamente e seleziona il numero per indicare quanto ogni problema ti ha afflitto nell'ultima settimana:")
             
             # Crea cinque colonne per le informazioni
             cl1, cl2, cl3, cl4, cl5 = st.columns([0.2, 0.16, 0.32, 0.16, 0.16])
@@ -303,14 +303,14 @@ def PCL5():
             with cl5:
                 st.write("Moltissimo = 4")
             
-            items_reexperiencing = st.slider("Ricordi ripetuti, disturbanti e indesiderati dell'esperienza stressante che ha subito?", min_value=0, max_value=4, step=1)
+            items_reexperiencing = st.slider("Ricordi ripetuti, disturbanti e indesiderati dell'esperienza stressante che hai subito?", min_value=0, max_value=4, step=1)
             items_reexperiencing = items_reexperiencing + st.slider("Sogni ricorrenti e disturbanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
             items_reexperiencing = items_reexperiencing + st.slider("Avere la sensazione o comportarsi improvvisamente come se l'esperienza stressante  si stesse verificando nuovamente (come se si rivivesse la stessa esperienza)?", min_value=0, max_value=4, step=1)
             items_reexperiencing = items_reexperiencing + st.slider("Sentirsi molto turbato/a quando qualcosa le ricorda l'esperienza stressante?", min_value=0, max_value=4, step=1)
             items_reexperiencing = items_reexperiencing + st.slider("Avere forti reazioni fisiche quando qualcosa Le ricorda l'esperienza stressante (per esempio battito del cuore accelerato, respiro affannoso, sudorazione)?", min_value=0, max_value=4, step=1)
     
             items_avoidance = st.slider("Evitare ricordi, pensieri o sensazioni legati all'esperienza stressante?", min_value=0, max_value=4, step=1)
-            items_avoidance = items_avoidance + st.slider("Evitare qualunque cosa Le ricordi l'esperienza stressante (per esempio, persone, luoghi, conversazioni, attività, oggetti o situazioni)?", min_value=0, max_value=4, step=1)
+            items_avoidance = items_avoidance + st.slider("Evitare qualunque cosa ti ricordi l'esperienza stressante (per esempio, persone, luoghi, conversazioni, attività, oggetti o situazioni)?", min_value=0, max_value=4, step=1)
     
             items_altereted_cognition = st.slider("Problemi a ricordare elementi importanti dell'esperienza stressante?", min_value=0, max_value=4, step=1)
             items_altereted_cognition = items_altereted_cognition + st.slider("Avere opinioni fortemente negative di sé, di altre persone o del mondo (per esempio, avere pensieri del tipo: Io sono una cattiva persona, c'è realmente qualcosa che non va in me, non ci si può fidare di nessuno, il mondo intero è pericoloso)?", min_value=0, max_value=4, step=1)
@@ -507,7 +507,7 @@ def main():
     
     
         st.header("**Cue-Word Autobiographic Memory Retrievial**")
-        st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Si descrivano quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
+        st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Descrivi quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
         st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
         st.write("Vi sarà la possibilità:")
         st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
@@ -721,6 +721,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
