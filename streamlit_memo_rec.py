@@ -152,7 +152,7 @@ def BDI2(dispositivo):
             st.info("Utilizzando lo **smartphone** alcune risposte potrebbero non risultare interamente leggibili. In tal caso, si consiglia di **RUOTARE il dispositivo** per una lettura completa.")
         
         options = ["0. Non mi sento triste.", "1. Mi sento triste per la maggior parte del tempo.", "2. Mi sento sempre triste.", "3. Mi sento così triste o infelice da non poterlo sopportare."]
-        items= options.index(st.selectbox("Tristezza", options))#, on_change = BDI2_on_change()
+        items= options.index(st.radio("Tristezza", options))#, on_change = BDI2_on_change()
         
         options = ["0. Non sono scoraggiato riguardo al mio futuro.", "1. Mi sento più scoraggiato riguardo al mio futuro rispetto al solito.", "2. Non mi aspetto nulla di buono per me.", "3. Sento che il mio futuro è senza speranza e che continuerà a peggiorare."]
         items = items + options.index(st.selectbox("Pessimismo", options))
@@ -721,6 +721,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
