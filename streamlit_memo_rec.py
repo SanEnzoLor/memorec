@@ -149,67 +149,67 @@ def BDI2(dispositivo):
         st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo seleziona quella che meglio descrive come ti sei sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come ti senti, seleziona il numero più elevato per quel gruppo. Non soffermarti troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
         
         options = ["0. Non mi sento triste.", "1. Mi sento triste per la maggior parte del tempo.", "2. Mi sento sempre triste.", "3. Mi sento così triste o infelice da non poterlo sopportare."]
-        items= options.index(st.radio("*Tristezza*", options))#, on_change = BDI2_on_change()
+        items= options.index(st.radio("**Tristezza**", options))#, on_change = BDI2_on_change()
         
         options = ["0. Non sono scoraggiato riguardo al mio futuro.", "1. Mi sento più scoraggiato riguardo al mio futuro rispetto al solito.", "2. Non mi aspetto nulla di buono per me.", "3. Sento che il mio futuro è senza speranza e che continuerà a peggiorare."]
-        items = items + options.index(st.radio("Pessimismo", options))
+        items = items + options.index(st.radio("**Pessimismo**", options))
             
         options = ["0. Non mi sento un fallito.", "1. Ho fallito più di quanto avrei dovuto.", "2. Se ripenso alla mia vita riesco a vedere solo una serie di fallimenti.", "3. Ho la sensazione di essere un fallimento totale come persona."]
-        items = items + options.index(st.radio("Fallimento", options))
+        items = items + options.index(st.radio("**Fallimento**", options))
         
         options = ["0. Traggo lo stesso piacere di sempre dalle cose che faccio.", "1. Non traggo più piacere dalle cose come un tempo.", "2. Traggo molto poco piacere dalle cose che di solito mi divertivano.", "3. Non riesco a trarre alcun piacere dalle cose che una volta mi piacevano."]
-        items = items + options.index(st.radio("Perdita di piacere", options))
+        items = items + options.index(st.radio("**Perdita di piacere**", options))
         
         options = ["0. Non mi sento particolarmente in colpa.", "1. Mi sento in colpa per molte cose che ho fatto o che avrei dovuto fare.", "2. Mi sento molto spesso in colpa.", "3. Mi sento sempre in colpa."]
-        items = items + options.index(st.radio("Senso di colpa", options))
+        items = items + options.index(st.radio("**Senso di colpa**", options))
         
         options = ["0. Non mi sento come se stessi subendo una punizione. ","1. Sento che potrei essere punito. ","2. Mi aspetto di essere punito. ","3. Mi sento come se stessi subendo una punizione."]
-        items = items + options.index(st.radio("Sentimenti di punizione", options))
+        items = items + options.index(st.radio("**Sentimenti di punizione**", options))
         
         options = ["0. Considero me stesso come ho sempre fatto.","1. Credo meno in me stesso.","2. Sono deluso di me stesso. ","3. Mi detesto."]
-        items = items + options.index(st.radio("Autostima", options))
+        items = items + options.index(st.radio("**Autostima**", options))
         
         options = ["0. Non mi critico né mi biasimo più del solito.","1. Mi critico più spesso del solito.", "2. Mi critico per tutte le mie colpe.", "3. Mi biasimo per ogni cosa brutta che mi accade."]
-        items = items + options.index(st.radio("Autocritica", options))
+        items = items + options.index(st.radio("**Autocritica**", options))
         
         options = ["0. Non ho alcun pensiero suicida.","1. Ho pensieri suicidi ma non li realizzerei.","2. Sento che starei meglio se morissi. ","3. Se mi si presentasse l’occasione, non esiterei ad uccidermi."]
-        items = items + options.index(st.radio("Suicidio", options))
+        items = items + options.index(st.radio("**Suicidio**", options))
         
         options = ["0. Non piango più del solito.","1. Piango più del solito. ","2. Piango per ogni minima cosa. ","3. Ho spesso voglia di piangere ma non ci riesco."]
-        items = items + options.index(st.radio("Pianto", options))
+        items = items + options.index(st.radio("**Pianto**", options))
         
         options = ["0. Non mi sento più agitato o teso del solito.","1. Mi sento più agitato o teso del solito. ","2. Sono così nervoso o agitato al punto che mi è difficile rimanere fermo. ","3. Sono così nervoso o agitato che devo continuare a muovermi o fare qualcosa."]
-        items = items + options.index(st.radio("Agitazione", options))
+        items = items + options.index(st.radio("**Agitazione**", options))
         
         options = ["0. Non ho perso interesse verso le altre persone o verso le attività.", "1. Sono meno interessato agli altri o alle cose rispetto a prima. ","2. Ho perso la maggior parte dell’interesse verso le altre persone o cose. ","3. Mi risulta difficile interessarmi a qualsiasi cosa."]
-        items = items + options.index(st.radio("Perdita di interessi", options))
+        items = items + options.index(st.radio("**Perdita di interessi**", options))
         
         options = ["0. Prendo decisioni come sempre. ","1. Trovo più difficoltà del solito nel prendere decisioni. ","2. Ho molte più difficoltà nel prendere decisioni rispetto al solito. ","3. Non riesco a prendere nessuna decisione."]
-        items = items + options.index(st.radio("Indecisione", options))
+        items = items + options.index(st.radio("**Indecisione**", options))
         
         options = ["0. Non mi sento inutile. ","1. Non mi sento valido e utile come un tempo. ","2. Mi sento più inutile delle altre persone. ","3. Mi sento completamente inutile su qualsiasi cosa."]
-        items = items + options.index(st.radio("Senso di inutilità", options))
+        items = items + options.index(st.radio("**Senso di inutilità**", options))
         
         options = ["0. Ho la stessa energia di sempre. ","1. Ho meno energia del solito. ","2. Non ho energia sufficiente per fare la maggior parte delle cose.","3. Ho così poca energia che non riesco a fare nulla."]
-        items = items + options.index(st.radio("Perdita di energia ", options))
+        items = items + options.index(st.radio("**Perdita di energia**", options))
         
         options = ["0. Non ho notato alcun cambiamento nel mio modo di dormire. ", "1. Dormo un po’ più del solito. ","1. Dormo un po’ meno del solito. ","2. Dormo molto più del solito. ","2. Dormo molto meno del solito. ","3. Dormo quasi tutto il giorno. ","3. Mi sveglio 1-2 ore prima e non riesco a riaddormentarmi."]
-        items = items + np.round(options.index(st.radio("Sonno", options))/2 + 0.01)
+        items = items + np.round(options.index(st.radio("**Sonno**", options))/2 + 0.01)
         
         options = ["0. Non sono più irritabile del solito. ","1. Sono più irritabile del solito. ","2. Sono molto più irritabile del solito.","3. Sono sempre irritabile."]
-        items = items + options.index(st.radio("Irritabilità", options))
+        items = items + options.index(st.radio("**Irritabilità**", options))
         
         options = ["0. Non ho notato alcun cambiamento nel mio appetito.", "1. Il mio appetito è un po’ diminuito rispetto al solito. ","1. Il mio appetito è un po’ aumentato rispetto al solito. ","2. Il mi appetito è molto diminuito rispetto al solito. ","2. Il mio appetito è molto aumentato rispetto al solito. ","3. Non ho per niente appetito. ","3. Mangerei in qualsiasi momento"]
-        items = items + np.round(options.index(st.radio("Appetito", options))/2 + 0.01)
+        items = items + np.round(options.index(st.radio("**Appetito**", options))/2 + 0.01)
         
         options = ["0. Riesco a concentrarmi come sempre.","1. Non riesco a concentrarmi come al solito.","2. Trovo difficile concentrarmi per molto tempo.","3. Non riesco a concentrarmi su nulla."]
-        items = items + options.index(st.radio("Concentrazione", options))
+        items = items + options.index(st.radio("**Concentrazione**", options))
         
         options = ["0. Non sono più stanco o affaticato del solito. ","1. Mi stanco e mi affatico più facilmente del solito. ","2. Sono così stanco e affaticato che non riesco a fare molte delle cose che facevo prima. ","3. Sono talmente stanco e affaticato che non riesco più a fare nessuna delle cose che facevo prima."]
-        items = items + options.index(st.radio("Fatica", options))
+        items = items + options.index(st.radio("**Fatica**", options))
         
         options = ["0. Non ho notato alcun cambiamento recente nel mio interesse verso il sesso.", "1. Sono meno interessato al sesso rispetto a prima.","2. Ora sono molto meno interessato al sesso. ","3. Ho completamente perso l’interesse verso il sesso."]
-        items = items + options.index(st.radio("Sesso", options))
+        items = items + options.index(st.radio("**Sesso**", options))
 
         return items
 
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
