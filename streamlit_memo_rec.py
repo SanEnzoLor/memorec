@@ -149,7 +149,7 @@ def BDI2(dispositivo):
         st.write("Il presente questionario consiste di 21 gruppi di affermazioni.  Per ogni gruppo seleziona quella che meglio descrive come ti sei sentito nelle ultime due settimane (incluso oggi). Se più di una affermazione dello stesso gruppo descrive ugualmente bene come ti senti, seleziona il numero più elevato per quel gruppo. Non soffermarti troppo su ogni affermazione: la prima risposta è spesso la più accurata.")
         
         options = ["0. Non mi sento triste.", "1. Mi sento triste per la maggior parte del tempo.", "2. Mi sento sempre triste.", "3. Mi sento così triste o infelice da non poterlo sopportare."]
-        items= options.index(st.radio("Tristezza", options))#, on_change = BDI2_on_change()
+        items= options.index(st.radio("*Tristezza*", options))#, on_change = BDI2_on_change()
         
         options = ["0. Non sono scoraggiato riguardo al mio futuro.", "1. Mi sento più scoraggiato riguardo al mio futuro rispetto al solito.", "2. Non mi aspetto nulla di buono per me.", "3. Sento che il mio futuro è senza speranza e che continuerà a peggiorare."]
         items = items + options.index(st.radio("Pessimismo", options))
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
