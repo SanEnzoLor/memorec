@@ -491,16 +491,16 @@ def main():
         st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
         st.header("**Beck Depression Inventory - II**")
         results_d = BDI2(dispositivo)
-        st.write(f"BDI2: {results_d}")
+        #st.write(f"BDI2: {results_d}")
     
         st.header("**Ruminative Response Scale**")
         results_r = RRS()
-        st.write(f"RRS: {results_r}")
+        #st.write(f"RRS: {results_r}")
         
         st.header("**Posttraumatic Stress Disorder Checklist - 5**")
         results_p = PCL5()
-        if results_p is not None:
-            st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
+        #if results_p is not None:
+        #    st.write(f"PCL5: Re-experiencing = {results_p[0]}, Avoidance = {results_p[1]}, Negative alterations in cognition and mood = {results_p[2]}, Hyper-arousal = {results_p[3]}, Totale = {results_p[4]}")
     
     
         st.header("**Cue-Word Autobiographic Memory Retrievial**")
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
