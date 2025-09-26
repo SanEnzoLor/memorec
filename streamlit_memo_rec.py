@@ -193,13 +193,13 @@ def BDI2(dispositivo):
         options = ["0. Ho la stessa energia di sempre. ","1. Ho meno energia del solito. ","2. Non ho energia sufficiente per fare la maggior parte delle cose.","3. Ho così poca energia che non riesco a fare nulla."]
         items = items + options.index(st.radio("Perdita di energia ", options))
         
-        options = ["0. Non ho notato alcun cambiamento nel mio modo di dormire. ", "1a. Dormo un po’ più del solito. ","1b. Dormo un po’ meno del solito. ","2a. Dormo molto più del solito. ","2b. Dormo molto meno del solito. ","3a. Dormo quasi tutto il giorno. ","3b. Mi sveglio 1-2 ore prima e non riesco a riaddormentarmi."]
+        options = ["0. Non ho notato alcun cambiamento nel mio modo di dormire. ", "1. Dormo un po’ più del solito. ","1. Dormo un po’ meno del solito. ","2. Dormo molto più del solito. ","2. Dormo molto meno del solito. ","3. Dormo quasi tutto il giorno. ","3. Mi sveglio 1-2 ore prima e non riesco a riaddormentarmi."]
         items = items + np.round(options.index(st.radio("Sonno", options))/2 + 0.01)
         
         options = ["0. Non sono più irritabile del solito. ","1. Sono più irritabile del solito. ","2. Sono molto più irritabile del solito.","3. Sono sempre irritabile."]
         items = items + options.index(st.radio("Irritabilità", options))
         
-        options = ["0. Non ho notato alcun cambiamento nel mio appetito.", "1a. Il mio appetito è un po’ diminuito rispetto al solito. ","1b. Il mio appetito è un po’ aumentato rispetto al solito. ","2a. Il mi appetito è molto diminuito rispetto al solito. ","2b. Il mio appetito è molto aumentato rispetto al solito. ","3a. Non ho per niente appetito. ","3b. Mangerei in qualsiasi momento"]
+        options = ["0. Non ho notato alcun cambiamento nel mio appetito.", "1. Il mio appetito è un po’ diminuito rispetto al solito. ","1. Il mio appetito è un po’ aumentato rispetto al solito. ","2. Il mi appetito è molto diminuito rispetto al solito. ","2. Il mio appetito è molto aumentato rispetto al solito. ","3. Non ho per niente appetito. ","3. Mangerei in qualsiasi momento"]
         items = items + np.round(options.index(st.radio("Appetito", options))/2 + 0.01)
         
         options = ["0. Riesco a concentrarmi come sempre.","1. Non riesco a concentrarmi come al solito.","2. Trovo difficile concentrarmi per molto tempo.","3. Non riesco a concentrarmi su nulla."]
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
