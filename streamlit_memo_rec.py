@@ -357,7 +357,7 @@ def main():
     st.title("**Indagine volta alla costruzione di una banca dati di memorie in italiano**")
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
     st.write("**Modeling dialogue between human and digital agents for the personalized stimulation of mnemonic abilities and the support for the evaluation of the progress and assistance of neurocognitive problems**")
-    st.write("Lo scopo di questo studio è quello di raccogliere memorie autobiografiche, ovvero ricordi di esperienze di vita personali sisnificative, emotivamente vivide e ricche di dettagli. Le caratteristiche di questi racconti possono essere messe in relazione con alcuni parametri, già utilizzati nella ricerca scientifica, per valutare lo stato di salute e di benessere individuale.")
+    st.write("Lo scopo di questo studio è raccogliere memorie autobiografiche, ovvero ricordi di esperienze di vita personali significative, emotivamente vivide e ricche di dettagli. Al fine di mettere in relazione caratteristiche di questi racconti con dei parametri utilizzati nella ricerca scientifica per valutare lo stato di salute e di benessere individuale.")
     st.markdown("I dati raccolti in questo studio, in formato testuale e anonimo (se si registra un file audio, esso sarà cancellato una volta completata la trascrizione automatica), saranno caricati su una banca dati temporanea privata, protetta da password, accessibile solo ai ricercatori coinvolti e, solo successivamente alla verifica di completo anonimato, verranno resi pubblici per finalità di ricerca.")
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
@@ -718,6 +718,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
