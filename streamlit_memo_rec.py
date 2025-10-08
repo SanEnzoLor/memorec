@@ -364,29 +364,30 @@ def main():
 
     
     
-    from pathlib import Path
-    
-    st.write("📄 Nota informativa dello studio")
-    
-    file_path = Path("doc/MINDSYNC_Notainformativadellostudio.pdf")
-    
-    # Mostra il link di anteprima
-    st.markdown("### 🔍 Anteprima")
-    st.markdown(
-        f'<iframe src="{file_path.as_posix()}" width="400" height="500" style="border:1px solid #ccc; border-radius:10px;"></iframe>',
-        unsafe_allow_html=True
-    )
-    
-    # Legge il file per il download
+    # Legge il file PDF e lo codifica in base64
     with open(file_path, "rb") as f:
         pdf_bytes = f.read()
+        base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
     
-    st.download_button(
-        label="📥 Scarica la nota informativa (PDF)",
-        data=pdf_bytes,
-        file_name="nota_informativa.pdf",
-        mime="application/pdf"
-    )
+    # Crea un link per aprire il PDF in una nuova scheda
+    pdf_display_link = f"""
+    <div style="text-align:center; margin-top: 15px;">
+        <a href="data:application/pdf;base64,{base64_pdf}" target="_blank" style="
+            text-decoration:none;
+            background-color:#f0f2f6;
+            color:#333;
+            padding:10px 16px;
+            border-radius:10px;
+            font-weight:600;
+            border:1px solid #ccc;
+        ">
+            🔍 Apri anteprima in una nuova scheda
+        </a>
+    </div>
+    """
+    
+    # Mostra il link per l’anteprima
+    st.markdown(pdf_display_link, unsafe_allow_html=True)
 
     
     st.header("**Indici Demografici**")
@@ -745,6 +746,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
