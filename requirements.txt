@@ -5,5 +5,7 @@ streamlit
 
 pydub
 streamlit-audiorec
+streamlit[pdf]
 SpeechRecognition
 sounddevice
+
