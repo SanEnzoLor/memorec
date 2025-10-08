@@ -362,57 +362,21 @@ def main():
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
 
+
+    from pathlib import Path
     
     st.write("📄 Nota informativa dello studio")
 
     # Percorso del file PDF
-    file_path = "doc/MINDSYNC_Notainformativadellostudio.pdf"
+    file_path = Path("doc/MINDSYNC_Notainformativadellostudio.pdf")
     
-    # Legge il file PDF e lo codifica in base64
-    with open(file_path, "rb") as f:
-        pdf_bytes = f.read()
-        base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
-    
-    # componente HTML + JS che crea un Blob dal base64 e lo apre in una nuova scheda
-    component_html = f"""
-    <div style="text-align:center; margin: 10px 0;">
-      <button id="openPdfBtn" style="
-          background-color:#f0f2f6;
-          border:1px solid #ccc;
-          color:#333;
-          padding:10px 16px;
-          border-radius:10px;
-          font-weight:600;
-          cursor:pointer;
-      ">
-        🔍 Apri anteprima in una nuova scheda
-      </button>
-    </div>
-    
-    <script>
-    const b64 = `{base64_pdf}`;
-    const btn = document.getElementById("openPdfBtn");
-    btn.addEventListener("click", function() {{
-      try {{
-        const binary = atob(b64);
-        const len = binary.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {{
-          bytes[i] = binary.charCodeAt(i);
-        }}
-        const blob = new Blob([bytes], {{type: "application/pdf"}});
-        const url = URL.createObjectURL(blob);
-        window.open(url, "_blank");
-      }} catch (err) {{
-        // fallback: apri data: URI (potrebbe richiedere refresh in Edge)
-        window.open("data:application/pdf;base64," + b64, "_blank");
-      }}
-    }});
-    </script>
-    """
-    
-    # Mostra il link per l’anteprima
-    st.markdown(component_html, unsafe_allow_html=True)
+    # Mostra link che apre direttamente il file (funziona su Edge)
+    st.markdown(
+        f'<a href="{file_path.as_posix()}" target="_blank" '
+        f'style="text-decoration:none; background:#f0f2f6; padding:10px 16px; border-radius:10px; '
+        f'border:1px solid #ccc; color:#333; font-weight:600;">🔍 Apri anteprima in nuova scheda</a>',
+        unsafe_allow_html=True
+    )
 
     
     st.header("**Indici Demografici**")
@@ -771,6 +735,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
