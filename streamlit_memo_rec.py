@@ -361,6 +361,35 @@ def main():
     st.markdown("I dati raccolti in questo studio, in formato testuale e anonimo (se si registra un file audio, esso sarà cancellato una volta completata la trascrizione automatica), saranno caricati su una banca dati temporanea privata, protetta da password, accessibile solo ai ricercatori coinvolti e, solo successivamente alla verifica di completo anonimato, verranno resi pubblici per finalità di ricerca.")
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
+
+    st.title("📄 Nota informativa dello studio")
+    
+    # Percorso del file PDF
+    file_path = "doc/MINDSYNC_Notainformativadellostudio.pdf"
+    
+    # Legge il file in modalità binaria
+    with open(file_path, "rb") as f:
+        pdf_bytes = f.read()
+    
+    # --- Anteprima PDF in finestra piccola ---
+    base64_pdf = base64.b64encode(pdf_bytes).decode('utf-8')
+    
+    pdf_display = f"""
+    <div style="text-align:center;">
+        <iframe src="data:application/pdf;base64,{base64_pdf}" width="400" height="500" style="border:1px solid #ccc; border-radius:10px;"></iframe>
+    </div>
+    """
+    
+    st.markdown(pdf_display, unsafe_allow_html=True)
+    
+    # --- Bottone di download ---
+    st.download_button(
+        label="📥 Scarica la nota informativa (PDF)",
+        data=pdf_bytes,
+        file_name="nota_informativa.pdf",
+        mime="application/pdf"
+    )
+
     
     st.header("**Indici Demografici**")
 
@@ -718,6 +747,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
