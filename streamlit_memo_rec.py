@@ -361,7 +361,7 @@ def main():
     st.markdown("I dati raccolti in questo studio, in formato testuale e anonimo (se si registra un file audio, esso sarà cancellato una volta completata la trascrizione automatica), saranno caricati su una banca dati temporanea privata, protetta da password, accessibile solo ai ricercatori coinvolti e, solo successivamente alla verifica di completo anonimato, verranno resi pubblici per finalità di ricerca.")
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
-    st.write("📄 Nota informativa sullo studio")
+    st.write("📄 **Nota informativa sullo studio**:")
     st.pdf("doc/MINDSYNC_Notainformativadellostudio.pdf", height=500)
     
     st.header("**Indici Demografici**")
@@ -720,6 +720,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
