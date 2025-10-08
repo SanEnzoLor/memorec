@@ -363,6 +363,10 @@ def main():
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
 
     
+    st.write("📄 Nota informativa dello studio")
+
+    # Percorso del file PDF
+    file_path = "doc/MINDSYNC_Notainformativadellostudio.pdf"
     
     # Legge il file PDF e lo codifica in base64
     with open(file_path, "rb") as f:
@@ -746,6 +750,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
