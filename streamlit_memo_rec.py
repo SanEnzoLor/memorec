@@ -373,25 +373,34 @@ def main():
         pdf_bytes = f.read()
         base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
     
-    # Crea un link per aprire il PDF in una nuova scheda
-    pdf_display_link = f"""
-    <div style="text-align:center; margin-top: 15px;">
-        <a href="data:application/pdf;base64,{base64_pdf}" target="_blank" style="
-            text-decoration:none;
-            background-color:#f0f2f6;
-            color:#333;
-            padding:10px 16px;
-            border-radius:10px;
-            font-weight:600;
-            border:1px solid #ccc;
-        ">
-            🔍 Apri anteprima in una nuova scheda
-        </a>
-    </div>
+    open_script = f"""
+    <script>
+    function openPdf() {{
+        const pdfData = "{base64_pdf}";
+        const byteCharacters = atob(pdfData);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {{
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }}
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {{type: "application/pdf"}});
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, "_blank");
+    }}
+    </script>
+    <button onclick="openPdf()" style="
+        background-color:#f0f2f6;
+        border:1px solid #ccc;
+        color:#333;
+        padding:10px 16px;
+        border-radius:10px;
+        font-weight:600;
+        cursor:pointer;
+    ">🔍 Apri anteprima in una nuova scheda</button>
     """
     
     # Mostra il link per l’anteprima
-    st.markdown(pdf_display_link, unsafe_allow_html=True)
+    st.markdown(open_script, unsafe_allow_html=True)
 
     
     st.header("**Indici Demografici**")
@@ -750,6 +759,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
