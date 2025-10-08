@@ -365,11 +365,7 @@ def main():
 
     
     st.write("📄 Nota informativa dello studio")
-    
-    st.markdown(
-    '<a href="doc/MINDSYNC_Notainformativadellostudio.pdf" target="_blank">🔍 Apri PDF</a>',
-    unsafe_allow_html=True
-    )
+    st.pdf("doc/MINDSYNC_Notainformativadellostudio.pdf", height=700)
     
     st.header("**Indici Demografici**")
 
@@ -727,6 +723,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
