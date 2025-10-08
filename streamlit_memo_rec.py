@@ -363,20 +363,33 @@ def main():
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
 
 
-    from pathlib import Path
     
     st.write("📄 Nota informativa dello studio")
 
     # Percorso del file PDF
-    file_path = Path("doc/MINDSYNC_Notainformativadellostudio.pdf")
+    file_path = "doc/MINDSYNC_Notainformativadellostudio.pdf"
     
-    # Mostra link che apre direttamente il file (funziona su Edge)
-    st.markdown(
-        f'<a href="{file_path.as_posix()}" target="_blank" '
-        f'style="text-decoration:none; background:#f0f2f6; padding:10px 16px; border-radius:10px; '
-        f'border:1px solid #ccc; color:#333; font-weight:600;">🔍 Apri anteprima in nuova scheda</a>',
-        unsafe_allow_html=True
-    )
+    # Legge il file PDF e lo codifica in base64
+    with open(file_path, "rb") as f:
+        pdf_bytes = f.read()
+        base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+    
+    # Crea un link per aprire il PDF in una nuova scheda
+    pdf_display_link = f"""
+    <div style="text-align:center; margin-top: 15px;">
+        <a href="data:application/pdf;base64,{base64_pdf}" target="_blank" style="
+            text-decoration:none;
+            background-color:#f0f2f6;
+            color:#333;
+            padding:10px 16px;
+            border-radius:10px;
+            font-weight:600;
+            border:1px solid #ccc;
+        ">
+            🔍 Apri anteprima in una nuova scheda
+        </a>
+    </div>
+    """
 
     
     st.header("**Indici Demografici**")
@@ -735,6 +748,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
