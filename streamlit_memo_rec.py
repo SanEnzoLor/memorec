@@ -390,7 +390,9 @@ def main():
         </a>
     </div>
     """
-
+    
+    # Mostra il link per l’anteprima
+    st.markdown(pdf_display_link, unsafe_allow_html=True)
     
     st.header("**Indici Demografici**")
 
@@ -748,6 +750,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
