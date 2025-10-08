@@ -373,34 +373,46 @@ def main():
         pdf_bytes = f.read()
         base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
     
-    open_script = f"""
+    # componente HTML + JS che crea un Blob dal base64 e lo apre in una nuova scheda
+    component_html = f"""
+    <div style="text-align:center; margin: 10px 0;">
+      <button id="openPdfBtn" style="
+          background-color:#f0f2f6;
+          border:1px solid #ccc;
+          color:#333;
+          padding:10px 16px;
+          border-radius:10px;
+          font-weight:600;
+          cursor:pointer;
+      ">
+        🔍 Apri anteprima in una nuova scheda
+      </button>
+    </div>
+    
     <script>
-    function openPdf() {{
-        const pdfData = "{base64_pdf}";
-        const byteCharacters = atob(pdfData);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {{
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
+    const b64 = `{base64_pdf}`;
+    const btn = document.getElementById("openPdfBtn");
+    btn.addEventListener("click", function() {{
+      try {{
+        const binary = atob(b64);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {{
+          bytes[i] = binary.charCodeAt(i);
         }}
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], {{type: "application/pdf"}});
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, "_blank");
-    }}
+        const blob = new Blob([bytes], {{type: "application/pdf"}});
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+      }} catch (err) {{
+        // fallback: apri data: URI (potrebbe richiedere refresh in Edge)
+        window.open("data:application/pdf;base64," + b64, "_blank");
+      }}
+    }});
     </script>
-    <button onclick="openPdf()" style="
-        background-color:#f0f2f6;
-        border:1px solid #ccc;
-        color:#333;
-        padding:10px 16px;
-        border-radius:10px;
-        font-weight:600;
-        cursor:pointer;
-    ">🔍 Apri anteprima in una nuova scheda</button>
     """
     
     # Mostra il link per l’anteprima
-    st.markdown(open_script, unsafe_allow_html=True)
+    st.markdown(component_html, unsafe_allow_html=True)
 
     
     st.header("**Indici Demografici**")
@@ -759,6 +771,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
