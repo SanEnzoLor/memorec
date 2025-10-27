@@ -601,7 +601,8 @@ def main():
             # Salva temporaneamente il file WAV per la trascrizione
             temp_file = "temp_audio.wav"
             audio_segment.export(temp_file, format="wav")
-            st.session_state.transcription = transcribe_audio(temp_file)
+            transcription = transcribe_audio(temp_file)
+            st.session_state.transcription = transcription
 
         if dispositivo == "Computer":
             if st.session_state.transcription != "":
@@ -725,6 +726,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
