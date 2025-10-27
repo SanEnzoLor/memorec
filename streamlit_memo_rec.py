@@ -608,11 +608,11 @@ def main():
                     st.write(st.session_state.transcription)
                     st.session_state.testo = st.session_state.transcription
                     st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                                        value = st.session_state.testo,
-                                                        height = 300,
-                                                        key = len(st.session_state.remaining_words),
-                                                        disabled = able(st.session_state.show, ten_w),
-                                                        label_visibility = visible(st.session_state.show))
+                                                            value = st.session_state.testo,
+                                                            height = 300,
+                                                            key = len(st.session_state.remaining_words),
+                                                            disabled = able(st.session_state.show, ten_w),
+                                                            label_visibility = visible(st.session_state.show))
             else:
                 if st.session_state.transcription != "":
                     st.write("**Trascrizione audio:**")
@@ -620,10 +620,10 @@ def main():
                     st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
                     st.session_state.testo = st.session_state.transcription
                     st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                                        value =  st.session_state.testo,
-                                                        key = len(st.session_state.remaining_words),
-                                                        disabled = able(st.session_state.show, ten_w),
-                                                        label_visibility = visible(st.session_state.show))
+                                                            value =  st.session_state.testo,
+                                                            key = len(st.session_state.remaining_words),
+                                                            disabled = able(st.session_state.show, ten_w),
+                                                            label_visibility = visible(st.session_state.show))
                 
 
         else:
@@ -741,6 +741,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
