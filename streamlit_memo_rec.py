@@ -555,8 +555,8 @@ def main():
             st.session_state.testo = ""
         if "ind" not in st.session_state:
             st.session_state.ind = "Inizia"
-    
-        ten_w = False
+        if "ten_w" not in st.session_state:
+            st.session_state.ten_w = False
         
         def on_button_i_click():
             st.session_state.start = True
@@ -576,9 +576,9 @@ def main():
             else:
                 # Se non ci sono parole da suggerire, disabilita il pulsante di registrazione
                 st.warning("Hai già usato tutte le 10 parole, non è più possibile fare altre registrazioni. Selezionare **Salva Dati e Termina**")
-                ten_w = True
+                st.session_state.ten_w = True
         
-        if st.session_state.show == True and ten_w == False:
+        if st.session_state.show == True and st.session_state.ten_w == False:
             # Mostra la parola spunto
             st.write("**Racconta una memoria** che recuperi prendendo spunto dalla parola:")
             st.header(f"**{st.session_state.selected_word}**")
@@ -611,7 +611,7 @@ def main():
                                                             value = st.session_state.transcription,
                                                             height = 300,
                                                             key = -len(st.session_state.remaining_words),
-                                                            disabled = able(st.session_state.show, ten_w),
+                                                            disabled = able(st.session_state.show, st.session_state.ten_w),
                                                             label_visibility = visible(st.session_state.show))
             else:
                 if st.session_state.transcription != "":
@@ -621,7 +621,7 @@ def main():
                 st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                             value =  st.session_state.transcription,
                                                             key = -len(st.session_state.remaining_words),
-                                                            disabled = able(st.session_state.show, ten_w),
+                                                            disabled = able(st.session_state.show, st.session_state.ten_w),
                                                             label_visibility = visible(st.session_state.show))
                 
 
@@ -630,12 +630,12 @@ def main():
                 st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                         height = 300,
                                                         key = len(st.session_state.remaining_words),
-                                                        disabled = able(st.session_state.show, ten_w),
+                                                        disabled = able(st.session_state.show, st.session_state.ten_w),
                                                         label_visibility = visible(st.session_state.show))
             else:
                 st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                         key = len(st.session_state.remaining_words),
-                                                        disabled = able(st.session_state.show, ten_w),
+                                                        disabled = able(st.session_state.show, st.session_state.ten_w),
                                                         label_visibility = visible(st.session_state.show))
         
 
@@ -694,7 +694,6 @@ def main():
             st.write("")
             st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
             if st.button(label = "Salva Dati e Termina"):
-                #st.session_state.show = False
                 save_and_upload_to_github(st.session_state.session_data)
                 st.success("Grazie per aver partecipato alla raccolta dati!")
                 st.success("Il tuo codice di accesso:", icon = "🔑")
@@ -741,6 +740,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
