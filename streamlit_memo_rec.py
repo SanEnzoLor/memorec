@@ -603,9 +603,9 @@ def main():
             audio_segment.export(temp_file, format="wav")
             transcription = transcribe_audio(temp_file)
             st.session_state.transcription = transcription
+            st.session_state.testo = trascription
 
         if dispositivo == "Computer":
-            st.session_state.testo = st.session_state.trascription
             if st.session_state.transcription != "":
                 st.write("**Trascrizione audio:**")
                 st.write(st.session_state.transcription)
@@ -616,7 +616,6 @@ def main():
                                                     disabled = able(st.session_state.show, ten_w),
                                                     label_visibility = visible(st.session_state.show))
         else:
-            st.session_state.testo = st.session_state.trascription
             if st.session_state.transcription != "":
                 st.write("**Trascrizione audio:**")
                 st.write(st.session_state.transcription)
@@ -728,6 +727,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
