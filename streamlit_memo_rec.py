@@ -603,6 +603,9 @@ def main():
         visible = lambda x: "visible" if x else "collapsed"
         able = lambda x, y: False if x and not y else True
         if dispositivo == "Computer":
+            if st.session_state.transcription != "":
+                st.write("**Trascrizione audio:**")
+                st.write(st.session_state.transcription)
             st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                   value = st.session_state.transcription,
                                                   height = 300,
@@ -720,6 +723,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
