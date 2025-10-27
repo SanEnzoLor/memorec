@@ -592,6 +592,7 @@ def main():
         # Trascrizione automatica tramite modulo speech to text
         if st.session_state.wav_audio_data is not None:
             # Converti l'audio registrato in formato WAV
+            trascription = ""
             if st.session_state.show == True:
                 st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
             audio_file = BytesIO(st.session_state.wav_audio_data)
@@ -729,6 +730,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
