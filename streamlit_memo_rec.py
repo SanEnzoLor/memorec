@@ -591,6 +591,7 @@ def main():
             # Converti l'audio registrato in formato WAV
             if st.session_state.show == True:
                 st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
+                st.session_state.show = False
             audio_file = BytesIO(st.session_state.wav_audio_data)
             audio_segment = AudioSegment.from_file(audio_file)
             st.session_state.time_rec = len(audio_segment)/1000 # da [ms] a [s]
@@ -599,13 +600,11 @@ def main():
             temp_file = "temp_audio.wav"
             audio_segment.export(temp_file, format="wav")
             st.session_state.transcription = transcribe_audio(temp_file)
+            st.session_state.show = True
     
         visible = lambda x: "visible" if x else "collapsed"
         able = lambda x, y: False if x and not y else True
         if dispositivo == "Computer":
-            if st.session_state.transcription != "":
-                st.write("**Trascrizione audio:**")
-                st.write(st.session_state.transcription)
             st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                   value = st.session_state.transcription,
                                                   height = 300,
@@ -723,6 +722,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
