@@ -603,7 +603,7 @@ def main():
             temp_file = "temp_audio.wav"
             audio_segment.export(temp_file, format="wav")
             st.session_state.transcription = transcribe_audio(temp_file)
-            if st.session_state.testo != st.session_state.transcription & trascription:
+            if (st.session_state.testo != st.session_state.transcription) and (trascription == True):
                 st.rerun()
                 trascription = False
                 
@@ -730,6 +730,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
