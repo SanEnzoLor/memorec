@@ -585,13 +585,15 @@ def main():
             # Mostra il modulo di registrazione 
             st.info("Se si volesse utilizzare la trascrizione automatica premere **Start Recording**, quando ci si vuole fermare premere **Stop** e **ATTENDERE qualche secondo** per il caricamento del file audio temporaneo. Nel caso in cui **NON** ci sia feedback visivo della registrazione in corso o l'audio finale abbia durata di 0 secondi, fare ripartire la registrazione premendo prima **Stop** (se non si è già premuto) e poi **Start Recording**.")
             st.session_state.wav_audio_data = st_audiorec()
-    
+
+        visible = lambda x: "visible" if x else "collapsed"
+        able = lambda x, y: False if x and not y else True
+        
         # Trascrizione automatica tramite modulo speech to text
         if st.session_state.wav_audio_data is not None:
             # Converti l'audio registrato in formato WAV
             if st.session_state.show == True:
                 st.warning("**Attendere**, sto generando la trascrizione. Vi è la possibilità di correggerla prima di salvarla.")
-                st.session_state.show = False
             audio_file = BytesIO(st.session_state.wav_audio_data)
             audio_segment = AudioSegment.from_file(audio_file)
             st.session_state.time_rec = len(audio_segment)/1000 # da [ms] a [s]
@@ -600,29 +602,38 @@ def main():
             temp_file = "temp_audio.wav"
             audio_segment.export(temp_file, format="wav")
             st.session_state.transcription = transcribe_audio(temp_file)
-            st.session_state.show = True
+            
+            if dispositivo == "Computer":
+                st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                                                      value = st.session_state.transcription,
+                                                      height = 300,
+                                                      key = len(st.session_state.remaining_words),
+                                                      disabled = able(st.session_state.show, ten_w),
+                                                      label_visibility = visible(st.session_state.show))
+            else:
+                if st.session_state.transcription != "":
+                    st.write("**Trascrizione audio:**")
+                    st.write(st.session_state.transcription)
+                    st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
+                st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                                                        value = st.session_state.transcription,
+                                                        key = len(st.session_state.remaining_words),
+                                                        disabled = able(st.session_state.show, ten_w),
+                                                        label_visibility = visible(st.session_state.show))
     
-        visible = lambda x: "visible" if x else "collapsed"
-        able = lambda x, y: False if x and not y else True
         if dispositivo == "Computer":
             st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                                  value = st.session_state.transcription,
                                                   height = 300,
                                                   key = len(st.session_state.remaining_words),
                                                   disabled = able(st.session_state.show, ten_w),
                                                   label_visibility = visible(st.session_state.show))
         else:
-            if st.session_state.transcription != "":
-                st.write("**Trascrizione audio:**")
-                st.write(st.session_state.transcription)
-                st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
             st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
-                                                    value = st.session_state.transcription,
                                                     key = len(st.session_state.remaining_words),
                                                     disabled = able(st.session_state.show, ten_w),
                                                     label_visibility = visible(st.session_state.show))
-            if dispositivo == "Smartphone":
-                st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
+        if dispositivo == "Smartphone":
+            st.info("Per salvare correttamente le risposte date per iscritto nel campo testuale premere sulla tastiera virtuale **INVIO**.")
         
         def on_button_s_click():
             st.session_state.show = False
@@ -722,6 +733,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
