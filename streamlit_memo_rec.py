@@ -700,6 +700,7 @@ def main():
                 st.code(st.session_state.new_token, language='text')
                 st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
                 st.session_state.session_data.clear()
+                st.session_state.show = False
             st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
@@ -740,6 +741,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
