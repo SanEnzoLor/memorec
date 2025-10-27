@@ -694,13 +694,13 @@ def main():
             st.write("")
             st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
             if st.button(label = "Salva Dati e Termina"):
+                st.session_state.show = False
                 save_and_upload_to_github(st.session_state.session_data)
                 st.success("Grazie per aver partecipato alla raccolta dati!")
                 st.success("Il tuo codice di accesso:", icon = "🔑")
                 st.code(st.session_state.new_token, language='text')
                 st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
                 st.session_state.session_data.clear()
-                st.session_state.show = False
             st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
@@ -741,6 +741,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
