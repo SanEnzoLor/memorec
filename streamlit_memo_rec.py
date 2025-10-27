@@ -603,8 +603,8 @@ def main():
             audio_segment.export(temp_file, format="wav")
             st.session_state.transcription = transcribe_audio(temp_file)
 
+        transcription = st.session_state.transcription
         if dispositivo == "Computer":
-            transcription = st.session_state.transcription
             st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                     value = transcription,
                                                     height = 300,
@@ -612,7 +612,6 @@ def main():
                                                     disabled = able(st.session_state.show, ten_w),
                                                     label_visibility = visible(st.session_state.show))
         else:
-            transcription = st.session_state.transcription
             if st.session_state.transcription != "":
                 st.write("**Trascrizione audio:**")
                 st.write(transcription)
@@ -724,6 +723,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
