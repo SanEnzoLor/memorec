@@ -602,12 +602,12 @@ def main():
             temp_file = "temp_audio.wav"
             audio_segment.export(temp_file, format="wav")
             st.session_state.transcription = transcribe_audio(temp_file)
+            
             if dispositivo == "Computer":
                 if st.session_state.transcription != "":
                     st.write("**Trascrizione audio:**")
                     st.write(st.session_state.transcription)
-                    #st.session_state.testo = st.session_state.transcription
-                    st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                st.session_state.testo = st.text_area("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                             value = st.session_state.transcription,
                                                             height = 300,
                                                             key = -len(st.session_state.remaining_words),
@@ -618,8 +618,7 @@ def main():
                     st.write("**Trascrizione audio:**")
                     st.write(st.session_state.transcription)
                     st.info("La **modifica** della trascrizione da smartphone potrebbe essere più difficoltosa che da computer, per potervi muovere lungo il testo utilizzare il **cursore mobile** nel campo testuale (tenendo premuto e spostando la lineaa verticale lampeggiante).")
-                    #st.session_state.testo = st.session_state.transcription
-                    st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
+                st.session_state.testo = st.text_input("**Scrivi** qui il tuo testo una volta vista la **parola** da cui recuperare la memoria, oppure **modifica** qui la **trascrizione** dell'audio:",
                                                             value =  st.session_state.transcription,
                                                             key = -len(st.session_state.remaining_words),
                                                             disabled = able(st.session_state.show, ten_w),
@@ -686,7 +685,7 @@ def main():
                 st.session_state.time_rec = 0
                 st.write("")
                 st.write("")
-                st.write(f"Sono state fornite **{10 - len(st.session_state.remaining_words)}** memorie.")
+            st.write(f"Sono state fornite **{10 - len(st.session_state.remaining_words)}** memorie.")
                 
     
         # Bottone per salvare i dati
@@ -741,6 +740,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
