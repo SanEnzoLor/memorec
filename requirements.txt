@@ -2,10 +2,12 @@ pandas
 requests
 numpy
 streamlit
+altair==4.2.2
 
 pydub
 streamlit-audiorec
 streamlit[pdf]
 SpeechRecognition
 sounddevice
+
 
