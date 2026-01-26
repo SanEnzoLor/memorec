@@ -492,7 +492,7 @@ def main():
     
         st.info("Per facilitare la lettura, nei questionari verrà utilizzata la forma **maschile sovraestesa**, da intendersi come inclusiva di tutte le identità di genere.")
         st.header("**Beck Depression Inventory - II**")
-        results_d = BDI2(dispositivo)
+        results_d = BDI2()
         #st.write(f"BDI2: {results_d}")
     
         st.header("**Ruminative Response Scale**")
@@ -740,6 +740,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
