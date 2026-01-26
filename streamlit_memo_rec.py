@@ -350,9 +350,9 @@ def main():
     col1, col2 = st.columns([0.81, 1])
     # Mostra le immagini nelle colonne
     with col1:
-        st.image("image/logo_unige.png")#, width="stretch")
+        st.image("image/logo_unige.png", width="stretch")
     with col2:
-        st.image("image/logo_nextage.png")#, width="stretch")
+        st.image("image/logo_nextage.png", width="stretch")
 
     st.title("**Indagine volta alla costruzione di una banca dati di memorie in italiano**")
     st.write("Questo studio fa parte del progetto di dottorato intitolato:")
@@ -362,7 +362,7 @@ def main():
     st.markdown("I dati raccolti da Streamlit Cloud sono anch'essi anonimi e hanno lo scopo di analizzare e gestire l'utilizzo dell'app. In nessun modo sarà possibile risalire all'identità di chi ha completato il test. Per ulteriori informazioni, consulta https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/app-analytics e https://streamlit.io/privacy-policy.")
     st.markdown("Essendo i dati anonimi, la raccolta è conforme al Regolamento Generale sulla Protezione dei Dati o GDPR.")
     st.write("📄 **Nota informativa sullo studio**:")
-    #st.pdf("doc/MINDSYNC_Notainformativadellostudio.pdf", height=500)
+    st.pdf("doc/MINDSYNC_Notainformativadellostudio.pdf", height=500)
     
     st.header("**Indici Demografici**")
 
@@ -740,6 +740,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
