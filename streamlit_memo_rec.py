@@ -416,13 +416,6 @@ def main():
     #partecipanti da Prolific
     if "prolific_id" not in st.session_state:
         st.session_state.prolific_id = ""
-    pid = st.session_state.prolific_id
-    if (
-        pid is None
-        or str(pid).lower() == "nan"
-        or pd.isna(pid)
-    ):
-        st.session_state.prolific_id = ""
 
     st.session_state.prolific_id = st.text_input(
         "Se partecipi da **Prolific**, incolla qui il tuo **Prolific ID**:",
@@ -449,8 +442,7 @@ def main():
         #if not all(col in st.session_state.df_ses_p.columns for col in columns):
         #    st.error("Il file caricato non è corretto.")
         #else:
-            st.session_state.new_token = st.session_state.df_ses_p["ID"].iloc[-1]
-            st.session_state.prolific_id = st.session_state.df_ses_p["Prolific_id"].iloc[-1]
+            st.session_state.new_token = st.session_state.df_ses_p["ID"].iloc[-1]          
             st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
             st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
             st.session_state.lingua = st.session_state.df_ses_p["Lingua"].iloc[-1]
@@ -776,6 +768,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
