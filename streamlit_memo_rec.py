@@ -423,7 +423,7 @@ def main():
     )
 
     if st.session_state.prolific_id != "":
-        st.info("Gli utenti Prolific che partecipano più volte sono i benvenuti! Tuttavia, la retribuzione verrà erogata solo per il completamento della prima partecipazione; eventuali sessioni successive non saranno pagate.”)
+        st.info("Gli utenti Prolific che partecipano più volte sono i benvenuti! Tuttavia, la retribuzione verrà erogata solo per il completamento della prima partecipazione; eventuali sessioni successive non saranno pagate.")
     
     
     # genera il nuovo token di accesso
@@ -772,6 +772,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
