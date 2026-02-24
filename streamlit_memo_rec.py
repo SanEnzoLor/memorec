@@ -427,7 +427,7 @@ def main():
         st.session_state.new_token = generate_unique_token()
     
     # Creazione di input per acquisire dati dall'utente
-    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il 🔑 **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
+    user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi e NON sei un utente PROLIFIC**: Inserisci il 🔑 **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
 
     if user_id != "" and st.session_state.file_update == True:
         file = load_from_github(user_id)
@@ -515,7 +515,11 @@ def main():
     
         st.header("**Cue-Word Autobiographic Memory Retrievial**")
         st.write("L'attività consiste nel **raccontare** un **evento personale** richiamato dalla **parola** che verrà mostrata una volta selezionato **Inizia**. Descrivi quanti più **dettagli** possibili associati alla memoria autobiografica recuperata. L'evento descritto **NON** deve essere accaduto durante la **scorsa settimana**. **È OBBLIGATORIO EVITARE** di menzionare **indirizzi specifici** e/o **nome e cognome di persone**, **È OBBLIGATORIO UTILIZZARE** indirizzi generici (e.g. città), nomi comuni di persona (e.g. amico/compagno) o nomi di fantasia (e.g. soprannomi).")
-        st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**). Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
+        st.write("Terminata la narrazione sarà possibile salvare la memoria appena descritta (selezionando **Salva memoria**), l'esercizio **dovrà** essere rieseguito per 10 volte con parole differenti (selezionando **Prosegui** e poi **Salva memoria**).")
+        if st.session_state.prolific_id == "":
+            st.write("Se si desidera ci si può fermare prima (selezionando **Salva Dati e Termina**).")
+        else:
+            st.write("Dopo aver eseguito l'esercizio per 10 volte, potrai selezionare **Salva Dati e Termina** e verrai reindirizzato alla pagina di completamento su **Prolific**.")
         st.write("Vi sarà la possibilità:")
         st.write("- Sia di **registrare un audio**, che verrà poi **trascritto automaticamente** nel campo di testuale per eventuali modifiche,")
         st.write("- Sia di **scrivere direttamente** nel campo testuale.") 
@@ -712,17 +716,17 @@ def main():
                     st.session_state.session_data.clear()
                 st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
             elif st.session_state.prolific_id != "" and len(st.session_state.remaining_words) == 0:
+                st.success("Grazie per aver partecipato alla raccolta dati!")
                 st.write("Ora che hai completato le **10 memorie**, premere:")
                 if st.button(label = "Salva Dati e Termina"):
                     save_and_upload_to_github(st.session_state.session_data)
-                    st.success("Grazie per aver partecipato alla raccolta dati!")
                     st.markdown(
                         '<meta http-equiv="refresh" content="3; url=https://app.prolific.com/submissions/complete?cc=CYE8NY6C">',
                         unsafe_allow_html=True
                     )
                     st.markdown(
                         "Se non vieni reindirizzato automaticamente, clicca qui: "
-                        "[Vai a Prolific](https://app.prolific.com/submissions/complete?cc=CYE8NY6C)"
+                        "https://app.prolific.com/submissions/complete?cc=CYE8NY6C"
                     )
                     st.session_state.session_data.clear()
                 st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
@@ -765,6 +769,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
