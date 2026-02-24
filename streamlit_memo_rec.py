@@ -75,7 +75,7 @@ def load_from_github(id_value):
 
 def save_and_upload_to_github(data):
     # Input per i dati da salvare
-    columns = ["ID", "Eta", "Gender", "Lingua", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
+    columns = ["ID", "Prolific_id", "Eta", "Gender", "Lingua", "Educazione", "Occupazione", "Caregiver", "Limitazione",  "BDI2", "RRS", "PCL-5-reexperiencing", "PCL-5-avoidance", "PCL-5-altereted_cognition", "PCL-5-hyperarousal", "PCL-5-tot", "Cue-Word", "Text", "Time", "Time_recording"]
     new_df = pd.DataFrame(data, columns=columns)
     file_name = "dati.csv"
 
@@ -413,11 +413,18 @@ def main():
     if "file_update" not in st.session_state:
         st.session_state.file_update = True
 
+    #partecipanti da Prolific
+    if "prolific_id" not in st.session_state:
+        st.session_state.prolific_id = ""
 
+    st.session_state.prolific_id = st.text_input(
+        "Se partecipi da Prolific, incolla qui il tuo Prolific ID:",
+        value=st.session_state.prolific_id
+    )
+    
     # genera il nuovo token di accesso
     if "new_token" not in st.session_state:
         st.session_state.new_token = generate_unique_token()
-
     
     # Creazione di input per acquisire dati dall'utente
     user_id = st.text_input("**Se NON è la PRIMA VOLTA che partecipi**: Inserisci il 🔑 **codice di accesso** che ti è stato fornito al termine della sessione precedente:")
@@ -436,6 +443,7 @@ def main():
         #    st.error("Il file caricato non è corretto.")
         #else:
             st.session_state.new_token = st.session_state.df_ses_p["ID"].iloc[-1]
+            st.session_state.prolific_id = st.session_state.df_ses_p["Prolific_id"].iloc[-1]
             st.session_state.eta = st.session_state.df_ses_p["Eta"].iloc[-1]
             st.session_state.gender = st.session_state.df_ses_p["Gender"].iloc[-1]
             st.session_state.lingua = st.session_state.df_ses_p["Lingua"].iloc[-1]
@@ -653,6 +661,7 @@ def main():
                 # Aggiungi i dati di questa registrazione alla sessione
                 st.session_state.session_data.append({
                     "ID": st.session_state.new_token,
+                    "Prolific_id": st.session_state.prolific_id,
                     "Eta": st.session_state.eta,
                     "Gender": st.session_state.gender,
                     "Lingua": st.session_state.lingua,
@@ -692,15 +701,31 @@ def main():
         if st.session_state.session_data:
             st.write("")
             st.write("")
-            st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
-            if st.button(label = "Salva Dati e Termina"):
-                save_and_upload_to_github(st.session_state.session_data)
-                st.success("Grazie per aver partecipato alla raccolta dati!")
-                st.success("Il tuo codice di accesso:", icon = "🔑")
-                st.code(st.session_state.new_token, language='text')
-                st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
-                st.session_state.session_data.clear()
-            st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
+            if st.session_state.prolific_id == "":
+                st.write("Se si sono completate le **10 memorie** o se si desidera **interrompere**, premere:")
+                if st.button(label = "Salva Dati e Termina"):
+                    save_and_upload_to_github(st.session_state.session_data)
+                    st.success("Grazie per aver partecipato alla raccolta dati!")
+                    st.success("Il tuo codice di accesso:", icon = "🔑")
+                    st.code(st.session_state.new_token, language='text')
+                    st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
+                    st.session_state.session_data.clear()
+                st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
+            elif st.session_state.prolific_id != "" and len(st.session_state.remaining_words) == 0:
+                st.write("Ora che hai completato le **10 memorie**, premere:")
+                if st.button(label = "Salva Dati e Termina"):
+                    save_and_upload_to_github(st.session_state.session_data)
+                    st.success("Grazie per aver partecipato alla raccolta dati!")
+                    st.markdown(
+                        '<meta http-equiv="refresh" content="3; url=https://app.prolific.com/submissions/complete?cc=CYE8NY6C">',
+                        unsafe_allow_html=True
+                    )
+                    st.markdown(
+                        "Se non vieni reindirizzato automaticamente, clicca qui: "
+                        "[Vai a Prolific](https://app.prolific.com/submissions/complete?cc=CYE8NY6C)"
+                    )
+                    st.session_state.session_data.clear()
+                st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
     if len(st.session_state.remaining_words) != 0 and psico == "NO":
@@ -740,6 +765,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
