@@ -418,9 +418,13 @@ def main():
         st.session_state.prolific_id = ""
 
     st.session_state.prolific_id = st.text_input(
-        "Se partecipi da **Prolific**, incolla qui il tuo **Prolific ID**:",
+        "Se partecipi come utente **Prolific**, incolla qui il tuo **Prolific ID**, altrimenti lascia questo campo **vuoto**:",
         value=st.session_state.prolific_id
     )
+
+    if st.session_state.prolific_id != "":
+        st.info("Gli utenti Prolific che partecipano più volte sono i benvenuti! Tuttavia, la retribuzione verrà erogata solo per il completamento della prima partecipazione; eventuali sessioni successive non saranno pagate.”)
+    
     
     # genera il nuovo token di accesso
     if "new_token" not in st.session_state:
@@ -768,6 +772,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
