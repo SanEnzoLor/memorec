@@ -416,6 +416,13 @@ def main():
     #partecipanti da Prolific
     if "prolific_id" not in st.session_state:
         st.session_state.prolific_id = ""
+    pid = st.session_state.prolific_id
+    if (
+        pid is None
+        or str(pid).lower() == "nan"
+        or pd.isna(pid)
+    ):
+        st.session_state.prolific_id = ""
 
     st.session_state.prolific_id = st.text_input(
         "Se partecipi da **Prolific**, incolla qui il tuo **Prolific ID**:",
@@ -769,6 +776,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
