@@ -418,7 +418,7 @@ def main():
         st.session_state.prolific_id = ""
 
     st.session_state.prolific_id = st.text_input(
-        "Se partecipi da Prolific, incolla qui il tuo Prolific ID:",
+        "Se partecipi da **Prolific**, incolla qui il tuo **Prolific ID**:",
         value=st.session_state.prolific_id
     )
     
@@ -765,6 +765,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
