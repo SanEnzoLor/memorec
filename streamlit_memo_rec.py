@@ -723,13 +723,19 @@ def main():
                 st.write("Ora che hai completato le **10 memorie**, premere:")
                 if st.button(label = "Salva Dati e Termina"):
                     save_and_upload_to_github(st.session_state.session_data)
+                    completion_code = st.secrets["completion_code"]
+                    st.success("Le tue risposte sono state salvate correttamente.")
+                    st.markdown("### 🔑 Codice di completamento Prolific")
+                    st.code(completion_code, language="text")
                     st.markdown(
-                        '<meta http-equiv="refresh" content="3; url=https://app.prolific.com/submissions/complete?cc=CYE8NY6C">',
-                        unsafe_allow_html=True
+                        "Clicca sul seguente link per tornare a Prolific e inserire il codice manualmente:"
                     )
                     st.markdown(
-                        "Se non vieni reindirizzato automaticamente, clicca qui: "
-                        "https://app.prolific.com/submissions/complete?cc=CYE8NY6C"
+                        f"[Vai alla pagina di completamento su Prolific]"
+                        f"(https://app.prolific.com/submissions/complete?cc={completion_code})"
+                    )
+                    st.info(
+                        "Se il codice non viene inserito automaticamente, copialo e incollalo manualmente nella pagina di Prolific."
                     )
                     st.session_state.session_data.clear()
                 st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
@@ -772,6 +778,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
