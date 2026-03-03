@@ -716,7 +716,7 @@ def main():
                     st.success("Il tuo codice di accesso:", icon = "🔑")
                     st.code(st.session_state.new_token, language='text')
                     st.warning("Copia e conserva questo codice. Non potrai più visualizzarlo dopo aver chiuso la pagina.", icon = "💾")
-                    st.session_state.session_data.clear()
+                    #st.session_state.session_data.clear()
                 st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
             elif st.session_state.prolific_id != "" and len(st.session_state.remaining_words) == 0:
                 st.success("Grazie per aver partecipato alla raccolta dati!")
@@ -737,7 +737,7 @@ def main():
                     st.info(
                         "Se il codice non viene inserito automaticamente, copialo e incollalo manualmente nella pagina di Prolific."
                     )
-                    st.session_state.session_data.clear()
+                    #st.session_state.session_data.clear()
                 st.write("Selezionando **Salva Dati e Termina** acconsenti al trattamento delle informazioni fornite per fini di ricerca, secondo quanto descritto in testa alla pagina.")
 
     st.header("BIBLIOGRAFIA")
@@ -778,6 +778,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
