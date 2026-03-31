@@ -372,10 +372,11 @@ def main():
     def gend_sel():
         st.session_state.change = True
 
-    
     # Lista di parole spunto
-    cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
-    cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+    #cue_words_f = ['ECCITATA', 'ANNOIATA', 'FELICE', 'FALLITA', 'FORTUNATA', 'DISPERATA', 'RILASSATA', 'SOLITARIA', 'SERENA', 'TRISTE']
+    #cue_words = ['ECCITATO', 'ANNOIATO', 'FELICE', 'FALLITO', 'FORTUNATO', 'DISPERATO', 'RILASSATO', 'SOLITARIO', 'SERENO', 'TRISTE']
+    cue_words_f = ['FIDUCIOSA', 'SPAVENTATA', 'PIACERE', 'ARRABBIATA', 'CORAGGIOSA', 'TRISTE', 'TRANQUILLA', 'SORPRESA', 'AUDACE', 'STUPIDA']
+    cue_words = ['FIDUCIOSO', 'SPAVENTATO', 'PIACERE', 'ARRABBIATO', 'CORAGGIOSO', 'TRISTE', 'TRANQUILLO', 'SORPRESO', 'AUDACE', 'STUPIDO']
     # Gestione dello stato per i dati della sessione
     if "remaining_words" not in st.session_state:
         st.session_state.remaining_words = cue_words.copy()  # Parole rimanenti
