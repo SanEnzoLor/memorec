@@ -9,8 +9,6 @@ import base64
 import speech_recognition as sr
 import secrets
 import string
-import static_ffmpeg
-static_ffmpeg.add_paths()
 
 from st_audiorec import st_audiorec
 from pydub import AudioSegment
